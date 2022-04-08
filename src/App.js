@@ -3,6 +3,31 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import { axios } from 'axios';
 
+function sendData(type, dataToSend) {
+  const axios = require('axios').default;
+  let url = 'http://localhost:8080/register';
+
+  if(type === 'moderator') {
+    url += '/moderator';
+  }
+  else if(type === 'client') {
+    url += '/client';
+  }
+  else if(type === 'agency') {
+    url += '/agency';
+  }
+
+  if(url !== 'http://localhost:8080/register') {
+    axios.post(url, dataToSend)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+}
+
 function App() {
   const [moderator, setModerator] = useState(false);
   const [client, setClient] = useState(false);
@@ -29,7 +54,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <h2>REJESTRACJA</h2>
         <form>
           <input type="radio" id="moderator" name="acctype" value="moderator" onChange={(e) => case1()}/>
           <label for="moderator">Moderator</label>
@@ -39,9 +64,7 @@ function App() {
           <label for="agency">Agencja</label>
         </form>
         <br/>
-        {moderator == true && <Moderator/>}
-        {client == true && <Client/>}
-        {agency == true && <Agency/>}
+        <Login />
       </header>
     </div>
   );
@@ -56,31 +79,25 @@ function Moderator() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios.post('http://localhost:8080/register/moderator', {
+    sendData('moderator', {
       "userNameModerator": userNameModerator,
       "account": {
         "emailAccount": emailAccount,
         "accountLogin": accountLogin,
         "passwordAccount": passwordAccount
       }
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
     });
-
-    setUserNameModerator("");
+    
     setEmailAccount("");
     setAccountLogin("");
     setPasswordAccount("");
+    setUserNameModerator("");
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="emailAccount" placeholder="Login" value={accountLogin} onChange={(e) => setAccountLogin(e.target.value)}/><br/>
-      <input type="text" name="accountLogin" placeholder="E-mail" value={emailAccount} onChange={(e) => setEmailAccount(e.target.value)}/><br/>
+      <input type="text" name="accountLogin" placeholder="Login" value={accountLogin} onChange={(e) => setAccountLogin(e.target.value)}/><br/>
+      <input type="text" name="emailAccount" placeholder="E-mail" value={emailAccount} onChange={(e) => setEmailAccount(e.target.value)}/><br/>
       <input type="password" name="passwordAccount" placeholder="Hasło" value={passwordAccount} onChange={(e) => setPasswordAccount(e.target.value)}/><br/>
       <input type="text" name="userNameModerator" placeholder="Nazwa moderatora" value={userNameModerator} onChange={(e) => setUserNameModerator(e.target.value)}/><br/>
       <input type="submit" value="Zarejestruj" />
@@ -100,7 +117,7 @@ function Client() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios.post('http://localhost:8080/register/client', {
+    sendData('client', {
       "nameUser": nameUser,
       "surnameUser": surnameUser,
       "dateOfBirth": dateOfBirth,
@@ -110,12 +127,6 @@ function Client() {
         "accountLogin": accountLogin,
         "passwordAccount": passwordAccount
       }
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
     });
 
     setNameUser("");
@@ -129,8 +140,8 @@ function Client() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="emailAccount" placeholder="Login" value={accountLogin} onChange={(e) => setAccountLogin(e.target.value)}/><br/>
-      <input type="text" name="accountLogin" placeholder="E-mail" value={emailAccount} onChange={(e) => setEmailAccount(e.target.value)}/><br/>
+      <input type="text" name="accountLogin" placeholder="Login" value={accountLogin} onChange={(e) => setAccountLogin(e.target.value)}/><br/>
+      <input type="text" name="emailAccount" placeholder="E-mail" value={emailAccount} onChange={(e) => setEmailAccount(e.target.value)}/><br/>
       <input type="password" name="passwordAccount" placeholder="Hasło" value={passwordAccount} onChange={(e) => setPasswordAccount(e.target.value)}/><br/>
       <input type="text" name="nameUser" placeholder="Imię" value={nameUser} onChange={(e) => setNameUser(e.target.value)}/><br/>
       <input type="text" name="surnameUser" placeholder="Nazwisko" value={surnameUser} onChange={(e) => setSurnameUser(e.target.value)}/><br/>
@@ -152,7 +163,7 @@ function Agency() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios.post('http://localhost:8080/register/moderator', {
+    sendData('agency', {
       "nameCompany": nameCompany,
       "NIP": NIP,
       "numberPhone": numberPhone,
@@ -161,12 +172,6 @@ function Agency() {
         "accountLogin": accountLogin,
         "passwordAccount": passwordAccount
       }
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
     });
 
     setNameCompany("");
@@ -179,13 +184,46 @@ function Agency() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="emailAccount" placeholder="Login" value={accountLogin} onChange={(e) => setAccountLogin(e.target.value)}/><br/>
-      <input type="text" name="accountLogin" placeholder="E-mail" value={emailAccount} onChange={(e) => setEmailAccount(e.target.value)}/><br/>
+      <input type="text" name="accountLogin" placeholder="Login" value={accountLogin} onChange={(e) => setAccountLogin(e.target.value)}/><br/>
+      <input type="text" name="emailAccount" placeholder="E-mail" value={emailAccount} onChange={(e) => setEmailAccount(e.target.value)}/><br/>
       <input type="password" name="passwordAccount" placeholder="Hasło" value={passwordAccount} onChange={(e) => setPasswordAccount(e.target.value)}/><br/>
       <input type="text" name="nameCompany" placeholder="Nazwa firmy" value={nameCompany} onChange={(e) => setNameCompany(e.target.value)}/><br/>
       <input type="text" name="NIP" placeholder="NIP" value={NIP} onChange={(e) => setNIP(e.target.value)}/><br/>
       <input type="text" name="numberPhone" placeholder="Numer telefonu" value={numberPhone} onChange={(e) => setNumberPhone(e.target.value)}/><br/>
       <input type="submit" value="Zarejestruj" />
+    </form>
+  );
+}
+
+function Login() {
+  const [accountLogin, setAccountLogin] = useState("");
+  const [passwordAccount, setPasswordAccount] = useState("");
+
+  const handleSubmit = (event) => {
+    const axios = require('axios').default;
+    event.preventDefault();
+
+    axios.post('http://localhost:8080/login', {
+      "accountLogin": accountLogin,
+      "passwordLogin": passwordAccount
+    })
+    .then(function (response) {
+      console.log(response);
+      console.log('zwycienstwo')
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+    setAccountLogin("");
+    setPasswordAccount("");
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" name="accountLogin" placeholder="Login" value={accountLogin} onChange={(e) => setAccountLogin(e.target.value)}/><br/>
+      <input type="password" name="passwordAccount" placeholder="Hasło" value={passwordAccount} onChange={(e) => setPasswordAccount(e.target.value)}/><br/>
+      <input type="submit" value="Zaloguj" />
     </form>
   );
 }
