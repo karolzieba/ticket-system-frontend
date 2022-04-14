@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
 import { axios } from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Form from 'react-bootstrap/Form'
 
 function sendData(type, dataToSend) {
   const axios = require('axios').default;
@@ -28,7 +30,35 @@ function sendData(type, dataToSend) {
   }
 }
 
-function App() {
+const App = () => {
+  const [login, setLogin] = useState(false);
+  const [register, setRegister] = useState(false);
+
+  function case1() {
+    setLogin(true);
+    setRegister(false);
+  }
+
+  function case2() {
+    setLogin(false);
+    setRegister(true);
+  }
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <Form>
+            <Form.Check type="radio" id="login" name="action" label="Logowanie" value="login" onChange={(e) => case1()}/>
+            <Form.Check type="radio" id="register" name="action" label="Rejestracja" value="register" onChange={(e) => case2()}/>
+        </Form>
+        {login == true && <Login/>}
+        {register == true && <Register/>}
+      </header>
+    </div>
+  );
+}
+
+const Register = () => {
   const [moderator, setModerator] = useState(false);
   const [client, setClient] = useState(false);
   const [agency, setAgency] = useState(false);
@@ -53,24 +83,21 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h2>REJESTRACJA</h2>
-        <form>
-          <input type="radio" id="moderator" name="acctype" value="moderator" onChange={(e) => case1()}/>
-          <label for="moderator">Moderator</label>
-          <input type="radio" id="client" name="acctype" value="client" onChange={(e) => case2()}/>
-          <label for="client">Klient</label>
-          <input type="radio" id="agency" name="acctype" value="agency" onChange={(e) => case3()}/>
-          <label for="agency">Agencja</label>
-        </form>
-        <br/>
-        <Login />
-      </header>
-    </div>
+      <h2>REJESTRACJA</h2>
+      <Form>
+        <Form.Check type="radio" id="moderator" name="acctype" label="Moderator" value="moderator" onChange={(e) => case1()}/>
+        <Form.Check type="radio" id="client" name="acctype" label="Klient" value="client" onChange={(e) => case2()}/>
+        <Form.Check type="radio" id="agency" name="acctype" label="Agencja" value="agency" onChange={(e) => case3()}/>
+      </Form>
+      <br/>
+      {moderator == true && <Moderator/>}
+      {client == true && <Client/>}
+      {agency == true && <Agency/>}
+  </div>
   );
 }
 
-function Moderator() {
+const Moderator = () => {
   const [userNameModerator, setUserNameModerator] = useState("");
   const [emailAccount, setEmailAccount] = useState("");
   const [accountLogin, setAccountLogin] = useState("");
@@ -96,18 +123,18 @@ function Moderator() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="accountLogin" placeholder="Login" value={accountLogin} onChange={(e) => setAccountLogin(e.target.value)}/><br/>
-      <input type="text" name="emailAccount" placeholder="E-mail" value={emailAccount} onChange={(e) => setEmailAccount(e.target.value)}/><br/>
-      <input type="password" name="passwordAccount" placeholder="Hasło" value={passwordAccount} onChange={(e) => setPasswordAccount(e.target.value)}/><br/>
-      <input type="text" name="userNameModerator" placeholder="Nazwa moderatora" value={userNameModerator} onChange={(e) => setUserNameModerator(e.target.value)}/><br/>
+      <input type="text" name="moderatorregister" id="accountLogin" placeholder="Login" value={accountLogin} required onChange={(e) => setAccountLogin(e.target.value)}/><br/>
+      <input type="text" name="moderatorregister" id="emailAccount" placeholder="E-mail" value={emailAccount} required onChange={(e) => setEmailAccount(e.target.value)}/><br/>
+      <input type="password" name="moderatorregister" id="passwordAccount" placeholder="Hasło" value={passwordAccount} required onChange={(e) => setPasswordAccount(e.target.value)}/><br/>
+      <input type="text" name="moderatorregister" id="userNameModerator" placeholder="Nazwa wyśw. moderatora" value={userNameModerator} required onChange={(e) => setUserNameModerator(e.target.value)}/><br/>
       <input type="submit" value="Zarejestruj" />
     </form>
   );
 }
 
-function Client() {
+const Client = () => {
   const [nameUser, setNameUser] = useState("");
-  const [surnameUser, setSurnameUser,] = useState("");
+  const [surName, setSurName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [emailAccount, setEmailAccount] = useState("");
@@ -119,7 +146,7 @@ function Client() {
 
     sendData('client', {
       "nameUser": nameUser,
-      "surnameUser": surnameUser,
+      "surName": surName,
       "dateOfBirth": dateOfBirth,
       "phoneNumber": phoneNumber,
       "account": {
@@ -130,7 +157,7 @@ function Client() {
     });
 
     setNameUser("");
-    setSurnameUser("");
+    setSurName("");
     setDateOfBirth("");
     setPhoneNumber("");
     setEmailAccount("");
@@ -140,19 +167,19 @@ function Client() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="accountLogin" placeholder="Login" value={accountLogin} onChange={(e) => setAccountLogin(e.target.value)}/><br/>
-      <input type="text" name="emailAccount" placeholder="E-mail" value={emailAccount} onChange={(e) => setEmailAccount(e.target.value)}/><br/>
-      <input type="password" name="passwordAccount" placeholder="Hasło" value={passwordAccount} onChange={(e) => setPasswordAccount(e.target.value)}/><br/>
-      <input type="text" name="nameUser" placeholder="Imię" value={nameUser} onChange={(e) => setNameUser(e.target.value)}/><br/>
-      <input type="text" name="surnameUser" placeholder="Nazwisko" value={surnameUser} onChange={(e) => setSurnameUser(e.target.value)}/><br/>
-      <input type="text" name="dateOfBirth" placeholder="Data urodzenia" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)}/><br/>
-      <input type="text" name="phoneNumber" placeholder="Numer telefonu" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}/><br/>
+      <input type="text" name="clientregister" id="accountLogin" placeholder="Login" value={accountLogin} required onChange={(e) => setAccountLogin(e.target.value)}/><br/>
+      <input type="text" name="clientregister" id="emailAccount" placeholder="E-mail" value={emailAccount} required onChange={(e) => setEmailAccount(e.target.value)}/><br/>
+      <input type="password" name="clientregister" id="passwordAccount" placeholder="Hasło" value={passwordAccount} required onChange={(e) => setPasswordAccount(e.target.value)}/><br/>
+      <input type="text" name="clientregister" id="nameUser" placeholder="Imię" value={nameUser} required onChange={(e) => setNameUser(e.target.value)}/><br/>
+      <input type="text" name="clientregister" id="surName" placeholder="Nazwisko" value={surName} required onChange={(e) => setSurName(e.target.value)}/><br/>
+      <input type="date" name="clientregister" id="dateOfBirth" placeholder="Data urodzenia" value={dateOfBirth} required onChange={(e) => setDateOfBirth(e.target.value)}/><br/>
+      <input type="text" name="clientregister" id="phoneNumber" placeholder="Numer telefonu" maxlength="9" value={phoneNumber} required onChange={(e) => setPhoneNumber(e.target.value)}/><br/>
       <input type="submit" value="Zarejestruj" />
     </form>
   );
 }
 
-function Agency() {
+const Agency = () => {
   const [nameCompany, setNameCompany] = useState("");
   const [NIP, setNIP] = useState("");
   const [numberPhone, setNumberPhone] = useState("");
@@ -165,7 +192,7 @@ function Agency() {
 
     sendData('agency', {
       "nameCompany": nameCompany,
-      "NIP": NIP,
+      "nip": NIP,
       "numberPhone": numberPhone,
       "account": {
         "emailAccount": emailAccount,
@@ -184,28 +211,28 @@ function Agency() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="accountLogin" placeholder="Login" value={accountLogin} onChange={(e) => setAccountLogin(e.target.value)}/><br/>
-      <input type="text" name="emailAccount" placeholder="E-mail" value={emailAccount} onChange={(e) => setEmailAccount(e.target.value)}/><br/>
-      <input type="password" name="passwordAccount" placeholder="Hasło" value={passwordAccount} onChange={(e) => setPasswordAccount(e.target.value)}/><br/>
-      <input type="text" name="nameCompany" placeholder="Nazwa firmy" value={nameCompany} onChange={(e) => setNameCompany(e.target.value)}/><br/>
-      <input type="text" name="NIP" placeholder="NIP" value={NIP} onChange={(e) => setNIP(e.target.value)}/><br/>
-      <input type="text" name="numberPhone" placeholder="Numer telefonu" value={numberPhone} onChange={(e) => setNumberPhone(e.target.value)}/><br/>
+      <input type="text" name="agencyregister" id="accountLogin" placeholder="Login" value={accountLogin} required onChange={(e) => setAccountLogin(e.target.value)}/><br/>
+      <input type="text" name="agencyregister" id="emailAccount" placeholder="E-mail" value={emailAccount} required onChange={(e) => setEmailAccount(e.target.value)}/><br/>
+      <input type="password" name="agencyregister" id="passwordAccount" placeholder="Hasło" value={passwordAccount} required onChange={(e) => setPasswordAccount(e.target.value)}/><br/>
+      <input type="text" name="agencyregister" id="nameCompany" placeholder="Nazwa firmy" value={nameCompany} required onChange={(e) => setNameCompany(e.target.value)}/><br/>
+      <input type="text" name="agencyregister" id="NIP" placeholder="NIP" maxlength="10" value={NIP} required onChange={(e) => setNIP(e.target.value)}/><br/>
+      <input type="text" name="agencyregister" id="numberPhone" placeholder="Numer telefonu" maxlength="9" value={numberPhone} required onChange={(e) => setNumberPhone(e.target.value)}/><br/>
       <input type="submit" value="Zarejestruj" />
     </form>
   );
 }
 
-function Login() {
+const Login = () => {
   const [accountLogin, setAccountLogin] = useState("");
   const [passwordAccount, setPasswordAccount] = useState("");
 
   const handleSubmit = (event) => {
     const axios = require('axios').default;
     event.preventDefault();
-
+    
     axios.post('http://localhost:8080/login', {
-      "accountLogin": accountLogin,
-      "passwordLogin": passwordAccount
+      "username": accountLogin,
+      "password": passwordAccount
     })
     .then(function (response) {
       console.log(response);
@@ -213,6 +240,7 @@ function Login() {
     })
     .catch(function (error) {
       console.log(error);
+      console.log('error :<')
     });
 
     setAccountLogin("");
@@ -220,11 +248,15 @@ function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="accountLogin" placeholder="Login" value={accountLogin} onChange={(e) => setAccountLogin(e.target.value)}/><br/>
-      <input type="password" name="passwordAccount" placeholder="Hasło" value={passwordAccount} onChange={(e) => setPasswordAccount(e.target.value)}/><br/>
-      <input type="submit" value="Zaloguj" />
-    </form>
+    <div class="App">
+      <h2>LOGOWANIE</h2>
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="login" id="accountLogin" placeholder="Login" value={accountLogin} required onChange={(e) => setAccountLogin(e.target.value)}/><br/>
+        <input type="password" name="login" id="passwordAccount" placeholder="Hasło" value={passwordAccount} required onChange={(e) => setPasswordAccount(e.target.value)}/><br/>
+        <input type="submit" value="Zaloguj" />
+      </form>
+      <br/>
+    </div>
   );
 }
 
