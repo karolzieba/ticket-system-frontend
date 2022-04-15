@@ -24,7 +24,9 @@ const Login = () => {
   
       if(!(response.request.responseURL.includes('?')))
       {
-        window.location='http://localhost:8080/index';
+       
+        
+        window.location='/index';
       }
       
       else
