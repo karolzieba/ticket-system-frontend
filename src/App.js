@@ -239,7 +239,10 @@ const Login = () => {
     
     axios.post('http://localhost:8080/login', form).then((response) => {
       
-    if(response.request.responseURL == 'http://localhost:8080/index')
+
+    
+
+    if(!(response.request.responseURL.includes('?')))
     {
       window.location='/index';
     }
