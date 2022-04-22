@@ -1,0 +1,31 @@
+body
+{
+    background-color: #E6ECFF;
+}
+
+#nameServer
+{
+    
+    float: left;
+}
+
+#buttonLogout
+{
+    float: right;
+    font-size: 12px;
+}
+
+#mainBoard
+{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #6B7DB3;
+    width: 100%;
+  height: 200px;
+}
+
+.product
+{
+    display: inline-block;
+}

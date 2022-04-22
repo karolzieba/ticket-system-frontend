@@ -4,7 +4,7 @@ import { axios } from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Form from 'react-bootstrap/Form'
 import { getValue } from '@testing-library/user-event/dist/utils';
-import Login from './Login';
+
 import { Link } from 'react-router-dom';
 
 function sendData(type, dataToSend) {
