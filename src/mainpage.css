@@ -25,7 +25,27 @@ body
   height: 200px;
 }
 
-.product
+
+
+#homeButton
 {
     display: inline-block;
+    color: aqua;
+}
+
+.product
+{
+  height: 400px;
+  width: 400px;
+  background-color: #ccd9ff;
+  padding: 5px !important;
+  padding-top: 20px !important;
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+}
+
+#newEvent
+{
+    text-align: center;
 }

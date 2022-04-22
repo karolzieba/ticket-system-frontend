@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { Link } from 'react-router-dom';
-import './css/mainpage.css';
+import logo from './logo.svg';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
@@ -18,13 +18,24 @@ const Front = () => {
 <div id="mainBoard">
   <h1>Nasz sklep. Wasze bilety.</h1>
 </div>
-<div id="mainProduct">
- <div class="product">
- <p>Pierwszy produkt</p>
- </div>
- <div class="product">
- <p>Drugi produkt</p>
- </div>
+
+<h1 id="newEvent">Najnowsze wydarzenia:</h1>
+<div class="product">
+
+      <Link style={{textDecoration: 'none', color: '#000000'}} to={'/news/'}>
+        <img src={logo} alt="logo" width="300px"/>
+        <p>
+          ELO
+          <p class="Text">
+            cZESC!
+          </p>
+          <br/>
+          <p class="Text">
+            gODZINA
+          </p>
+        </p>  
+      </Link>
+    
   
 </div>
 

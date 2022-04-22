@@ -4,24 +4,30 @@ import Login from "./Login";
 import Register from "./Register";
 import Front from "./Front";
 import EventCreator from "./Agency/EventCreator";
+import DetalisProducts from "./DetalisProduct";
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Dropdown from 'react-bootstrap/Dropdown';
+import Button from 'react-bootstrap/Button';
+import {Link} from 'react-router';
 
+import './mainpage.css';
 
 function App() {
     return (
         <div>
             <header>
+          
             <>
   <Dropdown className="d-inline mx-2">
+ 
     <Dropdown.Toggle id="dropdown-autoclose-true">
      Koncerty
     </Dropdown.Toggle>
 
-    <Dropdown.Menu>
-      <Dropdown.Item href="koncerty/pop">Pop</Dropdown.Item>
-      <Dropdown.Item href="koncerty/rap">Rap</Dropdown.Item>
-      <Dropdown.Item href="koncerty/rock">Rock</Dropdown.Item>
+    <Dropdown.Menu >
+      <Dropdown.Item href="/koncerty/pop">Pop</Dropdown.Item>
+      <Dropdown.Item href="/koncerty/rap">Rap</Dropdown.Item>
+      <Dropdown.Item href="/koncerty/rock">Rock</Dropdown.Item>
     </Dropdown.Menu>
   </Dropdown>
 
@@ -31,9 +37,9 @@ function App() {
     </Dropdown.Toggle>
 
     <Dropdown.Menu>
-      <Dropdown.Item href="wydarzeniasportowe/meczpilkarski">Mecz Piłkarski</Dropdown.Item>
-      <Dropdown.Item href="wydarzeniasportowe/mma">MMA</Dropdown.Item>
-      <Dropdown.Item href="wydarzeniasportowe/tenis">Tenis</Dropdown.Item>
+      <Dropdown.Item href="/wydarzeniasportowe/pilkanozna">Mecz Piłkarski</Dropdown.Item>
+      <Dropdown.Item href="/wydarzeniasportowe/mma">MMA</Dropdown.Item>
+      <Dropdown.Item href="/wydarzeniasportowe/tennis">Tenis</Dropdown.Item>
     </Dropdown.Menu>
   </Dropdown>
 
@@ -43,17 +49,24 @@ function App() {
     </Dropdown.Toggle>
 
     <Dropdown.Menu>
-      <Dropdown.Item href="teatr/komedia">Komedia</Dropdown.Item>
-      <Dropdown.Item href="teatr/musicale">Musicale</Dropdown.Item>
-      <Dropdown.Item href="teatr/tragedia">Tragedia</Dropdown.Item>
+      <Dropdown.Item href="/teatr/komedia">Komedia</Dropdown.Item>
+      <Dropdown.Item href="/teatr/musicale">Musicale</Dropdown.Item>
+      <Dropdown.Item href="/teatr/dramat">Dramat</Dropdown.Item>
+      
     </Dropdown.Menu>
+    
   </Dropdown>
 
 
 </>
 <div id="nameServer">
+
 <h2>TicketServer</h2>
 </div>
+<div id="homeButton">
+<Button href="/index">Strona główna</Button>
+</div>
+
 
 <div id="buttonLogout">
     <Router>
@@ -84,6 +97,34 @@ function App() {
           <Route path="/agency/event/creator">
               <EventCreator />
           </Route>
+          <Route path="/koncerty/pop">
+              <DetalisProducts />
+          </Route>
+          <Route path="/koncerty/rap">
+              <DetalisProducts />
+          </Route>
+          <Route path="/koncerty/rock">
+              <DetalisProducts />
+          </Route>
+          <Route path="/wydarzeniasportowe/pilkanozna">
+              <DetalisProducts />
+          </Route>
+          <Route path="/wydarzeniasportowe/mma">
+              <DetalisProducts />
+          </Route>
+          <Route path="/wydarzeniasportowe/tennis">
+              <DetalisProducts />
+          </Route>
+          <Route path="/teatr/komedia">
+              <DetalisProducts />
+          </Route>
+          <Route path="/teatr/dramat">
+              <DetalisProducts />
+          </Route>
+          <Route path="/teatr/musicale">
+              <DetalisProducts />
+          </Route>
+
 
           <Route path="/">
                <Home/>

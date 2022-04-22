@@ -1,6 +1,6 @@
 import React from "react";
 import './App.css';
-import './css/mainpage.css';
+
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -8,7 +8,7 @@ const Home = () => {
 
     return (
 
-        <div className="container">
+        <div id="homeContainer">
 
         <h1>Witaj na naszej stronie</h1>
     <div id="buttonHome">
