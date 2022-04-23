@@ -22,7 +22,7 @@ const Front = () => {
 <h1 id="newEvent">Najnowsze wydarzenia:</h1>
 <div class="product">
 
-      <Link style={{textDecoration: 'none', color: '#000000'}} to={'/news/'}>
+      <Link style={{textDecoration: 'none', color: '#000000'}} to={'/wydarzeniasportowe/pilkanozna'}>
         <img src={logo} alt="logo" width="300px"/>
         <p>
           ELO

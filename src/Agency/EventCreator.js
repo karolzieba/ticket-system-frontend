@@ -9,6 +9,7 @@ const EventCreator = () => {
     const [nameEvent, setNameEvent] = useState("");
     const [priceEvent, setPriceEvent] = useState("");
     const [typeEvent, setTypeEvent] = useState("");
+    const [imageData, setImageData] = useState("");
 
 
     const handleSubmit = (event) => {
@@ -22,6 +23,7 @@ const EventCreator = () => {
         'locationEvent': locationEvent,
         'priceEvent': priceEvent,
         'capacityEvent': capacityEvent
+        
 
         })
         .then(function (response) {
@@ -39,8 +41,40 @@ const EventCreator = () => {
         setNameEvent("");
       };
 
+
+      const uploadImage = async (e) => 
+      {
+        const file = e.target.files[0];
+        
+        const base64 = await convertBase64(file);
+        console.log(base64);
+        setImageData(base64);
+      }
+
+      const convertBase64 = (file) => {
+
+        return new Promise((resolve, reject) =>
+        {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file);
+
+          fileReader.onload = () =>
+          {
+            resolve(fileReader.result);
+          };
+
+          fileReader.onerror = (error) => {
+            reject(error);
+          };
+        });
+
+      };
+      
+
     return (
-        <form onSubmit={handleSubmit}>
+      <div id="creatorFormEvent">
+
+<form onSubmit={handleSubmit}>
             <input type="text"  id="nameEvent" placeholder="Nazwa wydarzenia" value={nameEvent} required onChange={(e) => setNameEvent(e.target.value)}/><br/>
           <input type="number"  id="capacityEvent" placeholder="Ilość miejsc" value={capacityEvent} required onChange={(e) => setCapacityEvent(e.target.value)}/><br/>
           <input type="date"  id="dateTimeEvent" placeholder="Dzień wydarzenia" value={dateTimeEvent} required onChange={(e) => setDateTimeEvent(e.target.value)}/><br/>
@@ -57,10 +91,17 @@ const EventCreator = () => {
               </select>
               
           </label>
+
+          <br />
+        <input type="file" onChange={(e) => {uploadImage(e);}}></input>
+        <br />
+         <img src={imageData} height="200px" width="200px"/>
          <br />
          <br />
           <input type="submit" value="Utworz wydarzenie" />
         </form>
+      </div>
+        
       );
     
 

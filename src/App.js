@@ -8,11 +8,16 @@ import DetalisProducts from "./DetalisProduct";
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
-import {Link} from 'react-router';
+import { useEffect } from "react";
+import axios from "axios";
 
 import './mainpage.css';
 
+
+
+
 function App() {
+  
     return (
         <div>
             <header>
@@ -61,7 +66,7 @@ function App() {
 </>
 <div id="nameServer">
 
-<h2>TicketServer</h2>
+<h2>TicketServer.pl</h2>
 </div>
 <div id="homeButton">
 <Button href="/index">Strona główna</Button>
