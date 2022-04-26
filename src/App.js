@@ -65,7 +65,6 @@ function App() {
 
 </>
 <div id="nameServer">
-
 <h2>TicketServer.pl</h2>
 </div>
 <div id="homeButton">
