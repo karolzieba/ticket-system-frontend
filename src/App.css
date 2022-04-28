@@ -1,78 +1,181 @@
-
-
-#buttonHome
-{
-  display:inline-block;
-}
-.login
-{
-  text-align: center;
-  background-image: linear-gradient(#294681, #282c34);
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#navigatorHeader {
+	background-image: linear-gradient(#294681, #121313);
 }
 
-.register
-{
-  text-align: center;
-  background-image: linear-gradient(#294681, #282c34);
-  min-height: 100vh;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#navigatorHeader a {
+	color: white;
+}
+
+.login {
+	text-align: center;
+	background-image: linear-gradient(#294681, #282c34);
+	min-height: 100vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+
+.register {
+	text-align: center;
+	background-image: linear-gradient(#294681, #282c34);
+	min-height: 100vh;
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+	height: 40vmin;
+	pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
 }
 
 .App-header {
-  background-image: linear-gradient(#294681, #282c34);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+	background-image: linear-gradient(#294681, #282c34);
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 
 .App-link {
-  color: #61dafb;
+	color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
 
-#homeContainer
-{
-  text-align: center;
-  color: #294681;
-  background-color: #294681;
-  height: 300px;
+#homeContainer {
+	text-align: center;
+	background-image: linear-gradient(#294681, #282c34);
+	min-height: 100vh;
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 
+#mainProduct {
+	background-image: linear-gradient(#294681, #282c34);
+	min-height: 80vh;
+}
 
+#newEvent {
+	text-align: center;
+	color: white;
+}
+
+#nameServer {
+	color: white;
+	margin-right: 15%;
+	height: auto;
+	float: left;
+}
+
+#creatorFormEvent {
+	text-align: center;
+	background-image: linear-gradient(#294681, #282c34);
+	min-height: 100vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	color: white;
+}
+
+#parentDetalisProduct {
+	background-image: linear-gradient(#294681, #282c34);
+	height: 80vh;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.dropdown-menu.show {
+	background-image: linear-gradient(#294681, #121313);
+}
+
+.dropdown-item:hover {
+	background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.singleProduct {
+	height: 400px;
+	width: 400px;
+	background-color: #ccd9ff;
+	padding: 5px !important;
+	padding-top: 20px !important;
+	display: inline-block;
+	margin: 2vh;
+	text-align: center;
+}
+.mb-1 {
+	text-align: center;
+}
+
+.singleProduct:hover {
+	filter: brightness(80%);
+}
+
+#parentOrder {
+	background-image: linear-gradient(#294681, #282c34);
+	min-height: 80vh;
+}
+
+div.card {
+	width: 400px;
+	height: 450px;
+}
+.buttonProduct {
+	display: none;
+}
+.card:hover {
+	filter: brightness(70%);
+}
+
+.card:hover > .buttonProduct {
+	display: block;
+}
+
+.d-block.w-100 {
+	height: 200px;
+}
+#frontPage {
+	background-image: linear-gradient(#294681, #282c34);
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+#frontPage h1 {
+	text-align: center;
+	color: white;
+}
