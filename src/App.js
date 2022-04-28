@@ -6,6 +6,7 @@ import Front from './Front';
 import EventCreator from './Agency/EventCreator';
 import DetalisProducts from './DetalisProduct';
 import Order from './Order';
+import AboutUs from './aboutus';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { ReactComponent as Logo } from './logo.svg';
@@ -52,10 +53,18 @@ function App() {
 							</NavDropdown.Item>
 							<NavDropdown.Item href='/teatr/dramat'>Dramat</NavDropdown.Item>
 						</NavDropdown>
+
+						<NavDropdown
+							title='Panel Administracyjny'
+							id='collasible-nav-ddropdown'>
+							<NavDropdown.Item href='/agency/event/creator'>
+								Dodawanie wydarzeń
+							</NavDropdown.Item>
+						</NavDropdown>
 					</Nav>
 
 					<Nav>
-						<Nav.Link href='#'>O nas</Nav.Link>
+						<Nav.Link href='/aboutus'>O nas</Nav.Link>
 						<Nav.Link eventKey={2} href='/login'>
 							Wyloguj sie
 						</Nav.Link>
@@ -109,6 +118,9 @@ function App() {
 					</Route>
 					<Route path='/teatr/musicale'>
 						<DetalisProducts />
+					</Route>
+					<Route path='/aboutus'>
+						<AboutUs></AboutUs>
 					</Route>
 
 					<Route path='/'>

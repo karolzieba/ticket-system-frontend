@@ -1,27 +1,44 @@
 import React from 'react';
 import { useState } from 'react';
-
+import { useSelector } from 'react-redux';
 const EventCreator = () => {
 	const [capacityEvent, setCapacityEvent] = useState('');
 	const [dateTimeEvent, setDateTimeEvent] = useState('');
 	const [locationEvent, setLocationEvent] = useState('');
 	const [nameEvent, setNameEvent] = useState('');
 	const [priceEvent, setPriceEvent] = useState('');
-	const [typeEvent, setTypeEvent] = useState('');
+	const [typeEvent, setTypeEvent] = useState(1);
 	const [imageData, setImageData] = useState('');
+	const [imagePreview, setImagePreview] = useState('');
+	const [imageName, setImageName] = useState('');
 
 	const handleSubmit = (event) => {
 		const axios = require('axios').default;
 		event.preventDefault();
 
 		axios
-			.post('http://localhost:8080/addevent', {
-				nameEvent: nameEvent,
-				dateTimeEvent: dateTimeEvent,
-				locationEvent: locationEvent,
-				priceEvent: priceEvent,
-				capacityEvent: capacityEvent,
-			})
+			.post(
+				'http://localhost:8080/api/event/add',
+				{
+					
+					capacityEvent: capacityEvent,
+					dateTimeEvent: dateTimeEvent,
+					locationEvent: locationEvent,
+				   	priceEvent: priceEvent,
+					nameEvent: nameEvent,
+					   
+						typeEvent: 
+						  {
+							  idTypeEvent: typeEvent
+						  },
+					  
+						  agency:
+						  {
+							  idAgency: "1"
+						  }
+					  },
+				
+			)
 			.then(function (response) {
 				console.log(response);
 				console.log('zwycienstwo');
@@ -116,10 +133,11 @@ const EventCreator = () => {
 							value={typeEvent}
 							required
 							onChange={(e) => setTypeEvent(e.target.value)}>
-							<option value='Koncert'>Koncert</option>
-							<option value='WydarzenieSportowe'>Wydarzenie Sportowe</option>
-
-							<option value='Kabaret'>Kabaret</option>
+							<option  value='1'>
+								Koncert
+							</option>
+							<option value='2'>Wydarzenie Sportowe</option>
+							<option value='3'>Teatr</option>
 						</select>
 					</label>
 
@@ -141,7 +159,7 @@ const EventCreator = () => {
 					</div>
 
 					<br />
-					<img src={imageData} height='250px' width='250px' />
+					<img src={imageData} height='430px' width='316px' />
 					<br />
 					<br />
 					<input type='submit' value='Utworz wydarzenie' />
