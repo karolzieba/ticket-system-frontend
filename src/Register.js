@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 
 function sendData(type, dataToSend) {
 	const axios = require('axios').default;
+	axios.defaults.withCredentials = true;
 	let url = 'http://localhost:8080/register';
 
 	if (type === 'moderator') {

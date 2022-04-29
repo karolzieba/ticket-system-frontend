@@ -57,10 +57,11 @@ const EventCreator = () => {
 	/******************************************************************************************************* */
 	const handleSubmit = (event) => {
 		const axios = require('axios').default;
+		axios.defaults.withCredentials = true;
 		event.preventDefault();
 
 		axios
-			.post('http://localhost:8080/api/event/add', {
+			.post('http://localhost:8080/api/event', {
 				capacityEvent: capacityEvent,
 				dateTimeEvent: dateTimeEvent,
 				locationEvent: locationEvent,
@@ -72,7 +73,7 @@ const EventCreator = () => {
 				},
 
 				agency: {
-					idAgency: '1',
+					idAgency: 1,
 				},
 			})
 			.then(function (response) {

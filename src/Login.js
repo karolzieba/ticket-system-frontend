@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 const Login = () => {
 	const [accountLogin, setAccountLogin] = useState('');
 	const [passwordAccount, setPasswordAccount] = useState('');
-	const [rememberMe, setRemember] = useState();
 
 	const handleSubmit = (event) => {
 		const axios = require('axios').default;
+		axios.defaults.withCredentials = true;
 		event.preventDefault();
 
 		let loginData = {
@@ -18,17 +18,8 @@ const Login = () => {
 		};
 
 		axios
-			.post('http://localhost:8080/login', loginData, { withCredentials: true })
+			.post('http://localhost:8080/login', loginData)
 			.then((response) => {
-				/*if(!(response.request.responseURL.includes('?')))
-      {
-        window.location='http://localhost:8080/index';
-      }
-      
-      else
-      {
-        console.log("Błąd logowania");
-      }*/
 
 				console.log(response.data);
 			})
@@ -58,15 +49,6 @@ const Login = () => {
 					value={passwordAccount}
 					required
 					onChange={(e) => setPasswordAccount(e.target.value)}
-				/>
-				<br />
-				<input
-					type='checkbox'
-					name='rememberme'
-					id='rememberme'
-					placeholder='Pamiętaj mnie'
-					value={rememberMe}
-					onChange={(e) => setRemember(e.target.value)}
 				/>
 				<br />
 				<input type='submit' value='Zaloguj' />

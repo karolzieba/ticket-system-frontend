@@ -17,7 +17,7 @@ const Front = () => {
 	const listMainProduct3 = [];
 	function getTicket() {
 		axios
-			.get('http://localhost:8080/api/event/ticket')
+			.get('http://localhost:8080/api/event')
 			.then((data) => {
 				let x = data.data;
 
