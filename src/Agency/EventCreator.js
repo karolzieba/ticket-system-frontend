@@ -12,33 +12,69 @@ const EventCreator = () => {
 	const [imagePreview, setImagePreview] = useState('');
 	const [imageName, setImageName] = useState('');
 
+	const optionsData = [
+		{
+			name: 'Koncerty',
+			states: ['Pop', 'Rap', 'Rock'],
+		},
+		{
+			name: 'Wydarzenia Sportowe',
+			states: ['Piłka nożna', 'MMA', 'Tennis'],
+		},
+		{
+			name: 'Teatr',
+			states: ['Komedia', 'Musicale', 'Dramat'],
+		},
+	];
+
+	const [{ category, state }, setData] = useState({
+		country: 'Koncerty',
+		state: 'Pop',
+	});
+
+	const categories = optionsData.map((type) => (
+		<option key={type.name} value={type.name}>
+			{type.name}
+		</option>
+	));
+
+	const states = optionsData
+		.find((item) => item.name === category)
+		?.states.map((state) => (
+			<option key={state} value={state}>
+				{state}
+			</option>
+		));
+
+	function handleNameChange(event) {
+		setData((data) => ({ state: '', category: event.target.value }));
+	}
+
+	function handleStateChange(event) {
+		setData((data) => ({ ...data, state: event.target.value }));
+		setTypeEvent(event.target.value);
+	}
+	/******************************************************************************************************* */
 	const handleSubmit = (event) => {
 		const axios = require('axios').default;
 		event.preventDefault();
 
 		axios
-			.post(
-				'http://localhost:8080/api/event/add',
-				{
-					
-					capacityEvent: capacityEvent,
-					dateTimeEvent: dateTimeEvent,
-					locationEvent: locationEvent,
-				   	priceEvent: priceEvent,
-					nameEvent: nameEvent,
-					   
-						typeEvent: 
-						  {
-							  idTypeEvent: typeEvent
-						  },
-					  
-						  agency:
-						  {
-							  idAgency: "1"
-						  }
-					  },
-				
-			)
+			.post('http://localhost:8080/api/event/add', {
+				capacityEvent: capacityEvent,
+				dateTimeEvent: dateTimeEvent,
+				locationEvent: locationEvent,
+				priceEvent: priceEvent,
+				nameEvent: nameEvent,
+
+				typeEvent: {
+					nameTypeEvent: typeEvent,
+				},
+
+				agency: {
+					idAgency: '1',
+				},
+			})
 			.then(function (response) {
 				console.log(response);
 				console.log('zwycienstwo');
@@ -129,17 +165,19 @@ const EventCreator = () => {
 					<br />
 					<label>
 						Wybierz rodzaj wydarzenia <br />
-						<select
-							value={typeEvent}
-							required
-							onChange={(e) => setTypeEvent(e.target.value)}>
-							<option  value='1'>
-								Koncert
-							</option>
-							<option value='2'>Wydarzenie Sportowe</option>
-							<option value='3'>Teatr</option>
+						<select value={category} onChange={handleNameChange}>
+							<option>Wybierz...</option>
+							{categories}
 						</select>
 					</label>
+
+					<br />
+					<label Wybierz kategorie wydarzenia />
+
+					<select value={state} onChange={handleStateChange}>
+						<option>....</option>
+						{states}
+					</select>
 
 					<br />
 
