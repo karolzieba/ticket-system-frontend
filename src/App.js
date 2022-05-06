@@ -86,13 +86,13 @@ function App() {
 						<Front />
 					</Route>
 
-					<Route path='/zamowienie'>
+					<Route path='/zamowienie/:id'>
 						<Order />
 					</Route>
 					<Route path='/agency/event/creator'>
 						<EventCreator />
 					</Route>
-					<Route path='/koncerty/pop'>
+					<Route path='/koncerty/:pop'>
 						<DetalisProducts />
 					</Route>
 					<Route path='/koncerty/rap'>

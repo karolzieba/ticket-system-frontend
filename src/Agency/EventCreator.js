@@ -61,7 +61,7 @@ const EventCreator = () => {
 		event.preventDefault();
 
 		axios
-			.post('http://localhost:8080/api/event', {
+			.post('http://localhost:8080/api/event/add', {
 				capacityEvent: capacityEvent,
 				dateTimeEvent: dateTimeEvent,
 				locationEvent: locationEvent,
@@ -115,7 +115,7 @@ const EventCreator = () => {
 	};
 
 	return (
-		<div class='bodyPage'>
+		
 			<div id='creatorFormEvent'>
 				<form onSubmit={handleSubmit}>
 					<input
@@ -204,7 +204,7 @@ const EventCreator = () => {
 					<input type='submit' value='Utworz wydarzenie' />
 				</form>
 			</div>
-		</div>
+		
 	);
 };
 

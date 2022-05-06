@@ -101,6 +101,7 @@
 	text-align: center;
 	background-image: linear-gradient(#294681, #282c34);
 	min-height: 100vh;
+	height: auto;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -112,13 +113,33 @@
 
 #parentDetalisProduct {
 	background-image: linear-gradient(#294681, #282c34);
-	height: 100vh;
+	min-height: 100vh;
+	height: auto;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column-reverse;
 	align-items: center;
 	justify-content: center;
 }
-
+#parentDetalisProduct .card {
+	min-height: 50vh;
+	height: auto;
+	padding: 1vh;
+	margin-bottom: 1vh;
+}
+#parentDetalisProduct .card-deck {
+	display: flex;
+	flex-direction: row;
+	margin: 2vh;
+}
+#parentDetalisProduct .card .card-text {
+	color: black;
+	font-family: 'Times New Roman', Times, serif;
+	font-size: 22px;
+}
+#parentDetalisProduct .card .card-title {
+	font-size: 32px;
+	color: #294681;
+}
 .dropdown-menu.show {
 	background-image: linear-gradient(#294681, #121313);
 }
@@ -127,16 +148,6 @@
 	background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-.singleProduct {
-	height: 400px;
-	width: 400px;
-	background-color: #ccd9ff;
-	padding: 5px !important;
-	padding-top: 20px !important;
-	display: inline-block;
-	margin: 2vh;
-	text-align: center;
-}
 .mb-1 {
 	text-align: center;
 }
@@ -147,35 +158,39 @@
 
 #parentOrder {
 	background-image: linear-gradient(#294681, #282c34);
-	min-height: 80vh;
+	min-height: 100vh;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 #parentAboutUs {
 	background-image: linear-gradient(#294681, #282c34);
-	min-height: 80vh;
+	min-height: 100vh;
+	height: auto;
 	color: white;
 	font-size: calc(10px + 2vmin);
-	text-align: center;
+
 	font-family: Arial, Helvetica, sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
-.buttonProduct {
-	display: none;
-}
 .card:hover {
 	filter: brightness(70%);
 }
 
-.card:hover > .buttonProduct {
-	display: block;
-}
-
 #frontPage {
 	background-image: linear-gradient(#294681, #282c34);
-	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	min-height: 100vh;
+	height: auto;
 }
 #frontPage h1 {
 	text-align: center;
@@ -186,7 +201,12 @@
 	width: 1328px;
 }
 
-.card {
-	width: 450px;
-	height: 500px;
+.card-title {
+	font-size: 32px;
+	color: #294681;
+}
+.card-text {
+	color: black;
+	font-family: 'Times New Roman', Times, serif;
+	font-size: 22px;
 }

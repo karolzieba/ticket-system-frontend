@@ -17,7 +17,7 @@ const Front = () => {
 	const listMainProduct3 = [];
 	function getTicket() {
 		axios
-			.get('http://localhost:8080/api/event')
+			.get('http://localhost:8080/api/event/ticket')
 			.then((data) => {
 				let x = data.data;
 
@@ -29,87 +29,88 @@ const Front = () => {
 	console.log(tickets);
 
 	for (let i = 0; i < 3; i++) {
-		listMainProduct1.push(
-			<div class='card'>
-				<img className='d-block w-100' src={logo} alt='First slide' />
-				<div class='card-body'>
-					<h5 class='card-title'>
-						{tickets[i] !== undefined && tickets[i].nameEvent}
-					</h5>
-					<p class='card-text'>
-						Lokalizacja:
-						{tickets[i] !== undefined && tickets[i].locationEvent}
-					</p>
-					<p class='card-text'>
-						Data wydarzenia:
-						{tickets[i] !== undefined && tickets[i].dateTimeEvent}
-					</p>
-					<p class='card-text'>
-						Cena biletu:
-						{tickets[i] !== undefined && tickets[i].priceEvent} zł
-					</p>
+		if (tickets[i] !== undefined) {
+			let idEvent = tickets[i].idEvent;
+
+			listMainProduct1.push(
+				<div class='card'>
+					<Link to={'/zamowienie/' + idEvent}>
+						<img className='d-block w-100' src={logo} alt='First slide' />
+						<div class='card-body'>
+							<h5 class='card-title'>{tickets[i].nameEvent}</h5>
+							<p class='card-text'>
+								Lokalizacja:
+								{tickets[i].locationEvent}
+							</p>
+							<p class='card-text'>
+								Data wydarzenia:
+								{tickets[i].dateTimeEvent}
+							</p>
+							<p class='card-text'>
+								Cena biletu:
+								{tickets[i].priceEvent} zł
+							</p>
+						</div>
+					</Link>
 				</div>
-				<button
-					type='button'
-					class='buttonProduct'
-					onClick={(e) => {
-						e.preventDefault();
-						window.location.href = '/zamowienie?' + tickets[i].idEvent;
-					}}>
-					Kup bilet
-				</button>
-			</div>
-		);
+			);
+		}
 	}
 	for (let i = 3; i < 6; i++) {
-		listMainProduct2.push(
-			<div class='card'>
-				<img className='d-block w-100' src={logo} alt='First slide' />
-				<div class='card-body'>
-					<h5 class='card-title'>
-						{tickets[i] !== undefined && tickets[i].nameEvent}
-					</h5>
-					<p class='card-text'>
-						Lokalizacja:
-						{tickets[i] !== undefined && tickets[i].locationEvent}
-					</p>
-					<p class='card-text'>
-						Data wydarzenia:
-						{tickets[i] !== undefined && tickets[i].dateTimeEvent}
-					</p>
-					<p class='card-text'>
-						Cena biletu:
-						{tickets[i] !== undefined && tickets[i].priceEvent} zł
-					</p>
+		if (tickets[i] !== undefined) {
+			let idEvent = tickets[i].idEvent;
+
+			listMainProduct2.push(
+				<div class='card'>
+					<Link to={'/zamowienie/' + idEvent}>
+						<img className='d-block w-100' src={logo} alt='First slide' />
+						<div class='card-body'>
+							<h5 class='card-title'>{tickets[i].nameEvent}</h5>
+							<p class='card-text'>
+								Lokalizacja:
+								{tickets[i].locationEvent}
+							</p>
+							<p class='card-text'>
+								Data wydarzenia:
+								{tickets[i].dateTimeEvent}
+							</p>
+							<p class='card-text'>
+								Cena biletu:
+								{tickets[i].priceEvent} zł
+							</p>
+						</div>
+					</Link>
 				</div>
-				<button class='buttonProduct'>Kup bilet</button>
-			</div>
-		);
+			);
+		}
 	}
 	for (let i = 6; i < 9; i++) {
-		listMainProduct3.push(
-			<div class='card'>
-				<img className='d-block w-100' src={logo} alt='First slide' />
-				<div class='card-body'>
-					<h5 class='card-title'>
-						{tickets[i] !== undefined && tickets[i].nameEvent}
-					</h5>
-					<p class='card-text'>
-						Lokalizacja:
-						{tickets[i] !== undefined && tickets[i].locationEvent}
-					</p>
-					<p class='card-text'>
-						Data wydarzenia:
-						{tickets[i] !== undefined && tickets[i].dateTimeEvent}
-					</p>
-					<p class='card-text'>
-						Cena biletu:
-						{tickets[i] !== undefined && tickets[i].priceEvent} zł
-					</p>
+		if (tickets[i] !== undefined) {
+			let idEvent = tickets[i].idEvent;
+
+			listMainProduct3.push(
+				<div class='card'>
+					<Link to={'/zamowienie/' + idEvent}>
+						<img className='d-block w-100' src={logo} alt='First slide' />
+						<div class='card-body'>
+							<h5 class='card-title'>{tickets[i].nameEvent}</h5>
+							<p class='card-text'>
+								Lokalizacja:
+								{tickets[i].locationEvent}
+							</p>
+							<p class='card-text'>
+								Data wydarzenia:
+								{tickets[i].dateTimeEvent}
+							</p>
+							<p class='card-text'>
+								Cena biletu:
+								{tickets[i].priceEvent} zł
+							</p>
+						</div>
+					</Link>
 				</div>
-				<button class='buttonProduct'>Kup bilet</button>
-			</div>
-		);
+			);
+		}
 	}
 
 	return (
@@ -117,18 +118,17 @@ const Front = () => {
 			<h1>Najnowsze wydarzenia</h1>
 			<div id='containerFix'>
 				<Carousel fade>
-					<Carousel.Item interval={5000}>
+					<Carousel.Item interval={500000}>
 						<div class='card-deck'>{listMainProduct1}</div>
 					</Carousel.Item>
-					<Carousel.Item interval={5000}>
+					<Carousel.Item interval={500000}>
 						<div class='card-deck'>{listMainProduct2}</div>
 					</Carousel.Item>
-					<Carousel.Item interval={5000}>
+					<Carousel.Item interval={500000}>
 						<div class='card-deck'>{listMainProduct3}</div>
 					</Carousel.Item>
 				</Carousel>
 			</div>
-			))
 		</div>
 	);
 };
