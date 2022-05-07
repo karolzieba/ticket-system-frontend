@@ -121,10 +121,10 @@
 	justify-content: center;
 }
 #parentDetalisProduct .card {
-	min-height: 50vh;
-	height: auto;
 	padding: 1vh;
 	margin-bottom: 1vh;
+	height: 50vh;
+	width: 40vh;
 }
 #parentDetalisProduct .card-deck {
 	display: flex;

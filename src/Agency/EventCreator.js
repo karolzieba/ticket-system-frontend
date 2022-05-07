@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+
 const EventCreator = () => {
 	const [capacityEvent, setCapacityEvent] = useState('');
 	const [dateTimeEvent, setDateTimeEvent] = useState('');
@@ -52,7 +52,15 @@ const EventCreator = () => {
 
 	function handleStateChange(event) {
 		setData((data) => ({ ...data, state: event.target.value }));
-		setTypeEvent(event.target.value);
+
+		
+		if (event.target.value == 'Piłka nożna') {
+			setTypeEvent('Pilkanozna');
+		} else {
+			setTypeEvent(event.target.value);
+		}
+
+		
 	}
 	/******************************************************************************************************* */
 	const handleSubmit = (event) => {
@@ -89,6 +97,8 @@ const EventCreator = () => {
 		setDateTimeEvent('');
 		setLocationEvent('');
 		setNameEvent('');
+		setTypeEvent('');
+		setPriceEvent('');
 	};
 
 	const uploadImage = async (e) => {
@@ -115,96 +125,94 @@ const EventCreator = () => {
 	};
 
 	return (
-		
-			<div id='creatorFormEvent'>
-				<form onSubmit={handleSubmit}>
-					<input
-						type='text'
-						id='nameEvent'
-						placeholder='Nazwa wydarzenia'
-						value={nameEvent}
-						required
-						onChange={(e) => setNameEvent(e.target.value)}
-					/>
-					<br />
-					<input
-						type='number'
-						id='capacityEvent'
-						placeholder='Ilość miejsc'
-						value={capacityEvent}
-						required
-						onChange={(e) => setCapacityEvent(e.target.value)}
-					/>
-					<br />
-					<input
-						type='date'
-						id='dateTimeEvent'
-						placeholder='Dzień wydarzenia'
-						value={dateTimeEvent}
-						required
-						onChange={(e) => setDateTimeEvent(e.target.value)}
-					/>
-					<br />
-					<input
-						type='text'
-						id='locationEvent'
-						placeholder='Miejsce wydarzenia'
-						value={locationEvent}
-						required
-						onChange={(e) => setLocationEvent(e.target.value)}
-					/>
-					<br />
-					<input
-						type='number'
-						step='any'
-						id='priceEvent'
-						placeholder='Koszt wydarzenia'
-						value={priceEvent}
-						required
-						onChange={(e) => setPriceEvent(e.target.value)}
-					/>
-					<br />
-					<label>
-						Wybierz rodzaj wydarzenia <br />
-						<select value={category} onChange={handleNameChange}>
-							<option>Wybierz...</option>
-							{categories}
-						</select>
-					</label>
-
-					<br />
-					<label Wybierz kategorie wydarzenia />
-
-					<select value={state} onChange={handleStateChange}>
-						<option>....</option>
-						{states}
+		<div id='creatorFormEvent'>
+			<form onSubmit={handleSubmit}>
+				<input
+					type='text'
+					id='nameEvent'
+					placeholder='Nazwa wydarzenia'
+					value={nameEvent}
+					required
+					onChange={(e) => setNameEvent(e.target.value)}
+				/>
+				<br />
+				<input
+					type='number'
+					id='capacityEvent'
+					placeholder='Ilość miejsc'
+					value={capacityEvent}
+					required
+					onChange={(e) => setCapacityEvent(e.target.value)}
+				/>
+				<br />
+				<input
+					type='date'
+					id='dateTimeEvent'
+					placeholder='Dzień wydarzenia'
+					value={dateTimeEvent}
+					required
+					onChange={(e) => setDateTimeEvent(e.target.value)}
+				/>
+				<br />
+				<input
+					type='text'
+					id='locationEvent'
+					placeholder='Miejsce wydarzenia'
+					value={locationEvent}
+					required
+					onChange={(e) => setLocationEvent(e.target.value)}
+				/>
+				<br />
+				<input
+					type='number'
+					step='any'
+					id='priceEvent'
+					placeholder='Koszt wydarzenia'
+					value={priceEvent}
+					required
+					onChange={(e) => setPriceEvent(e.target.value)}
+				/>
+				<br />
+				<label>
+					Wybierz rodzaj wydarzenia <br />
+					<select value={category} onChange={handleNameChange}>
+						<option>Wybierz...</option>
+						{categories}
 					</select>
+				</label>
 
-					<br />
+				<br />
+				<label Wybierz kategorie wydarzenia />
 
-					<div class='mb-3'>
-						<label for='formFile' class='form-label'>
-							Wybierz zdjęcie awataru
-						</label>
-						<input
-							class='form-control'
-							type='file'
-							accept='image/*'
-							id='formFile'
-							onChange={(e) => {
-								uploadImage(e);
-							}}
-						/>
-					</div>
+				<select value={state} onChange={handleStateChange}>
+					<option>....</option>
+					{states}
+				</select>
 
-					<br />
-					<img src={imageData} height='430px' width='316px' />
-					<br />
-					<br />
-					<input type='submit' value='Utworz wydarzenie' />
-				</form>
-			</div>
-		
+				<br />
+
+				<div class='mb-3'>
+					<label for='formFile' class='form-label'>
+						Wybierz zdjęcie awataru
+					</label>
+					<input
+						class='form-control'
+						type='file'
+						accept='image/*'
+						id='formFile'
+						onChange={(e) => {
+							uploadImage(e);
+						}}
+					/>
+				</div>
+
+				<br />
+				<img src={imageData} height='430px' width='316px' />
+				<br />
+				<br />
+				<input type='submit' value='Utworz wydarzenie' />
+			</form>
+		</div>
 	);
 };
 

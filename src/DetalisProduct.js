@@ -29,7 +29,7 @@ const DetalisProducts = () => {
 			let idEvent = categoryTickets[i].idEvent;
 			listOfProduct.push(
 				<Row>
-					<Col lg={true}>
+					<Col>
 						<div class='card'>
 							<Link to={'/zamowienie/' + idEvent}>
 								<img src={logo} class='card-img-top' alt='...' />
