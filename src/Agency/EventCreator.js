@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 
-const EventCreator = () => {
+const EventCreator = ( { userData } ) => {
+	const axios = require('axios').default;
+
 	const [capacityEvent, setCapacityEvent] = useState('');
-	const [dateTimeEvent, setDateTimeEvent] = useState('');
+	const [dateEvent, setDateEvent] = useState('');
+	const [timeEvent, setTimeEvent] = useState('');
 	const [locationEvent, setLocationEvent] = useState('');
 	const [nameEvent, setNameEvent] = useState('');
 	const [priceEvent, setPriceEvent] = useState('');
@@ -64,14 +67,14 @@ const EventCreator = () => {
 	}
 	/******************************************************************************************************* */
 	const handleSubmit = (event) => {
-		const axios = require('axios').default;
 		axios.defaults.withCredentials = true;
 		event.preventDefault();
 
+		console.log("data: " + dateEvent + "T" + timeEvent)
 		axios
-			.post('http://localhost:8080/api/event/add', {
+			.post('http://localhost:8080/api/event', {
 				capacityEvent: capacityEvent,
-				dateTimeEvent: dateTimeEvent,
+				dateTimeEvent: (dateEvent + "T" + timeEvent),
 				locationEvent: locationEvent,
 				priceEvent: priceEvent,
 				nameEvent: nameEvent,
@@ -81,20 +84,19 @@ const EventCreator = () => {
 				},
 
 				agency: {
-					idAgency: 1,
+					idAgency: userData.idRole
 				},
 			})
 			.then(function (response) {
 				console.log(response);
-				console.log('zwycienstwo');
 			})
 			.catch(function (error) {
 				console.log(error);
-				console.log('error :<');
 			});
 
 		setCapacityEvent('');
-		setDateTimeEvent('');
+		setDateEvent('');
+		setTimeEvent('');
 		setLocationEvent('');
 		setNameEvent('');
 		setTypeEvent('');
@@ -147,11 +149,19 @@ const EventCreator = () => {
 				<br />
 				<input
 					type='date'
-					id='dateTimeEvent'
+					id='dateEvent'
 					placeholder='Dzień wydarzenia'
-					value={dateTimeEvent}
+					value={dateEvent}
 					required
-					onChange={(e) => setDateTimeEvent(e.target.value)}
+					onChange={(e) => setDateEvent(e.target.value)}
+				/>
+				<input
+					type='time'
+					id='timeEvent'
+					placeholder='Godzina'
+					value={timeEvent}
+					required
+					onChange={(e) => setTimeEvent(e.target.value)}
 				/>
 				<br />
 				<input
@@ -193,7 +203,7 @@ const EventCreator = () => {
 
 				<div class='mb-3'>
 					<label for='formFile' class='form-label'>
-						Wybierz zdjęcie awataru
+						Wybierz zdjęcie plakatu
 					</label>
 					<input
 						class='form-control'

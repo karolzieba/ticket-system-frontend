@@ -9,9 +9,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 const DetalisProducts = () => {
 	const [categoryTickets, setCategoryTickets] = useState([]);
-	useEffect(() => {
-		getCategoryTicket();
-	}, []);
 	const listOfProduct = [];
 	let location = useLocation().pathname.split('/')[2];
 
@@ -23,6 +20,11 @@ const DetalisProducts = () => {
 			})
 			.catch((err) => alert(err));
 	}
+
+	useEffect(() => {
+		getCategoryTicket();
+	}, [location]);
+	
 	console.log(categoryTickets);
 	for (let i = 0; i < categoryTickets.length; i++) {
 		if (categoryTickets[i] !== undefined) {

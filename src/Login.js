@@ -1,11 +1,13 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Facebook from './facebookLogin';
 
 const Login = () => {
 	const [accountLogin, setAccountLogin] = useState('');
 	const [passwordAccount, setPasswordAccount] = useState('');
+	const navigate = useNavigate();
 
 	const handleSubmit = (event) => {
 		const axios = require('axios').default;
@@ -20,8 +22,9 @@ const Login = () => {
 		axios
 			.post('http://localhost:8080/login', loginData)
 			.then((response) => {
-
 				console.log(response.data);
+				navigate("/", { replace: true });
+				window.location.reload();
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -51,12 +54,13 @@ const Login = () => {
 					onChange={(e) => setPasswordAccount(e.target.value)}
 				/>
 				<br />
-				<input type='submit' value='Zaloguj' />
+				<input class="loginRegisterButton" type='submit' value='Zaloguj' />
 			</form>
 			<br />
-
+			<Facebook/>
+			<br />
 			<Link to='/register'>
-				<button type='button'>Zarejestruj się!</button>
+				<button class="loginRegisterButton" type='button'>Zarejestruj się!</button>
 			</Link>
 		</div>
 	);

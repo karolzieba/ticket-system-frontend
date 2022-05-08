@@ -92,7 +92,7 @@ const Register = () => {
 
 			<br></br>
 			<Link to='/login'>
-				<button type='button'>Zaloguj się!</button>
+				<button class="loginRegisterButton" type='button'>Zaloguj się!</button>
 			</Link>
 		</div>
 	);
@@ -164,7 +164,7 @@ const Moderator = () => {
 				onChange={(e) => setUserNameModerator(e.target.value)}
 			/>
 			<br />
-			<input type='submit' value='Zarejestruj' />
+			<input class="loginRegisterButton" type='submit' value='Zarejestruj' />
 		</form>
 	);
 };
@@ -275,7 +275,7 @@ const Client = () => {
 				onChange={(e) => setPhoneNumber(e.target.value)}
 			/>
 			<br />
-			<input type='submit' value='Zarejestruj' />
+			<input class="loginRegisterButton" type='submit' value='Zarejestruj' />
 		</form>
 	);
 };
@@ -374,7 +374,7 @@ const Agency = () => {
 				onChange={(e) => setNumberPhone(e.target.value)}
 			/>
 			<br />
-			<input type='submit' value='Zarejestruj' />
+			<input class="loginRegisterButton" type='submit' value='Zarejestruj' />
 		</form>
 	);
 };

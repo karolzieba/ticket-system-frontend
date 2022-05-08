@@ -1,133 +1,62 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Home from './Home';
 import Login from './Login';
+import Logout from './Logout';
 import Register from './Register';
 import Front from './Front';
 import EventCreator from './Agency/EventCreator';
 import DetalisProducts from './DetalisProduct';
 import Order from './Order';
 import AboutUs from './aboutus';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { ReactComponent as Logo } from './logo.svg';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 
 function App() {
+	const [loggedIn, setLoggedIn] = useState(false);
+	const [userData, setUserData] = useState("");
+	const location = useLocation().pathname.split('/')[2];
+
+	useEffect(() => {
+		const axios = require('axios').default;
+		axios.defaults.withCredentials = true;
+
+		axios
+			.get('http://localhost:8080/getInfo')
+			.then(function (response) {
+				setLoggedIn(true);
+				setUserData(response.data);
+			})
+			.catch(function (error) {
+				setLoggedIn(false);
+			});
+	}, [location]);
+
+	const loginStatus = (status) => {
+		setLoggedIn(status);
+	}
+
 	return (
 		<div>
-			<Navbar collapseOnSelect expand='lg' id='navigatorHeader'>
-				<Navbar.Brand href='/index'>
-					<Logo
-						alt=''
-						width='30'
-						height='30'
-						className='d-inline-block align-top'
-					/>
-					TicketServer.pl
-				</Navbar.Brand>
-				<Navbar.Toggle aria-controls='responsive-navbar-nav' />
-				<Navbar.Collapse id='responsive-navbar-nav'>
-					<Nav className='mr-auto'>
-						<NavDropdown title='Koncerty' id='collasible-nav-dropdown'>
-							<NavDropdown.Item href='/koncerty/pop'>Pop</NavDropdown.Item>
-							<NavDropdown.Item href='/koncerty/rap'>Rap</NavDropdown.Item>
-							<NavDropdown.Item href='/koncerty/rock'>Rock</NavDropdown.Item>
-						</NavDropdown>
-						<NavDropdown
-							title='Wydarzenia sportowe'
-							id='collasible-nav-dropdown'>
-							<NavDropdown.Item href='/wydarzeniasportowe/pilkanozna'>
-								Piłka nożna
-							</NavDropdown.Item>
-							<NavDropdown.Item href='/wydarzeniasportowe/MMA'>
-								MMA
-							</NavDropdown.Item>
-							<NavDropdown.Item href='/wydarzeniasportowe/tennis'>
-								Tennis
-							</NavDropdown.Item>
-						</NavDropdown>
-						<NavDropdown title='Teatr' id='collasible-nav-dropdown'>
-							<NavDropdown.Item href='/teatr/komedia'>Komedia</NavDropdown.Item>
-							<NavDropdown.Item href='/teatr/musicale'>
-								Musicale
-							</NavDropdown.Item>
-							<NavDropdown.Item href='/teatr/dramat'>Dramat</NavDropdown.Item>
-						</NavDropdown>
-
-						<NavDropdown
-							title='Panel Administracyjny'
-							id='collasible-nav-ddropdown'>
-							<NavDropdown.Item href='/agency/event/creator'>
-								Dodawanie wydarzeń
-							</NavDropdown.Item>
-						</NavDropdown>
-					</Nav>
-
-					<Nav>
-						<Nav.Link href='/aboutus'>O nas</Nav.Link>
-						<Nav.Link eventKey={2} href='/login'>
-							Wyloguj sie
-						</Nav.Link>
-					</Nav>
-				</Navbar.Collapse>
-			</Navbar>
-
-			<Router>
-				<Switch>
-					<Route path='/login'>
-						<Login />
-					</Route>
-
-					<Route path='/register'>
-						<Register />
-					</Route>
-
-					<Route path='/index'>
-						<Front />
-					</Route>
-
-					<Route path='/zamowienie/:id'>
-						<Order />
-					</Route>
-					<Route path='/agency/event/creator'>
-						<EventCreator />
-					</Route>
-					<Route path='/koncerty/:pop'>
-						<DetalisProducts />
-					</Route>
-					<Route path='/koncerty/rap'>
-						<DetalisProducts />
-					</Route>
-					<Route path='/koncerty/rock'>
-						<DetalisProducts />
-					</Route>
-					<Route path='/wydarzeniasportowe/pilkanozna'>
-						<DetalisProducts />
-					</Route>
-					<Route path='/wydarzeniasportowe/mma'>
-						<DetalisProducts />
-					</Route>
-					<Route path='/wydarzeniasportowe/tennis'>
-						<DetalisProducts />
-					</Route>
-					<Route path='/teatr/komedia'>
-						<DetalisProducts />
-					</Route>
-					<Route path='/teatr/dramat'>
-						<DetalisProducts />
-					</Route>
-					<Route path='/teatr/musicale'>
-						<DetalisProducts />
-					</Route>
-					<Route path='/aboutus'>
-						<AboutUs></AboutUs>
-					</Route>
-
-					<Route path='/'>
-						<Home />
-					</Route>
-				</Switch>
-			</Router>
+			<Routes>
+				<Route path="/" element={<Home loggedIn={loggedIn} userData={userData} />}>
+					<Route index element={<Front />} exact />
+					<Route path='/login' element={<Login />} exact />
+					<Route path='/logout' element={<Logout />} exact />
+					<Route path='/register' element={<Register />} exact />
+					<Route path='/zamowienie/:id' element={<Order />} exact />
+					<Route path='/agency/event/creator' element={<EventCreator userData={userData} />} exact />
+					<Route path='/koncerty/:pop' element={<DetalisProducts />} exact />
+					<Route path='/koncerty/rap' element={<DetalisProducts />} exact />
+					<Route path='/koncerty/rock' element={<DetalisProducts />} exact />
+					<Route path='/wydarzeniasportowe/pilkanozna' element={<DetalisProducts />} exact />
+					<Route path='/wydarzeniasportowe/mma' element={<DetalisProducts />} exact />
+					<Route path='/wydarzeniasportowe/tennis' element={<DetalisProducts />} exact />
+					<Route path='/teatr/komedia' element={<DetalisProducts />} exact />
+					<Route path='/teatr/dramat' element={<DetalisProducts />} exact />
+					<Route path='/teatr/musicale' element={<DetalisProducts />} exact />
+					<Route path='/aboutus' element={<AboutUs />} exact />
+				</Route>
+			</Routes>
 
 			<footer class='py-5 bg-dark'>
 				<div class='container'>

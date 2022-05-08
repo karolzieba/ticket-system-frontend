@@ -1,22 +1,90 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { ReactComponent as Logo } from './logo.svg';
 
-const Home = () => {
+const Home = ( { loggedIn, userData } ) => {
+	const agencyElements = (<NavDropdown title='Panel agencyjny' id='collasible-nav-ddropdown'>
+			<LinkContainer to="/agency/event/creator">
+				<NavDropdown.Item>Dodawanie wydarzeń</NavDropdown.Item>
+			</LinkContainer>
+	</NavDropdown>);
+
+	const clientElements = (<NavDropdown title='Konto' id='collasible-nav-ddropdown'>
+			<LinkContainer to="">
+			<NavDropdown.Item></NavDropdown.Item>
+			</LinkContainer>
+	</NavDropdown>);
+
+	const moderatorElements = (<NavDropdown title='Panel moderatora' id='collasible-nav-ddropdown'>
+			<LinkContainer to="">
+				<NavDropdown.Item></NavDropdown.Item>
+			</LinkContainer>
+	</NavDropdown>);
+
 	return (
-		<div id='homeContainer'>
-			<h1>Witaj na naszej stronie</h1>
+		<div>
+			<Navbar collapseOnSelect expand='lg' id='navigatorHeader'>
+				<Navbar.Brand>
+					<Logo
+						alt=''
+						width='30'
+						height='30'
+						className='d-inline-block align-top'
+					/>
+					<Link id="logo" to="/">TwójBilecik</Link>
+				</Navbar.Brand>
+				<Navbar.Toggle aria-controls='responsive-navbar-nav' />
+				<Navbar.Collapse id='responsive-navbar-nav'>
+					<Nav className='mr-auto'>
+						<NavDropdown title='Koncerty' id='collasible-nav-dropdown'>
+							<LinkContainer to="/koncerty/pop">
+								<NavDropdown.Item>Pop</NavDropdown.Item>
+							</LinkContainer>
+							<LinkContainer to="/koncerty/rap">
+								<NavDropdown.Item>Rap</NavDropdown.Item>
+							</LinkContainer>
+							<LinkContainer to="/koncerty/rock">
+								<NavDropdown.Item>Rock</NavDropdown.Item>
+							</LinkContainer>
+						</NavDropdown>
+						<NavDropdown title='Wydarzenia sportowe' id='collasible-nav-dropdown'>
+							<LinkContainer to="/wydarzeniasportowe/pilkanozna">
+								<NavDropdown.Item>Piłka nożna</NavDropdown.Item>
+							</LinkContainer>
+							<LinkContainer to="/wydarzeniasportowe/MMA">
+								<NavDropdown.Item>MMA</NavDropdown.Item>
+							</LinkContainer>
+							<LinkContainer to="/wydarzeniasportowe/tennis">
+								<NavDropdown.Item>Tenis</NavDropdown.Item>
+							</LinkContainer>
+						</NavDropdown>
+						<NavDropdown title='Teatr' id='collasible-nav-dropdown'>
+							<LinkContainer to="/teatr/komedia">
+								<NavDropdown.Item>Komedia</NavDropdown.Item>
+							</LinkContainer>
+							<LinkContainer to="/teatr/musicale">
+								<NavDropdown.Item>Musical</NavDropdown.Item>
+							</LinkContainer>
+							<LinkContainer to="/teatr/dramat">
+								<NavDropdown.Item>Dramat</NavDropdown.Item>
+							</LinkContainer>
+						</NavDropdown>
+					</Nav>
 
-			<div id='buttonHome'>
-				<Link to='/register'>
-					<button type='button'>Zarejestruj się!</button>
-				</Link>
+					
+					{userData.role === "ROLE_AGENCY" && agencyElements}
+					{(userData.role === "ROLE_CLIENT" || userData.role === "ROLE_CLIENT_FACEBOOK") && clientElements}
+					{userData.role === "ROLE_MODERATOR" && moderatorElements}
+					{loggedIn === false && <Link to='/login'>Zaloguj się</Link>}
+					{loggedIn === true && <Link to='/logout'>Wyloguj się</Link>}
+				</Navbar.Collapse>
+			</Navbar>
 
-				<Link to='/login'>
-					<button type='button'>Zaloguj się!</button>
-				</Link>
-			</div>
+			<Outlet />
 		</div>
 	);
 };
