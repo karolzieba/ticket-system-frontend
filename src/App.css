@@ -124,8 +124,10 @@
 .parentDetalisProduct .card {
 	padding: 1vh;
 	margin-bottom: 1vh;
-	height: 60vh;
-	width: 40vh;
+	min-height: 510px;
+	height: auto;
+	max-height: 510px;
+	width: 70%;
 }
 .parentDetalisProduct .card-deck {
 	display: flex;
@@ -136,6 +138,12 @@
 	color: black;
 	font-family: 'Times New Roman', Times, serif;
 	font-size: 22px;
+}
+.parentDetalisProduct .card-deck .card-img-top {
+	font-size: 32px;
+	color: #294681;
+	height: 25vh;
+	width: 100%;
 }
 .parentDetalisProduct .card .card-title {
 	font-size: 32px;

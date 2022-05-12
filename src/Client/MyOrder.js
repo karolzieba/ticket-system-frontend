@@ -26,7 +26,11 @@ const MyOrder = ({ userData }) => {
 		if (dataTicket[i] !== undefined) {
 			listTicket.push(
 				<div class='card'>
-					<img src={logo} class='card-img-top' alt='...' />
+					<img
+						src={'http://localhost:8080/img/' + dataTicket[i][0] + '.png'}
+						class='card-img-top'
+						alt='...'
+					/>
 					<div class='card-body'>
 						<h5 class='card-title'>{dataTicket[i][4]}</h5>
 						<p class='card-text'>

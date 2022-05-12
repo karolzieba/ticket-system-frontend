@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+const EventCreator = ({ userData }) => {
+	const [dataState, setDataSate] = useState(userData);
+	const navigate = useNavigate();
 	const axios = require('axios').default;
 
 	const [capacityEvent, setCapacityEvent] = useState('');
@@ -11,7 +13,6 @@ import { useNavigate } from 'react-router-dom';
 	const [priceEvent, setPriceEvent] = useState('');
 	const [typeEvent, setTypeEvent] = useState(1);
 	const [image, setImage] = useState('');
-	const navigate = useNavigate();
 
 	const optionsData = [
 		{
@@ -83,24 +84,24 @@ import { useNavigate } from 'react-router-dom';
 			})
 			.then(function (response) {
 				let idEvent = response.data;
-				let blob = image.slice(0, image.size, 'image/png'); 
-				let newFile = new File([blob], idEvent + ".png", {type: 'image/png'});
+				let blob = image.slice(0, image.size, 'image/png');
+				let newFile = new File([blob], idEvent + '.png', { type: 'image/png' });
 				let formData = new FormData();
-				formData.append("image", newFile);
-			
-				axios.post('http://localhost:8080/api/event/image', formData, {
-					headers: {
-						'Content-Type': 'multipart/form-data'
-					}
-				})
-				.then(function (response) {
-					navigate("/", { replace: true });
-				})
-				.catch(function (error) {
-					console.log(error);
-				})
-				.then(function () {
-				});	
+				formData.append('image', newFile);
+
+				axios
+					.post('http://localhost:8080/api/event/image', formData, {
+						headers: {
+							'Content-Type': 'multipart/form-data',
+						},
+					})
+					.then(function (response) {
+						navigate('/', { replace: true });
+					})
+					.catch(function (error) {
+						console.log(error);
+					})
+					.then(function () {});
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -182,13 +183,15 @@ import { useNavigate } from 'react-router-dom';
 					</select>
 				</label>
 
-			<br />
-			<label Wybierz kategorie wydarzenia />
+				<br />
+				<label Wybierz kategorie wydarzenia />
 
-				{category !== undefined && <select value={state} onChange={handleStateChange}>
-					<option>Wybierz podkategorię wydarzenia</option>
-					{states}
-				</select>}
+				{category !== undefined && (
+					<select value={state} onChange={handleStateChange}>
+						<option>Wybierz podkategorię wydarzenia</option>
+						{states}
+					</select>
+				)}
 
 				<br />
 				<br />
@@ -197,11 +200,11 @@ import { useNavigate } from 'react-router-dom';
 					<label for='formFile' class='form-label'>
 						Wybierz zdjęcie plakatu
 					</label>
-					<br/>
-					<input 
+					<br />
+					<input
 						id='formFile'
-						type="file" 
-						accepts="image/*" 
+						type='file'
+						accepts='image/*'
 						required
 						onChange={(e) => setImage(e.target.files[0])}
 					/>

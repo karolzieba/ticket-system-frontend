@@ -33,7 +33,11 @@ const DetalisProducts = () => {
 					<Col>
 						<div class='card'>
 							<Link to={'/zamowienie/' + idEvent}>
-								<img src={logo} class='card-img-top' alt='...' />
+								<img
+									src={'http://localhost:8080/img/' + idEvent + '.png'}
+									class='card-img-top'
+									alt='...'
+								/>
 								<div class='card-body'>
 									<h5 class='card-title'>{categoryTickets[i].nameEvent}</h5>
 									<p class='card-text'>

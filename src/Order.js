@@ -53,7 +53,11 @@ const Order = ({ userData }) => {
 	if (ticket !== undefined) {
 		printData = (
 			<div class='card'>
-				<img src={logo} class='card-img-top' alt='...' />
+				<img
+					src={'http://localhost:8080/img/' + ticket.idEvent + '.png'}
+					class='card-img-top'
+					alt='...'
+				/>
 				<div class='card-body'>
 					<h5 class='card-title'>{ticket.nameEvent}</h5>
 					<p class='card-text'>
