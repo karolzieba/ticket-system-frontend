@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -5,6 +6,10 @@ import { useNavigate } from 'react-router-dom';
 const EventCreator = ({ userData }) => {
 	const [dataState, setDataSate] = useState(userData);
 	const navigate = useNavigate();
+=======
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+>>>>>>> c59de658c43a2696ac0c8606f633255d4c1b62a5
 
 	const axios = require('axios').default;
 
@@ -15,9 +20,8 @@ const EventCreator = ({ userData }) => {
 	const [nameEvent, setNameEvent] = useState('');
 	const [priceEvent, setPriceEvent] = useState('');
 	const [typeEvent, setTypeEvent] = useState(1);
-	const [imageData, setImageData] = useState('');
-	const [imagePreview, setImagePreview] = useState('');
-	const [imageName, setImageName] = useState('');
+	const [image, setImage] = useState('');
+	const navigate = useNavigate();
 
 	const optionsData = [
 		{
@@ -71,7 +75,10 @@ const EventCreator = ({ userData }) => {
 		axios.defaults.withCredentials = true;
 		event.preventDefault();
 
+<<<<<<< HEAD
 		console.log('data: ' + dateEvent + 'T' + timeEvent);
+=======
+>>>>>>> c59de658c43a2696ac0c8606f633255d4c1b62a5
 		axios
 			.post('http://localhost:8080/api/event', {
 				capacityEvent: capacityEvent,
@@ -89,7 +96,25 @@ const EventCreator = ({ userData }) => {
 				},
 			})
 			.then(function (response) {
-				console.log(response);
+				let idEvent = response.data;
+				let blob = image.slice(0, image.size, 'image/png'); 
+				let newFile = new File([blob], idEvent + ".png", {type: 'image/png'});
+				let formData = new FormData();
+				formData.append("image", newFile);
+			
+				axios.post('http://localhost:8080/api/event/image', formData, {
+					headers: {
+						'Content-Type': 'multipart/form-data'
+					}
+				})
+				.then(function (response) {
+					navigate("/", { replace: true });
+				})
+				.catch(function (error) {
+					console.log(error);
+				})
+				.then(function () {
+				});	
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -104,6 +129,7 @@ const EventCreator = ({ userData }) => {
 		setPriceEvent('');
 	};
 
+<<<<<<< HEAD
 	const uploadImage = async (e) => {
 		const file = e.target.files[0];
 
@@ -190,10 +216,79 @@ const EventCreator = ({ userData }) => {
 					{categories}
 				</select>
 			</label>
+=======
+	return (
+		<div id='creatorFormEvent'>
+			<form onSubmit={handleSubmit}>
+				<input
+					type='text'
+					id='nameEvent'
+					placeholder='Nazwa wydarzenia'
+					value={nameEvent}
+					required
+					onChange={(e) => setNameEvent(e.target.value)}
+				/>
+				<br />
+				<input
+					type='number'
+					id='capacityEvent'
+					placeholder='Ilość miejsc'
+					value={capacityEvent}
+					required
+					onChange={(e) => setCapacityEvent(e.target.value)}
+				/>
+				<br />
+				<input
+					type='date'
+					id='dateEvent'
+					placeholder='Dzień wydarzenia'
+					value={dateEvent}
+					required
+					onChange={(e) => setDateEvent(e.target.value)}
+				/>
+				<input
+					type='time'
+					id='timeEvent'
+					placeholder='Godzina'
+					value={timeEvent}
+					required
+					onChange={(e) => setTimeEvent(e.target.value)}
+				/>
+				<br />
+				<input
+					type='text'
+					id='locationEvent'
+					placeholder='Miejsce wydarzenia'
+					value={locationEvent}
+					required
+					onChange={(e) => setLocationEvent(e.target.value)}
+				/>
+				<br />
+				<input
+					type='number'
+					step='any'
+					id='priceEvent'
+					placeholder='Koszt wydarzenia'
+					value={priceEvent}
+					required
+					onChange={(e) => setPriceEvent(e.target.value)}
+				/>
+
+				<br />
+				<br />
+
+				<label>
+					<select value={category} onChange={handleNameChange}>
+						<option>Wybierz kategorię wydarzenia</option>
+						{categories}
+					</select>
+				</label>
+>>>>>>> c59de658c43a2696ac0c8606f633255d4c1b62a5
 
 			<br />
 			<label Wybierz kategorie wydarzenia />
 
+<<<<<<< HEAD
 			<select value={state} onChange={handleStateChange}>
 				<option>....</option>
 				{states}
@@ -229,6 +324,34 @@ const EventCreator = ({ userData }) => {
 			{userData.role !== 'ROLE_AGENCY' && (
 				<h1>Nie masz dostępu do tej strony!</h1>
 			)}
+=======
+				{category !== undefined && <select value={state} onChange={handleStateChange}>
+					<option>Wybierz podkategorię wydarzenia</option>
+					{states}
+				</select>}
+
+				<br />
+				<br />
+
+				<div class='mb-3'>
+					<label for='formFile' class='form-label'>
+						Wybierz zdjęcie plakatu
+					</label>
+					<br/>
+					<input 
+						id='formFile'
+						type="file" 
+						accepts="image/*" 
+						required
+						onChange={(e) => setImage(e.target.files[0])}
+					/>
+				</div>
+
+				<br />
+				<br />
+				<input type='submit' value='Utworz wydarzenie' />
+			</form>
+>>>>>>> c59de658c43a2696ac0c8606f633255d4c1b62a5
 		</div>
 	);
 };
