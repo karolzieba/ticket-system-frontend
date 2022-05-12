@@ -23,10 +23,10 @@ const Front = () => {
 
 				setTicket(x);
 			})
-			.catch((err) => alert(err));
+			.catch((err) => console.log(err));
 	}
 
-	console.log(tickets);
+	
 
 	for (let i = 0; i < 3; i++) {
 		if (tickets[i] !== undefined) {
@@ -114,7 +114,7 @@ const Front = () => {
 	}
 
 	return (
-		<div id='frontPage'>
+		<div class='frontPage'>
 			<h1>Najnowsze wydarzenia</h1>
 			<div id='containerFix'>
 				<Carousel fade>

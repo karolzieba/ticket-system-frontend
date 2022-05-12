@@ -111,7 +111,7 @@
 	color: white;
 }
 
-#parentDetalisProduct {
+.parentDetalisProduct {
 	background-image: linear-gradient(#294681, #282c34);
 	min-height: 100vh;
 	height: auto;
@@ -120,23 +120,24 @@
 	align-items: center;
 	justify-content: center;
 }
-#parentDetalisProduct .card {
+
+.parentDetalisProduct .card {
 	padding: 1vh;
 	margin-bottom: 1vh;
-	height: 50vh;
+	height: 60vh;
 	width: 40vh;
 }
-#parentDetalisProduct .card-deck {
+.parentDetalisProduct .card-deck {
 	display: flex;
 	flex-direction: row;
 	margin: 2vh;
 }
-#parentDetalisProduct .card .card-text {
+.parentDetalisProduct .card .card-text {
 	color: black;
 	font-family: 'Times New Roman', Times, serif;
 	font-size: 22px;
 }
-#parentDetalisProduct .card .card-title {
+.parentDetalisProduct .card .card-title {
 	font-size: 32px;
 	color: #294681;
 }
@@ -184,7 +185,7 @@
 	filter: brightness(70%);
 }
 
-#frontPage {
+.frontPage {
 	background-image: linear-gradient(#294681, #282c34);
 	display: flex;
 	flex-direction: column;
@@ -192,7 +193,7 @@
 	min-height: 100vh;
 	height: auto;
 }
-#frontPage h1 {
+.frontPage h1 {
 	text-align: center;
 	color: white;
 }
@@ -225,7 +226,7 @@
 #facebookButton {
 	width: 291px;
 	height: 50px;
-	background-color: #5890FF;
+	background-color: #5890ff;
 	color: white;
 	border: none;
 	text-align: center;

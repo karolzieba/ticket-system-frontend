@@ -14,8 +14,8 @@ const Home = ( { loggedIn, userData } ) => {
 	</NavDropdown>);
 
 	const clientElements = (<NavDropdown title='Konto' id='collasible-nav-ddropdown'>
-			<LinkContainer to="">
-			<NavDropdown.Item></NavDropdown.Item>
+			<LinkContainer to="/client/orders">
+			<NavDropdown.Item>Moje zamówienia</NavDropdown.Item>
 			</LinkContainer>
 	</NavDropdown>);
 

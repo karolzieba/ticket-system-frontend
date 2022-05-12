@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const EventCreator = ( { userData } ) => {
+const EventCreator = ({ userData }) => {
+	const [dataState, setDataSate] = useState(userData);
+	const navigate = useNavigate();
+
 	const axios = require('axios').default;
 
 	const [capacityEvent, setCapacityEvent] = useState('');
@@ -56,25 +60,22 @@ const EventCreator = ( { userData } ) => {
 	function handleStateChange(event) {
 		setData((data) => ({ ...data, state: event.target.value }));
 
-		
 		if (event.target.value == 'Piłka nożna') {
 			setTypeEvent('Pilkanozna');
 		} else {
 			setTypeEvent(event.target.value);
 		}
-
-		
 	}
 	/******************************************************************************************************* */
 	const handleSubmit = (event) => {
 		axios.defaults.withCredentials = true;
 		event.preventDefault();
 
-		console.log("data: " + dateEvent + "T" + timeEvent)
+		console.log('data: ' + dateEvent + 'T' + timeEvent);
 		axios
 			.post('http://localhost:8080/api/event', {
 				capacityEvent: capacityEvent,
-				dateTimeEvent: (dateEvent + "T" + timeEvent),
+				dateTimeEvent: dateEvent + 'T' + timeEvent,
 				locationEvent: locationEvent,
 				priceEvent: priceEvent,
 				nameEvent: nameEvent,
@@ -84,7 +85,7 @@ const EventCreator = ( { userData } ) => {
 				},
 
 				agency: {
-					idAgency: userData.idRole
+					idAgency: userData.idRole,
 				},
 			})
 			.then(function (response) {
@@ -126,102 +127,108 @@ const EventCreator = ( { userData } ) => {
 		});
 	};
 
+	const renderEventCreator = (
+		<form onSubmit={handleSubmit}>
+			<input
+				type='text'
+				id='nameEvent'
+				placeholder='Nazwa wydarzenia'
+				value={nameEvent}
+				required
+				onChange={(e) => setNameEvent(e.target.value)}
+			/>
+			<br />
+			<input
+				type='number'
+				id='capacityEvent'
+				placeholder='Ilość miejsc'
+				value={capacityEvent}
+				required
+				onChange={(e) => setCapacityEvent(e.target.value)}
+			/>
+			<br />
+			<input
+				type='date'
+				id='dateEvent'
+				placeholder='Dzień wydarzenia'
+				value={dateEvent}
+				required
+				onChange={(e) => setDateEvent(e.target.value)}
+			/>
+			<input
+				type='time'
+				id='timeEvent'
+				placeholder='Godzina'
+				value={timeEvent}
+				required
+				onChange={(e) => setTimeEvent(e.target.value)}
+			/>
+			<br />
+			<input
+				type='text'
+				id='locationEvent'
+				placeholder='Miejsce wydarzenia'
+				value={locationEvent}
+				required
+				onChange={(e) => setLocationEvent(e.target.value)}
+			/>
+			<br />
+			<input
+				type='number'
+				step='any'
+				id='priceEvent'
+				placeholder='Koszt wydarzenia'
+				value={priceEvent}
+				required
+				onChange={(e) => setPriceEvent(e.target.value)}
+			/>
+			<br />
+			<label>
+				Wybierz rodzaj wydarzenia <br />
+				<select value={category} onChange={handleNameChange}>
+					<option>Wybierz...</option>
+					{categories}
+				</select>
+			</label>
+
+			<br />
+			<label Wybierz kategorie wydarzenia />
+
+			<select value={state} onChange={handleStateChange}>
+				<option>....</option>
+				{states}
+			</select>
+
+			<br />
+
+			<div class='mb-3'>
+				<label for='formFile' class='form-label'>
+					Wybierz zdjęcie plakatu
+				</label>
+				<input
+					class='form-control'
+					type='file'
+					accept='image/*'
+					id='formFile'
+					onChange={(e) => {
+						uploadImage(e);
+					}}
+				/>
+			</div>
+
+			<br />
+			<img src={imageData} height='430px' width='316px' />
+			<br />
+			<br />
+			<input type='submit' value='Utworz wydarzenie' />
+		</form>
+	);
 	return (
 		<div id='creatorFormEvent'>
-			<form onSubmit={handleSubmit}>
-				<input
-					type='text'
-					id='nameEvent'
-					placeholder='Nazwa wydarzenia'
-					value={nameEvent}
-					required
-					onChange={(e) => setNameEvent(e.target.value)}
-				/>
-				<br />
-				<input
-					type='number'
-					id='capacityEvent'
-					placeholder='Ilość miejsc'
-					value={capacityEvent}
-					required
-					onChange={(e) => setCapacityEvent(e.target.value)}
-				/>
-				<br />
-				<input
-					type='date'
-					id='dateEvent'
-					placeholder='Dzień wydarzenia'
-					value={dateEvent}
-					required
-					onChange={(e) => setDateEvent(e.target.value)}
-				/>
-				<input
-					type='time'
-					id='timeEvent'
-					placeholder='Godzina'
-					value={timeEvent}
-					required
-					onChange={(e) => setTimeEvent(e.target.value)}
-				/>
-				<br />
-				<input
-					type='text'
-					id='locationEvent'
-					placeholder='Miejsce wydarzenia'
-					value={locationEvent}
-					required
-					onChange={(e) => setLocationEvent(e.target.value)}
-				/>
-				<br />
-				<input
-					type='number'
-					step='any'
-					id='priceEvent'
-					placeholder='Koszt wydarzenia'
-					value={priceEvent}
-					required
-					onChange={(e) => setPriceEvent(e.target.value)}
-				/>
-				<br />
-				<label>
-					Wybierz rodzaj wydarzenia <br />
-					<select value={category} onChange={handleNameChange}>
-						<option>Wybierz...</option>
-						{categories}
-					</select>
-				</label>
-
-				<br />
-				<label Wybierz kategorie wydarzenia />
-
-				<select value={state} onChange={handleStateChange}>
-					<option>....</option>
-					{states}
-				</select>
-
-				<br />
-
-				<div class='mb-3'>
-					<label for='formFile' class='form-label'>
-						Wybierz zdjęcie plakatu
-					</label>
-					<input
-						class='form-control'
-						type='file'
-						accept='image/*'
-						id='formFile'
-						onChange={(e) => {
-							uploadImage(e);
-						}}
-					/>
-				</div>
-
-				<br />
-				<img src={imageData} height='430px' width='316px' />
-				<br />
-				<br />
-				<input type='submit' value='Utworz wydarzenie' />
-			</form>
+			{userData.role === 'ROLE_AGENCY' && renderEventCreator}
+			{userData.role !== 'ROLE_AGENCY' && (
+				<h1>Nie masz dostępu do tej strony!</h1>
+			)}
 		</div>
 	);
 };

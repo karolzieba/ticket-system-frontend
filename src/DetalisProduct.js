@@ -24,8 +24,7 @@ const DetalisProducts = () => {
 	useEffect(() => {
 		getCategoryTicket();
 	}, [location]);
-	
-	console.log(categoryTickets);
+
 	for (let i = 0; i < categoryTickets.length; i++) {
 		if (categoryTickets[i] !== undefined) {
 			let idEvent = categoryTickets[i].idEvent;
@@ -59,7 +58,7 @@ const DetalisProducts = () => {
 	}
 
 	return (
-		<div id='parentDetalisProduct'>
+		<div class='parentDetalisProduct'>
 			<div class='card-deck'>{listOfProduct}</div>
 		</div>
 	);
