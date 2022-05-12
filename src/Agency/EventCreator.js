@@ -1,15 +1,5 @@
-<<<<<<< HEAD
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-const EventCreator = ({ userData }) => {
-	const [dataState, setDataSate] = useState(userData);
-	const navigate = useNavigate();
-=======
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
->>>>>>> c59de658c43a2696ac0c8606f633255d4c1b62a5
 
 	const axios = require('axios').default;
 
@@ -75,10 +65,6 @@ import { useNavigate } from 'react-router-dom';
 		axios.defaults.withCredentials = true;
 		event.preventDefault();
 
-<<<<<<< HEAD
-		console.log('data: ' + dateEvent + 'T' + timeEvent);
-=======
->>>>>>> c59de658c43a2696ac0c8606f633255d4c1b62a5
 		axios
 			.post('http://localhost:8080/api/event', {
 				capacityEvent: capacityEvent,
@@ -129,94 +115,6 @@ import { useNavigate } from 'react-router-dom';
 		setPriceEvent('');
 	};
 
-<<<<<<< HEAD
-	const uploadImage = async (e) => {
-		const file = e.target.files[0];
-
-		const base64 = await convertBase64(file);
-		console.log(base64);
-		setImageData(base64);
-	};
-
-	const convertBase64 = (file) => {
-		return new Promise((resolve, reject) => {
-			const fileReader = new FileReader();
-			fileReader.readAsDataURL(file);
-
-			fileReader.onload = () => {
-				resolve(fileReader.result);
-			};
-
-			fileReader.onerror = (error) => {
-				reject(error);
-			};
-		});
-	};
-
-	const renderEventCreator = (
-		<form onSubmit={handleSubmit}>
-			<input
-				type='text'
-				id='nameEvent'
-				placeholder='Nazwa wydarzenia'
-				value={nameEvent}
-				required
-				onChange={(e) => setNameEvent(e.target.value)}
-			/>
-			<br />
-			<input
-				type='number'
-				id='capacityEvent'
-				placeholder='Ilość miejsc'
-				value={capacityEvent}
-				required
-				onChange={(e) => setCapacityEvent(e.target.value)}
-			/>
-			<br />
-			<input
-				type='date'
-				id='dateEvent'
-				placeholder='Dzień wydarzenia'
-				value={dateEvent}
-				required
-				onChange={(e) => setDateEvent(e.target.value)}
-			/>
-			<input
-				type='time'
-				id='timeEvent'
-				placeholder='Godzina'
-				value={timeEvent}
-				required
-				onChange={(e) => setTimeEvent(e.target.value)}
-			/>
-			<br />
-			<input
-				type='text'
-				id='locationEvent'
-				placeholder='Miejsce wydarzenia'
-				value={locationEvent}
-				required
-				onChange={(e) => setLocationEvent(e.target.value)}
-			/>
-			<br />
-			<input
-				type='number'
-				step='any'
-				id='priceEvent'
-				placeholder='Koszt wydarzenia'
-				value={priceEvent}
-				required
-				onChange={(e) => setPriceEvent(e.target.value)}
-			/>
-			<br />
-			<label>
-				Wybierz rodzaj wydarzenia <br />
-				<select value={category} onChange={handleNameChange}>
-					<option>Wybierz...</option>
-					{categories}
-				</select>
-			</label>
-=======
 	return (
 		<div id='creatorFormEvent'>
 			<form onSubmit={handleSubmit}>
@@ -283,48 +181,10 @@ import { useNavigate } from 'react-router-dom';
 						{categories}
 					</select>
 				</label>
->>>>>>> c59de658c43a2696ac0c8606f633255d4c1b62a5
 
 			<br />
 			<label Wybierz kategorie wydarzenia />
 
-<<<<<<< HEAD
-			<select value={state} onChange={handleStateChange}>
-				<option>....</option>
-				{states}
-			</select>
-
-			<br />
-
-			<div class='mb-3'>
-				<label for='formFile' class='form-label'>
-					Wybierz zdjęcie plakatu
-				</label>
-				<input
-					class='form-control'
-					type='file'
-					accept='image/*'
-					id='formFile'
-					onChange={(e) => {
-						uploadImage(e);
-					}}
-				/>
-			</div>
-
-			<br />
-			<img src={imageData} height='430px' width='316px' />
-			<br />
-			<br />
-			<input type='submit' value='Utworz wydarzenie' />
-		</form>
-	);
-	return (
-		<div id='creatorFormEvent'>
-			{userData.role === 'ROLE_AGENCY' && renderEventCreator}
-			{userData.role !== 'ROLE_AGENCY' && (
-				<h1>Nie masz dostępu do tej strony!</h1>
-			)}
-=======
 				{category !== undefined && <select value={state} onChange={handleStateChange}>
 					<option>Wybierz podkategorię wydarzenia</option>
 					{states}
@@ -351,7 +211,6 @@ import { useNavigate } from 'react-router-dom';
 				<br />
 				<input type='submit' value='Utworz wydarzenie' />
 			</form>
->>>>>>> c59de658c43a2696ac0c8606f633255d4c1b62a5
 		</div>
 	);
 };
