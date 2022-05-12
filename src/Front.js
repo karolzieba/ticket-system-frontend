@@ -35,7 +35,7 @@ const Front = () => {
 			listMainProduct1.push(
 				<div class='card'>
 					<Link to={'/zamowienie/' + idEvent}>
-						<img className='d-block w-100' src={logo} alt='First slide' />
+						<img className='d-block w-100' src={"http://localhost:8080/img/" + idEvent + ".png"} alt='First slide' />
 						<div class='card-body'>
 							<h5 class='card-title'>{tickets[i].nameEvent}</h5>
 							<p class='card-text'>

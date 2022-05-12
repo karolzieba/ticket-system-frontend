@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const EventCreator = ( { userData } ) => {
 	const axios = require('axios').default;
@@ -11,9 +11,8 @@ const EventCreator = ( { userData } ) => {
 	const [nameEvent, setNameEvent] = useState('');
 	const [priceEvent, setPriceEvent] = useState('');
 	const [typeEvent, setTypeEvent] = useState(1);
-	const [imageData, setImageData] = useState('');
-	const [imagePreview, setImagePreview] = useState('');
-	const [imageName, setImageName] = useState('');
+	const [image, setImage] = useState('');
+	const navigate = useNavigate();
 
 	const optionsData = [
 		{
@@ -70,7 +69,6 @@ const EventCreator = ( { userData } ) => {
 		axios.defaults.withCredentials = true;
 		event.preventDefault();
 
-		console.log("data: " + dateEvent + "T" + timeEvent)
 		axios
 			.post('http://localhost:8080/api/event', {
 				capacityEvent: capacityEvent,
@@ -88,7 +86,25 @@ const EventCreator = ( { userData } ) => {
 				},
 			})
 			.then(function (response) {
-				console.log(response);
+				let idEvent = response.data;
+				let blob = image.slice(0, image.size, 'image/png'); 
+				let newFile = new File([blob], idEvent + ".png", {type: 'image/png'});
+				let formData = new FormData();
+				formData.append("image", newFile);
+			
+				axios.post('http://localhost:8080/api/event/image', formData, {
+					headers: {
+						'Content-Type': 'multipart/form-data'
+					}
+				})
+				.then(function (response) {
+					navigate("/", { replace: true });
+				})
+				.catch(function (error) {
+					console.log(error);
+				})
+				.then(function () {
+				});	
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -101,29 +117,6 @@ const EventCreator = ( { userData } ) => {
 		setNameEvent('');
 		setTypeEvent('');
 		setPriceEvent('');
-	};
-
-	const uploadImage = async (e) => {
-		const file = e.target.files[0];
-
-		const base64 = await convertBase64(file);
-		console.log(base64);
-		setImageData(base64);
-	};
-
-	const convertBase64 = (file) => {
-		return new Promise((resolve, reject) => {
-			const fileReader = new FileReader();
-			fileReader.readAsDataURL(file);
-
-			fileReader.onload = () => {
-				resolve(fileReader.result);
-			};
-
-			fileReader.onerror = (error) => {
-				reject(error);
-			};
-		});
 	};
 
 	return (
@@ -182,11 +175,13 @@ const EventCreator = ( { userData } ) => {
 					required
 					onChange={(e) => setPriceEvent(e.target.value)}
 				/>
+
 				<br />
+				<br />
+
 				<label>
-					Wybierz rodzaj wydarzenia <br />
 					<select value={category} onChange={handleNameChange}>
-						<option>Wybierz...</option>
+						<option>Wybierz kategorię wydarzenia</option>
 						{categories}
 					</select>
 				</label>
@@ -194,30 +189,28 @@ const EventCreator = ( { userData } ) => {
 				<br />
 				<label Wybierz kategorie wydarzenia />
 
-				<select value={state} onChange={handleStateChange}>
-					<option>....</option>
+				{category !== undefined && <select value={state} onChange={handleStateChange}>
+					<option>Wybierz podkategorię wydarzenia</option>
 					{states}
-				</select>
+				</select>}
 
+				<br />
 				<br />
 
 				<div class='mb-3'>
 					<label for='formFile' class='form-label'>
 						Wybierz zdjęcie plakatu
 					</label>
-					<input
-						class='form-control'
-						type='file'
-						accept='image/*'
+					<br/>
+					<input 
 						id='formFile'
-						onChange={(e) => {
-							uploadImage(e);
-						}}
+						type="file" 
+						accepts="image/*" 
+						required
+						onChange={(e) => setImage(e.target.files[0])}
 					/>
 				</div>
 
-				<br />
-				<img src={imageData} height='430px' width='316px' />
 				<br />
 				<br />
 				<input type='submit' value='Utworz wydarzenie' />
