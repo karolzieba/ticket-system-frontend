@@ -73,6 +73,7 @@ const EventCreator = ({ userData }) => {
 				locationEvent: locationEvent,
 				priceEvent: priceEvent,
 				nameEvent: nameEvent,
+				waitingToAccept: true,
 
 				typeEvent: {
 					nameTypeEvent: typeEvent,

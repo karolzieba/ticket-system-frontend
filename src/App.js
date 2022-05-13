@@ -5,6 +5,7 @@ import Logout from './Logout';
 import Register from './Register';
 import Front from './Front';
 import EventCreator from './Agency/EventCreator';
+import EventManagement from './Moderator/EventManagement'
 import DetalisProducts from './DetalisProduct';
 import Order from './Order';
 import MyOrder from './Client/MyOrder';
@@ -14,6 +15,7 @@ import {
 	Route,
 	Routes,
 	useLocation,
+	Link
 } from 'react-router-dom';
 import './App.css';
 
@@ -33,7 +35,10 @@ function App() {
 				setUserData(response.data);
 			})
 			.catch(function (error) {
-				setLoggedIn(false);
+				if(loggedIn == true) {
+					setLoggedIn(false);
+					window.location.reload();
+				}
 			});
 	}, [location]);
 
@@ -89,14 +94,16 @@ function App() {
 					<Route path='/teatr/dramat' element={<DetalisProducts />} exact />
 					<Route path='/teatr/musicale' element={<DetalisProducts />} exact />
 					<Route path='/aboutus' element={<AboutUs />} exact />
+					<Route path='/moderator/event/management' element={<EventManagement />} exact />
 				</Route>
 			</Routes>
 
 			<footer class='py-5 bg-dark'>
 				<div class='container'>
 					<p class='m-0 text-center text-white'>
-						Copyright &copy; Daniel Rogowski, Damian Przytuła, Patryk Duda,
-						Karol Zięba 2022
+						Copyright &copy; 2022 Daniel Rogowski, Damian Przytuła, Patryk Duda, Karol Zięba; grupa 3ID13A
+						<br />
+						<Link to="/aboutus">O projekcie</Link>
 					</p>
 				</div>
 			</footer>

@@ -36,7 +36,7 @@ const Order = ({ userData }) => {
 					idEvent: id,
 				},
 				payment: {
-					idPayment: '1', //Do momenu paypal
+					idPayment: 2, //Do momenu paypal
 				},
 			})
 			.then(function (response) {
@@ -78,7 +78,7 @@ const Order = ({ userData }) => {
 	}
 
 	return (
-		<div id='parentOrder'>
+		<div className='parentOrder'>
 			<div class='card-deck'>{printData}</div>
 			{userData.role === 'ROLE_CLIENT' && (
 				<button type='submit' onClick={addTicket}>

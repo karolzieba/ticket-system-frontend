@@ -26,10 +26,9 @@ const Front = () => {
 			.catch((err) => console.log(err));
 	}
 
-	
-
 	for (let i = 0; i < 3; i++) {
-		if (tickets[i] !== undefined) {
+		if (tickets[i] !== undefined && tickets[i].waitingToAccept !== true) {
+			console.log(tickets[i]);
 			let idEvent = tickets[i].idEvent;
 
 			listMainProduct1.push(
@@ -57,7 +56,7 @@ const Front = () => {
 		}
 	}
 	for (let i = 3; i < 6; i++) {
-		if (tickets[i] !== undefined) {
+		if (tickets[i] !== undefined && tickets[i].waitingToAccept !== true) {
 			let idEvent = tickets[i].idEvent;
 
 			listMainProduct2.push(
@@ -85,7 +84,7 @@ const Front = () => {
 		}
 	}
 	for (let i = 6; i < 9; i++) {
-		if (tickets[i] !== undefined) {
+		if (tickets[i] !== undefined && tickets[i].waitingToAccept !== true) {
 			let idEvent = tickets[i].idEvent;
 
 			listMainProduct3.push(

@@ -19,9 +19,15 @@ const Home = ( { loggedIn, userData } ) => {
 			</LinkContainer>
 	</NavDropdown>);
 
-	const moderatorElements = (<NavDropdown title='Panel moderatora' id='collasible-nav-ddropdown'>
-			<LinkContainer to="">
-				<NavDropdown.Item></NavDropdown.Item>
+			const moderatorElements = (<NavDropdown title='Panel moderatora' id='collasible-nav-ddropdown'>
+			<LinkContainer to="/moderator/event/management">
+				<NavDropdown.Item>Zarządzanie wydarzeniami</NavDropdown.Item>
+			</LinkContainer>
+			<LinkContainer to="/agency/event/creator">
+				<NavDropdown.Item>Zarządzanie płatnościami</NavDropdown.Item>
+			</LinkContainer>
+			<LinkContainer to="/agency/event/creator">
+				<NavDropdown.Item>Zarządzanie użytkownikami</NavDropdown.Item>
 			</LinkContainer>
 	</NavDropdown>);
 
@@ -75,10 +81,9 @@ const Home = ( { loggedIn, userData } ) => {
 						</NavDropdown>
 					</Nav>
 
-					
-					{userData.role === "ROLE_AGENCY" && agencyElements}
-					{(userData.role === "ROLE_CLIENT" || userData.role === "ROLE_CLIENT_FACEBOOK") && clientElements}
-					{userData.role === "ROLE_MODERATOR" && moderatorElements}
+					{loggedIn === true && userData.role === "ROLE_AGENCY" && agencyElements}
+					{loggedIn === true && (userData.role === "ROLE_CLIENT" || userData.role === "ROLE_CLIENT_FACEBOOK") && clientElements}
+					{loggedIn === true && userData.role === "ROLE_MODERATOR" && moderatorElements}
 					{loggedIn === false && <Link to='/login'>Zaloguj się</Link>}
 					{loggedIn === true && <Link to='/logout'>Wyloguj się</Link>}
 				</Navbar.Collapse>
