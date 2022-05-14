@@ -5,7 +5,7 @@ const EventManagement = () => {
     axios.defaults.withCredentials = true;
 
     const [events, setEvents] = useState("");
-    const [refresh, setRefresh] = useState("");
+    let eventList = [];
 
     useEffect(() => { 
        axios
@@ -16,10 +16,8 @@ const EventManagement = () => {
             .catch(function (error) {
                 console.log(error);
             });
+    }, [eventList]);
 
-    }, [refresh]);
-
-    let eventList = [];
     for(let i = 0; i < events.length; i++) {
         if (events[i] !== undefined) {
             eventList.push(<tr>
@@ -48,11 +46,11 @@ const EventManagement = () => {
                     {events[i].agency.nameCompany}
                 </td>
                 <td>
-                    {events[i].waitingToAccept?<button type="button" class="btn btn-success" 
+                    {events[i].waitingToAccept?<button type="button" class="btn btn-primary" 
                     onClick={() => {acceptEvent(events[i].idEvent)}}>Zaakceptuj</button>:"Zaakceptowane"}
                 </td>
                 <td>
-                    {<button type="button" class="btn btn-danger" onClick={() => {deleteEvent(events[i].idEvent)}}>Usuń</button>}
+                    {<button type="button" class="btn btn-primary" onClick={() => {deleteEvent(events[i].idEvent)}}>Usuń</button>}
                 </td>
             </tr>);
         }
@@ -65,7 +63,6 @@ const EventManagement = () => {
             })
             .then(function (response) {
                 console.log(response)
-                setRefresh();
             })
             .catch(function (error) {
                 console.log(error);
@@ -77,16 +74,16 @@ const EventManagement = () => {
             .delete('http://localhost:8080/api/event/' + id)
             .then(function (response) {
                 console.log(response)
-                setRefresh();
             })
             .catch(function (error) {
                 console.log(error);
             });
     }
 
-    return (events.length !== 0 ? <div className='parentOrder'>
+    return (events.length !== 0 ? <div className='parentMenu'>
+        <br/><br/>
         <h2>ZARZĄDZANIE WYDARZENIAMI</h2>
-        <br/><br/><br/>
+        <br/><br/>
         <table class="table table-light">
             <thead class="thead-dark">
                 <tr>
@@ -108,9 +105,10 @@ const EventManagement = () => {
         </table>
     </div>
     :
-    <div className='parentOrder'>
+    <div className='parentMenu'>
+        <br/><br/>
         <h2>ZARZĄDZANIE WYDARZENIAMI</h2>
-        <br/><br/><br/>
+        <br/><br/>
         <text>W systemie nie ma żadnych wydarzeń.</text>
     </div>);
 }

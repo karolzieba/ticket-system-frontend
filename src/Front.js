@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Carousel from 'react-bootstrap/Carousel';
@@ -38,16 +37,13 @@ const Front = () => {
 						<div class='card-body'>
 							<h5 class='card-title'>{tickets[i].nameEvent}</h5>
 							<p class='card-text'>
-								Lokalizacja:
-								{tickets[i].locationEvent}
+								Lokalizacja: {tickets[i].locationEvent}
 							</p>
 							<p class='card-text'>
-								Data wydarzenia:
-								{tickets[i].dateTimeEvent}
+								Data wydarzenia: {tickets[i].dateTimeEvent}
 							</p>
 							<p class='card-text'>
-								Cena biletu:
-								{tickets[i].priceEvent} zł
+								Cena biletu: {tickets[i].priceEvent} zł
 							</p>
 						</div>
 					</Link>
@@ -62,20 +58,17 @@ const Front = () => {
 			listMainProduct2.push(
 				<div class='card'>
 					<Link to={'/zamowienie/' + idEvent}>
-						<img className='d-block w-100' src={logo} alt='First slide' />
+						<img className='d-block w-100' src={"http://localhost:8080/img/" + idEvent + ".png"} alt='First slide' />
 						<div class='card-body'>
 							<h5 class='card-title'>{tickets[i].nameEvent}</h5>
 							<p class='card-text'>
-								Lokalizacja:
-								{tickets[i].locationEvent}
+								Lokalizacja: {tickets[i].locationEvent}
 							</p>
 							<p class='card-text'>
-								Data wydarzenia:
-								{tickets[i].dateTimeEvent}
+								Data wydarzenia: {tickets[i].dateTimeEvent}
 							</p>
 							<p class='card-text'>
-								Cena biletu:
-								{tickets[i].priceEvent} zł
+								Cena biletu: {tickets[i].priceEvent} zł
 							</p>
 						</div>
 					</Link>
@@ -90,20 +83,17 @@ const Front = () => {
 			listMainProduct3.push(
 				<div class='card'>
 					<Link to={'/zamowienie/' + idEvent}>
-						<img className='d-block w-100' src={logo} alt='First slide' />
+						<img className='d-block w-100' src={"http://localhost:8080/img/" + idEvent + ".png"} alt='First slide' />
 						<div class='card-body'>
 							<h5 class='card-title'>{tickets[i].nameEvent}</h5>
 							<p class='card-text'>
-								Lokalizacja:
-								{tickets[i].locationEvent}
+								Lokalizacja: {tickets[i].locationEvent}
 							</p>
 							<p class='card-text'>
-								Data wydarzenia:
-								{tickets[i].dateTimeEvent}
+								Data wydarzenia: {tickets[i].dateTimeEvent}
 							</p>
 							<p class='card-text'>
-								Cena biletu:
-								{tickets[i].priceEvent} zł
+								Cena biletu: {tickets[i].priceEvent} zł
 							</p>
 						</div>
 					</Link>

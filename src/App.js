@@ -6,7 +6,10 @@ import Register from './Register';
 import Front from './Front';
 import EventCreator from './Agency/EventCreator';
 import EventManagement from './Moderator/EventManagement'
+import PaymentManagement from './Moderator/PaymentManagement'
 import DetalisProducts from './DetalisProduct';
+import TraditionalPaymentSuccess from './TraditionalPaymentSuccess';
+import PaymentFailed from './PaymentFailed';
 import Order from './Order';
 import MyOrder from './Client/MyOrder';
 import AboutUs from './aboutus';
@@ -94,7 +97,10 @@ function App() {
 					<Route path='/teatr/dramat' element={<DetalisProducts />} exact />
 					<Route path='/teatr/musicale' element={<DetalisProducts />} exact />
 					<Route path='/aboutus' element={<AboutUs />} exact />
+					<Route path='/traditionalpaymentsuccess' element={<TraditionalPaymentSuccess />} exact />
+					<Route path='/paymentfailed' element={<PaymentFailed />} exact />
 					<Route path='/moderator/event/management' element={<EventManagement />} exact />
+					<Route path='/moderator/payment/management' element={<PaymentManagement />} exact />
 				</Route>
 			</Routes>
 

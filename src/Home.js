@@ -23,7 +23,7 @@ const Home = ( { loggedIn, userData } ) => {
 			<LinkContainer to="/moderator/event/management">
 				<NavDropdown.Item>Zarządzanie wydarzeniami</NavDropdown.Item>
 			</LinkContainer>
-			<LinkContainer to="/agency/event/creator">
+			<LinkContainer to="/moderator/payment/management">
 				<NavDropdown.Item>Zarządzanie płatnościami</NavDropdown.Item>
 			</LinkContainer>
 			<LinkContainer to="/agency/event/creator">
