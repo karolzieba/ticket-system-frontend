@@ -5,15 +5,26 @@ const PaymentManagement = () => {
     axios.defaults.withCredentials = true;
 
     const [payments, setPayments] = useState("");
+    const [tickets, setTickets] = useState("");
     const [refresh, setRefresh] = useState(false);
-    let paymentList = [];
+    let paymentList = [], ticketList = [];
 
     useEffect(() => { 
        axios
             .get('http://localhost:8080/api/payment')
             .then(function (response) {
                 setPayments(response.data);
-                console.log(payments);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        axios
+            .get('http://localhost:8080/api/ticket')
+            .then(function (response) {
+                console.log(response.data);
+                setTickets(response.data);
+                console.log(tickets);
             })
             .catch(function (error) {
                 console.log(error);
@@ -33,7 +44,7 @@ const PaymentManagement = () => {
                     {payments[i].idPayment}
                 </th>
                 <td>
-                {date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()}
+                    {date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()}
                 </td>
                 <td>
                     {payments[i].endDatePayment === null?<button type="button" class="btn btn-primary" 
@@ -43,6 +54,34 @@ const PaymentManagement = () => {
                 </td>
                 <td>
                     {payments[i].typePayment.nameTypePayment === "Gotowka"?"Przelew tradycyjny":"PayPal"}
+                </td>
+            </tr>);
+        }
+    }
+
+    for(let i = 0; i < tickets.length; i++) {
+        if (tickets[i] !== undefined && tickets[i].payment !== undefined && tickets[i].client !== undefined && tickets[i].event !== undefined) {
+            let date = new Date(tickets[i].dateTicketBuy);
+			date.setMonth(date.getMonth() + 1);
+
+            ticketList.push(<tr>
+                <th scope="row">
+                    {tickets[i].idTicket}
+                </th>
+                <td>
+                    {date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()}
+                </td>
+                <td>
+                    {tickets[i].client.nameUser} (ID: {tickets[i].client.idClient})
+                </td>
+                <td>
+                    {tickets[i].event.nameEvent} (ID: {tickets[i].event.idEvent})
+                </td>
+                <td>
+                    {tickets[i].payment.endDatePayment === null?"Niepotwierdzona":"ID: " + tickets[i].payment.idPayment}
+                </td>
+                <td>
+                {<button type="button" class="btn btn-primary" onClick={() => {deleteTicket(tickets[i].idTicket)}}>Usuń</button>}
                 </td>
             </tr>);
         }
@@ -65,7 +104,20 @@ const PaymentManagement = () => {
             });
     }
 
-    return (payments.length !== 0 ? <div className='parentMenu'>
+    const deleteTicket = (id) => {
+        axios
+            .delete('http://localhost:8080/api/ticket/' + id)
+            .then(function (response) {
+                console.log(response);
+                setRefresh(refresh?false:true);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    const paymentsRender = payments.length !== 0 ? 
+    <div>
         <br/><br/>
         <h2>ZARZĄDZANIE PŁATNOŚCIAMI</h2>
         <br/><br/>
@@ -84,12 +136,47 @@ const PaymentManagement = () => {
         </table>
     </div>
     :
-    <div className='parentMenu'>
+    <div>
         <br/><br/>
         <h2>ZARZĄDZANIE PŁATNOŚCIAMI</h2>
         <br/><br/>
         <text>W systemie nie ma żadnych płatności.</text>
-    </div>);
+    </div>;
+
+    const ticketsRender = tickets.length !== 0 ? 
+    <div>
+        <br/><br/>
+        <h2>ZARZĄDZANIE BILETAMI</h2>
+        <br/><br/>
+        <table class="table table-light">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Data zakupu</th>
+                    <th scope="col">Klient</th>
+                    <th scope="col">Wydarzenie</th>
+                    <th scope="col">Płatność</th>
+                    <th scope="col">Usuń</th>
+                </tr>
+            </thead>
+            <tbody>
+                {ticketList}
+            </tbody>
+        </table>
+    </div>
+    :
+    <div>
+        <br/><br/>
+        <h2>ZARZĄDZANIE BILETAMI</h2>
+        <br/><br/>
+        <text>W systemie nie ma żadnych biletów.</text>
+    </div>;
+    return (
+        <div className='parentMenu'>
+            {paymentsRender}
+            {ticketsRender}
+        </div>
+    );
 }
 
 export default PaymentManagement;
