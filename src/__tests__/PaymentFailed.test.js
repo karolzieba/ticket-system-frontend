@@ -6,5 +6,8 @@ describe('PaymentFailed component', () => {
     it("Should render PaymentFailed component", () => {
         render(<TraditionalPaymentSuccess />);
         screen.debug();
+
+        const informationAboutPaymentFailed = screen.getByText("Wystąpił błąd podczas kupowania biletu.");
+        expect(informationAboutPaymentFailed).toBeInTheDocument();
     })
 })

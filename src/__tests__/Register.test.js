@@ -1,24 +1,27 @@
 import React from 'react';
 import Register from "../Register";
 import { render, screen, fireEvent } from "@testing-library/react";
+import { MemoryRouter as Router } from 'react-router-dom';
 
 describe('Register component', () => {
-    it("Should render value in input", () => {
-
-
-        render(<div/>);
+    it("Should render Register component", () => {
+        render(
+            <Router>
+                <Register />
+            </Router>
+        );
         screen.debug();
 
-        /*
-        render(<Form/>);
-        screen.debug();
-        const aElement = screen.getByDisplayValue("moderator");
-        expect(aElement).toBeInTheDocument();
-        fireEvent.click();
-        */
+        const inputModerator = screen.getByDisplayValue("moderator");
+        expect(inputModerator).toBeInTheDocument();
 
-        const button = screen.queryByRole('button');
-        //expect(button).toBeInTheDocument();
+        const inputClient = screen.getByDisplayValue("client");
+        expect(inputClient).toBeInTheDocument();
 
+        const inputAgency = screen.getByDisplayValue("agency");
+        expect(inputAgency).toBeInTheDocument();
+
+        const buttonForm = screen.getByRole("button");
+        expect(buttonForm).toBeInTheDocument();
     })
 })

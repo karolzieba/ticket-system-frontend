@@ -7,5 +7,7 @@ describe('Facebook component', () => {
         render(<Facebook />);
         screen.debug();
 
+        const buttonLogInWithFacebook = screen.getByText("Zaloguj się za pomocą Facebook");
+        expect(buttonLogInWithFacebook).toBeInTheDocument();
     })
 })
