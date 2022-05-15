@@ -145,7 +145,7 @@ const Order = ({ userData }) => {
 
 	return (
 		<div className='parentOrder'>
-			<div class='card-deck'>{printData}</div>
+			<div data-testid='card-deck' class='card-deck'>{printData}</div>
 		</div>
 	);
 };

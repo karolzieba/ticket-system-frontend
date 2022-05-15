@@ -61,7 +61,7 @@ const MyOrder = ({ userData }) => {
 */
 	return (
 		<div class='parentDetalisProduct'>
-			<div class='card-deck'>{listTicket}</div>
+			<div data-testid='card-deck' class='card-deck'>{listTicket}</div>
 			{listTicket.length === 0 && <h2>Brak dostępnych biletów.</h2>}
 		</div>
 	);
