@@ -5,6 +5,7 @@ const PaymentManagement = () => {
     axios.defaults.withCredentials = true;
 
     const [payments, setPayments] = useState("");
+    const [refresh, setRefresh] = useState(false);
     let paymentList = [];
 
     useEffect(() => { 
@@ -17,7 +18,7 @@ const PaymentManagement = () => {
             .catch(function (error) {
                 console.log(error);
             });
-    }, [paymentList]);
+    }, [refresh]);
 
     for(let i = 0; i < payments.length; i++) {
         if (payments[i] !== undefined) {
@@ -25,7 +26,7 @@ const PaymentManagement = () => {
 			date.setMonth(date.getMonth() + 1);
 
             let date2 = new Date(payments[i].endDatePayment);
-			date.setMonth(date.getMonth() + 1);
+			date2.setMonth(date2.getMonth() + 1);
 
             paymentList.push(<tr>
                 <th scope="row">
@@ -56,7 +57,8 @@ const PaymentManagement = () => {
                 endDatePayment: date
             })
             .then(function (response) {
-                console.log(response)
+                console.log(response);
+                setRefresh(refresh?false:true);
             })
             .catch(function (error) {
                 console.log(error);

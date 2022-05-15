@@ -1,11 +1,15 @@
 import './App.css';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const Order = ({ userData }) => {
+	const axios = require('axios').default;
+    axios.defaults.withCredentials = true;
+
 	const [ticket, setTicket] = useState([]);
 	const [paymentType, setPaymentType] = useState("");
+	const [ageCorrect, setAgeCorrect] = useState(false);
+	const [ticketExist, setTicketExist] = useState(true);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -13,21 +17,38 @@ const Order = ({ userData }) => {
 	}, []);
 
 	let { id } = useParams();
-	console.log(id);
 	function getTicket() {
 		axios
 			.get('http://localhost:8080/api/event/' + id)
 			.then((data) => {
 				setTicket(data.data);
+
+				if(userData !== undefined) {
+					axios
+					.get('http://localhost:8080/api/ticket/checkAge?idclient=' + userData.idRole + '&idevent=' + id)
+					.then((data) => {
+						setAgeCorrect(data.data);
+					})
+					.catch((err) => console.log(err));
+
+					axios
+					.get('http://localhost:8080/api/ticket/checkTicketExist?idclient=' + userData.idRole + '&idevent=' + id)
+					.then((data) => {
+						setTicketExist(data.data);
+						console.log("ticket: " + data.data);
+					})
+					.catch((err) => console.log(err));
+				}
 			})
 			.catch((err) => alert(err));
 	}
+		
 	
 	function addTicket() {
 		axios.defaults.withCredentials = true;
 
 		let date = new Date();
-		date.setHours(date.getHours() + 1);
+		date.setHours(date.getHours() + 2);
 
 		if(paymentType === "traditional") {
 			axios.post('http://localhost:8080/api/payment', {
@@ -103,7 +124,7 @@ const Order = ({ userData }) => {
 						Pozostało miejsc: {ticket.capacityEvent}
 					</p>
 					<br/>
-					{(userData.role === 'ROLE_CLIENT' || userData.role === 'ROLE_CLIENT_FACEBOOK') && ticket.capacityEvent !== 0 && (
+					{(userData.role === 'ROLE_CLIENT' || userData.role === 'ROLE_CLIENT_FACEBOOK') && (ticket.capacityEvent !== 0 && ageCorrect === true && ticketExist === false) && (
 					<form id="order-element3" onSubmit={addTicket} value={paymentType} required onChange={(e) => setPaymentType(e.target.value)}>
 						<select class="form-control" id="exampleFormControlSelect1" required>
 							<option value="" disabled selected>Wybierz formę płatności</option>
@@ -113,6 +134,8 @@ const Order = ({ userData }) => {
 						<button id="order-element4" type="button" class="btn btn-primary" onClick={addTicket}>Kup bilet</button>
 					</form>
 					)}
+					{(userData.role === 'ROLE_CLIENT' || userData.role === 'ROLE_CLIENT_FACEBOOK') && ageCorrect !== true && <p class='card-text'>Nie masz wystarczająco lat aby wejść na to wydarzenie.</p>}
+					{(userData.role === 'ROLE_CLIENT' || userData.role === 'ROLE_CLIENT_FACEBOOK') && ticketExist === true && <p class='card-text'>Posiadasz już wykupiony bilet na to wydarzenie.</p>}
 					{(userData.role === 'ROLE_CLIENT' || userData.role === 'ROLE_CLIENT_FACEBOOK') && ticket.capacityEvent === 0 && <p class='card-text'>Na to wydarzenie nie ma już wolnych biletów.</p>}
 					{(userData.role !== 'ROLE_CLIENT' && userData.role !== 'ROLE_CLIENT_FACEBOOK') && <p class='card-text'>Zaloguj się jako klient, aby kupić bilet na to wydarzenie.</p>}
 				</div>

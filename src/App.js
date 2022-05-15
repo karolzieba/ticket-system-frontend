@@ -6,7 +6,7 @@ import Register from './Register';
 import Front from './Front';
 import EventCreator from './Agency/EventCreator';
 import EventManagement from './Moderator/EventManagement'
-import PaymentManagement from './Moderator/PaymentManagement'
+import OrderManagement from './Moderator/OrderManagement'
 import DetalisProducts from './DetalisProduct';
 import TraditionalPaymentSuccess from './TraditionalPaymentSuccess';
 import PaymentFailed from './PaymentFailed';
@@ -100,7 +100,7 @@ function App() {
 					<Route path='/traditionalpaymentsuccess' element={<TraditionalPaymentSuccess />} exact />
 					<Route path='/paymentfailed' element={<PaymentFailed />} exact />
 					<Route path='/moderator/event/management' element={<EventManagement />} exact />
-					<Route path='/moderator/payment/management' element={<PaymentManagement />} exact />
+					<Route path='/moderator/order/management' element={<OrderManagement />} exact />
 				</Route>
 			</Routes>
 

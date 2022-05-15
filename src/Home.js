@@ -15,16 +15,19 @@ const Home = ( { loggedIn, userData } ) => {
 
 	const clientElements = (<NavDropdown title='Konto' id='collasible-nav-ddropdown'>
 			<LinkContainer to="/client/orders">
-			<NavDropdown.Item>Moje zamówienia</NavDropdown.Item>
+				<NavDropdown.Item>Moje zamówienia</NavDropdown.Item>
+			</LinkContainer>
+			<LinkContainer to="/client/orders">
+				<NavDropdown.Item>Zarządzaj kontem</NavDropdown.Item>
 			</LinkContainer>
 	</NavDropdown>);
 
-			const moderatorElements = (<NavDropdown title='Panel moderatora' id='collasible-nav-ddropdown'>
+	const moderatorElements = (<NavDropdown title='Panel moderatora' id='collasible-nav-ddropdown'>
 			<LinkContainer to="/moderator/event/management">
 				<NavDropdown.Item>Zarządzanie wydarzeniami</NavDropdown.Item>
 			</LinkContainer>
-			<LinkContainer to="/moderator/payment/management">
-				<NavDropdown.Item>Zarządzanie płatnościami</NavDropdown.Item>
+			<LinkContainer to="/moderator/order/management">
+				<NavDropdown.Item>Zarządzanie zamówieniami</NavDropdown.Item>
 			</LinkContainer>
 			<LinkContainer to="/agency/event/creator">
 				<NavDropdown.Item>Zarządzanie użytkownikami</NavDropdown.Item>

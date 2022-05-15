@@ -5,6 +5,7 @@ const EventManagement = () => {
     axios.defaults.withCredentials = true;
 
     const [events, setEvents] = useState("");
+    const [refresh, setRefresh] = useState(false);
     let eventList = [];
 
     useEffect(() => { 
@@ -12,11 +13,12 @@ const EventManagement = () => {
             .get('http://localhost:8080/api/event')
             .then(function (response) {
                 setEvents(response.data);
+                console.log(response);
             })
             .catch(function (error) {
                 console.log(error);
             });
-    }, [eventList]);
+    }, [refresh]);
 
     for(let i = 0; i < events.length; i++) {
         if (events[i] !== undefined) {
@@ -65,7 +67,8 @@ const EventManagement = () => {
                 waitingToAccept: false
             })
             .then(function (response) {
-                console.log(response)
+                console.log(response);
+                setRefresh(refresh?false:true);
             })
             .catch(function (error) {
                 console.log(error);
@@ -76,7 +79,8 @@ const EventManagement = () => {
         axios
             .delete('http://localhost:8080/api/event/' + id)
             .then(function (response) {
-                console.log(response)
+                console.log(response);
+                setRefresh(refresh?false:true);
             })
             .catch(function (error) {
                 console.log(error);
