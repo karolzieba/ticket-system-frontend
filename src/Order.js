@@ -70,6 +70,9 @@ const Order = ({ userData }) => {
 
 	let printData;
 	if (ticket !== undefined && ticket.typeEvent !== undefined && ticket.agency !== undefined) {
+		let date = new Date(ticket.dateTimeEvent);
+		date.setMonth(date.getMonth() + 1);
+
 		printData = (
 			<div id="order-card">
 				<img id="order-element1"
@@ -82,7 +85,7 @@ const Order = ({ userData }) => {
 						Lokalizacja: {ticket.locationEvent}
 					</p>
 					<p class='card-text'>
-						Data wydarzenia: {ticket.dateTimeEvent}
+						Data wydarzenia: {date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()}
 					</p>
 					<p class='card-text'>
 						Cena biletu: {ticket.priceEvent} zł

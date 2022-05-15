@@ -29,6 +29,8 @@ const Front = () => {
 		if (tickets[i] !== undefined && tickets[i].waitingToAccept !== true) {
 			console.log(tickets[i]);
 			let idEvent = tickets[i].idEvent;
+			let date = new Date(tickets[i].dateTimeEvent);
+			date.setMonth(date.getMonth() + 1);
 
 			listMainProduct1.push(
 				<div class='card'>
@@ -40,7 +42,7 @@ const Front = () => {
 								Lokalizacja: {tickets[i].locationEvent}
 							</p>
 							<p class='card-text'>
-								Data wydarzenia: {tickets[i].dateTimeEvent}
+								Data wydarzenia: {date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()}
 							</p>
 							<p class='card-text'>
 								Cena biletu: {tickets[i].priceEvent} zł
@@ -54,6 +56,8 @@ const Front = () => {
 	for (let i = 3; i < 6; i++) {
 		if (tickets[i] !== undefined && tickets[i].waitingToAccept !== true) {
 			let idEvent = tickets[i].idEvent;
+			let date = new Date(tickets[i].dateTimeEvent);
+			date.setMonth(date.getMonth() + 1);
 
 			listMainProduct2.push(
 				<div class='card'>
@@ -65,7 +69,7 @@ const Front = () => {
 								Lokalizacja: {tickets[i].locationEvent}
 							</p>
 							<p class='card-text'>
-								Data wydarzenia: {tickets[i].dateTimeEvent}
+								Data wydarzenia: {date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()}
 							</p>
 							<p class='card-text'>
 								Cena biletu: {tickets[i].priceEvent} zł
@@ -79,6 +83,8 @@ const Front = () => {
 	for (let i = 6; i < 9; i++) {
 		if (tickets[i] !== undefined && tickets[i].waitingToAccept !== true) {
 			let idEvent = tickets[i].idEvent;
+			let date = new Date(tickets[i].dateTimeEvent);
+			date.setMonth(date.getMonth() + 1);
 
 			listMainProduct3.push(
 				<div class='card'>
@@ -90,7 +96,7 @@ const Front = () => {
 								Lokalizacja: {tickets[i].locationEvent}
 							</p>
 							<p class='card-text'>
-								Data wydarzenia: {tickets[i].dateTimeEvent}
+								Data wydarzenia: {date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()}
 							</p>
 							<p class='card-text'>
 								Cena biletu: {tickets[i].priceEvent} zł

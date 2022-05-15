@@ -21,16 +21,24 @@ const PaymentManagement = () => {
 
     for(let i = 0; i < payments.length; i++) {
         if (payments[i] !== undefined) {
+            let date = new Date(payments[i].startDatePayment);
+			date.setMonth(date.getMonth() + 1);
+
+            let date2 = new Date(payments[i].endDatePayment);
+			date.setMonth(date.getMonth() + 1);
+
             paymentList.push(<tr>
                 <th scope="row">
                     {payments[i].idPayment}
                 </th>
                 <td>
-                    {payments[i].startDatePayment}
+                {date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()}
                 </td>
                 <td>
                     {payments[i].endDatePayment === null?<button type="button" class="btn btn-primary" 
-                    onClick={() => {acceptPayment(payments[i].idPayment)}}>Potwierdź płatność</button>:payments[i].endDatePayment}
+                    onClick={() => {acceptPayment(payments[i].idPayment)}}>Potwierdź płatność</button>
+                    :
+                    date2.getDate() + "." + date2.getMonth() + "." + date2.getFullYear() + " " + date2.getHours() + ":" + date2.getMinutes()}
                 </td>
                 <td>
                     {payments[i].typePayment.nameTypePayment === "Gotowka"?"Przelew tradycyjny":"PayPal"}

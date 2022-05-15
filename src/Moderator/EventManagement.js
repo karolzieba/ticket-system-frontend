@@ -20,6 +20,9 @@ const EventManagement = () => {
 
     for(let i = 0; i < events.length; i++) {
         if (events[i] !== undefined) {
+            let date = new Date(events[i].dateTimeEvent);
+			date.setMonth(date.getMonth() + 1);
+
             eventList.push(<tr>
                 <th scope="row">
                     {events[i].idEvent}
@@ -28,7 +31,7 @@ const EventManagement = () => {
                     {events[i].nameEvent}
                 </td>
                 <td>
-                    {events[i].dateTimeEvent}
+                    {date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()}
                 </td>
                 <td>
                     {events[i].locationEvent}

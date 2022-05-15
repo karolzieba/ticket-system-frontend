@@ -22,6 +22,9 @@ const MyOrder = ({ userData }) => {
 
 	for (let i = 0; i < dataTicket.length; i++) {
 		if (dataTicket[i] !== undefined && dataTicket[i].event !== undefined && dataTicket[i].event.agency !== undefined && dataTicket[i].payment.endDatePayment !== null) {
+			let date = new Date(dataTicket[i].event.dateTimeEvent);
+			date.setMonth(date.getMonth() + 1);
+
 			listTicket.push(
 				<div class='card'>
 					<img
@@ -35,7 +38,7 @@ const MyOrder = ({ userData }) => {
 							Lokalizacja: {dataTicket[i].event.locationEvent}
 						</p>
 						<p class='card-text'>
-							Data wydarzenia: {dataTicket[i].event.dateTimeEvent}
+							Data wydarzenia: {date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()}
 						</p>
 						<p class='card-text'>
 							Organizator wydarzenia: {dataTicket[i].event.agency.nameCompany}
