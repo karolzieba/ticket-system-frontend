@@ -10,7 +10,7 @@ const Order = ({ userData }) => {
 	}, []);
 
 	let { id } = useParams();
-	console.log(id);
+
 	function getTicket() {
 		axios
 			.get('http://localhost:8080/api/event/' + id)
@@ -21,6 +21,22 @@ const Order = ({ userData }) => {
 	}
 	const date = new Date();
 	const result = date.toISOString().split('T')[0];
+
+	function getPayment() {
+		axios.defaults.withCredentials = true;
+
+		axios
+			.post('http://localhost:8080/api/payment/pay', {
+				price: ticket.priceEvent,
+			})
+			.then((response) => {
+				console.log(response.data);
+				window.location.href = response.data;
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	}
 
 	function addTicket() {
 		axios.defaults.withCredentials = true;
@@ -46,8 +62,6 @@ const Order = ({ userData }) => {
 				console.log(error);
 			});
 	}
-
-	console.log(userData);
 
 	let printData;
 	if (ticket !== undefined) {
@@ -81,7 +95,7 @@ const Order = ({ userData }) => {
 		<div className='parentOrder'>
 			<div class='card-deck'>{printData}</div>
 			{userData.role === 'ROLE_CLIENT' && (
-				<button type='submit' onClick={addTicket}>
+				<button type='submit' onClick={getPayment}>
 					Kup bilet
 				</button>
 			)}
