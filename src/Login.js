@@ -54,7 +54,7 @@ const Login = () => {
 					onChange={(e) => setPasswordAccount(e.target.value)}
 				/>
 				<br />
-				<input class="loginRegisterButton" type='submit' value='Zaloguj' />
+				<input class="loginRegisterButton" type='submit' value='Zaloguj się!' />
 			</form>
 			<br />
 			<Facebook/>

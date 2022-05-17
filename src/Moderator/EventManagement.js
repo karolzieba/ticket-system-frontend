@@ -5,28 +5,41 @@ const EventManagement = () => {
 	axios.defaults.withCredentials = true;
 
 	const [events, setEvents] = useState('');
-	const [refresh, setRefresh] = useState('');
+	const [refresh, setRefresh] = useState(false);
+	let eventList = [];
 
 	useEffect(() => {
 		axios
 			.get('http://localhost:8080/api/event')
 			.then(function (response) {
-				console.log(response.data);
 				setEvents(response.data);
+				console.log(response);
 			})
 			.catch(function (error) {
 				console.log(error);
 			});
 	}, [refresh]);
 
-	let eventList = [];
 	for (let i = 0; i < events.length; i++) {
 		if (events[i] !== undefined) {
+			let date = new Date(events[i].dateTimeEvent);
+			date.setMonth(date.getMonth() + 1);
+
 			eventList.push(
 				<tr>
 					<th scope='row'>{events[i].idEvent}</th>
 					<td>{events[i].nameEvent}</td>
-					<td>{events[i].dateTimeEvent}</td>
+					<td>
+						{date.getDate() +
+							'.' +
+							date.getMonth() +
+							'.' +
+							date.getFullYear() +
+							' ' +
+							date.getHours() +
+							':' +
+							date.getMinutes()}
+					</td>
 					<td>{events[i].locationEvent}</td>
 					<td>{events[i].priceEvent}</td>
 					<td>{events[i].capacityEvent}</td>
@@ -36,7 +49,7 @@ const EventManagement = () => {
 						{events[i].waitingToAccept ? (
 							<button
 								type='button'
-								class='btn btn-success'
+								class='btn btn-primary'
 								onClick={() => {
 									acceptEvent(events[i].idEvent);
 								}}>
@@ -50,7 +63,7 @@ const EventManagement = () => {
 						{
 							<button
 								type='button'
-								class='btn btn-danger'
+								class='btn btn-primary'
 								onClick={() => {
 									deleteEvent(events[i].idEvent);
 								}}>
@@ -70,7 +83,7 @@ const EventManagement = () => {
 			})
 			.then(function (response) {
 				console.log(response);
-				setRefresh();
+				setRefresh(refresh ? false : true);
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -82,7 +95,7 @@ const EventManagement = () => {
 			.delete('http://localhost:8080/api/event/' + id)
 			.then(function (response) {
 				console.log(response);
-				setRefresh();
+				setRefresh(refresh ? false : true);
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -90,9 +103,10 @@ const EventManagement = () => {
 	};
 
 	return events.length !== 0 ? (
-		<div className='parentOrder'>
-			<h2>ZARZĄDZANIE WYDARZENIAMI</h2>
+		<div className='parentMenu'>
 			<br />
+			<br />
+			<h2>ZARZĄDZANIE WYDARZENIAMI</h2>
 			<br />
 			<br />
 			<table class='table table-light'>
@@ -114,9 +128,10 @@ const EventManagement = () => {
 			</table>
 		</div>
 	) : (
-		<div className='parentOrder'>
-			<h2>ZARZĄDZANIE WYDARZENIAMI</h2>
+		<div className='parentMenu'>
 			<br />
+			<br />
+			<h2>ZARZĄDZANIE WYDARZENIAMI</h2>
 			<br />
 			<br />
 			<text>W systemie nie ma żadnych wydarzeń.</text>

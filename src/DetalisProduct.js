@@ -28,6 +28,9 @@ const DetalisProducts = () => {
 	for (let i = 0; i < categoryTickets.length; i++) {
 		if (categoryTickets[i] !== undefined) {
 			let idEvent = categoryTickets[i].idEvent;
+			let date = new Date(categoryTickets[i].dateTimeEvent);
+			date.setMonth(date.getMonth() + 1);
+
 			listOfProduct.push(
 				<Row>
 					<Col>
@@ -41,16 +44,13 @@ const DetalisProducts = () => {
 								<div class='card-body'>
 									<h5 class='card-title'>{categoryTickets[i].nameEvent}</h5>
 									<p class='card-text'>
-										Lokalizacja:
-										{categoryTickets[i].locationEvent}
+										Lokalizacja: {categoryTickets[i].locationEvent}
 									</p>
 									<p class='card-text'>
-										Data wydarzenia:
-										{categoryTickets[i].dateTimeEvent}
+										Data wydarzenia: {date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()}
 									</p>
 									<p class='card-text'>
-										Cena biletu:
-										{categoryTickets[i].priceEvent} zł
+										Cena biletu: {categoryTickets[i].priceEvent} zł
 									</p>
 								</div>
 							</Link>

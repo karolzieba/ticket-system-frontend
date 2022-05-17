@@ -1,8 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import logo from '../logo.svg';
+
 const MyOrder = ({ userData }) => {
 	const [dataTicket, setDataTicket] = useState([]);
 
@@ -12,7 +10,7 @@ const MyOrder = ({ userData }) => {
 
 	function getTicketsOrder() {
 		axios
-			.get('http://localhost:8080/api/event/client/orders/' + userData.id)
+			.get('http://localhost:8080/api/ticket/client/' + userData.idRole)
 			.then((data) => {
 				console.log(data.data);
 				setDataTicket(data.data);
@@ -23,27 +21,27 @@ const MyOrder = ({ userData }) => {
 	const listTicket = [];
 
 	for (let i = 0; i < dataTicket.length; i++) {
-		if (dataTicket[i] !== undefined) {
+		if (dataTicket[i] !== undefined && dataTicket[i].event !== undefined && dataTicket[i].event.agency !== undefined && dataTicket[i].payment.endDatePayment !== null) {
+			let date = new Date(dataTicket[i].event.dateTimeEvent);
+			date.setMonth(date.getMonth() + 1);
+
 			listTicket.push(
 				<div class='card'>
 					<img
-						src={'http://localhost:8080/img/' + dataTicket[i][0] + '.png'}
+						src={'http://localhost:8080/img/' + dataTicket[i].event.idEvent + '.png'}
 						class='card-img-top'
 						alt='...'
 					/>
 					<div class='card-body'>
-						<h5 class='card-title'>{dataTicket[i][4]}</h5>
+						<h5 class='card-title'>{dataTicket[i].event.nameEvent}</h5>
 						<p class='card-text'>
-							Lokalizacja:
-							{dataTicket[i][3]}
+							Lokalizacja: {dataTicket[i].event.locationEvent}
 						</p>
 						<p class='card-text'>
-							Data wydarzenia:
-							{dataTicket[i][4]}
+							Data wydarzenia: {date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()}
 						</p>
 						<p class='card-text'>
-							Organizator wydarzenia:
-							{dataTicket[i][6]}
+							Organizator wydarzenia: {dataTicket[i].event.agency.nameCompany}
 						</p>
 					</div>
 				</div>
@@ -63,7 +61,8 @@ const MyOrder = ({ userData }) => {
 */
 	return (
 		<div class='parentDetalisProduct'>
-			<div class='card-deck'>{listTicket}</div>
+			<div data-testid='card-deck' class='card-deck'>{listTicket}</div>
+			{listTicket.length === 0 && <h2>Brak dostępnych biletów.</h2>}
 		</div>
 	);
 };

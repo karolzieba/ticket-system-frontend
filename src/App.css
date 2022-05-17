@@ -175,8 +175,14 @@
 	justify-content: center;
 }
 
-.parentOrder .card .card-img-top {
-	height: 40vh;
+.parentMenu {
+	background-image: linear-gradient(#294681, #282c34);
+	min-height: 100vh;
+	color: white;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
 }
 
 #parentAboutUs {
@@ -235,6 +241,34 @@
 	text-align: center;
 	font-size: 14px;
 	font-weight: bold;
+}
+
+#order-card {
+	display: inline-flex;
+	position: relative;
+	width: 1200px;
+	height: 550px;
+	background-color: #ffffff;
+}
+
+#order-element1 {
+	width: 400px;
+	height: 550px;
+}
+
+#order-element2 {
+	margin-left: 250px;
+	margin-top: 50px;
+}
+
+#order-element3 {
+	display: inline-flex;
+	position: relative;
+}
+
+#order-element4 {
+	margin-left: 50px;
+	width: 200px;
 }
 
 #facebookButton {
