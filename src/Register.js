@@ -59,40 +59,21 @@ const Register = () => {
 	return (
 		<div className='register'>
 			<h2>REJESTRACJA</h2>
-			<Form>
-				<Form.Check
-					type='radio'
-					id='moderator'
-					name='acctype'
-					label='Moderator'
-					value='moderator'
-					onChange={(e) => case1()}
-				/>
-				<Form.Check
-					type='radio'
-					id='client'
-					name='acctype'
-					label='Klient'
-					value='client'
-					onChange={(e) => case2()}
-				/>
-				<Form.Check
-					type='radio'
-					id='agency'
-					name='acctype'
-					label='Agencja'
-					value='agency'
-					onChange={(e) => case3()}
-				/>
-			</Form>
 			<br />
-			{moderator == true && <Moderator />}
-			{client == true && <Client />}
-			{agency == true && <Agency />}
+			{moderator === false && client === false && agency === false && <p>Wybierz rodzaj konta:</p>}
+			<div class="btn-group" role="group" aria-label="Register buttons">
+				<button type="button" class="btn btn-outline-light" onClick={(e) => case1()}>Moderator</button>
+				<button type="button" class="btn btn-outline-light" onClick={(e) => case2()}>Klient</button>
+				<button type="button" class="btn btn-outline-light" onClick={(e) => case3()}>Agencja</button>
+			</div>
+			<br />
+			{moderator === true && <Moderator />}
+			{client === true && <Client />}
+			{agency === true && <Agency />}
 
 			<br></br>
 			<Link to='/login'>
-				<button class="loginRegisterButton" type='button'>Zaloguj się!</button>
+				<button class="loginRegisterButton" type='button'>Zaloguj się</button>
 			</Link>
 		</div>
 	);
@@ -125,6 +106,7 @@ const Moderator = () => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<input
+				class='form-control'
 				type='text'
 				name='moderatorregister'
 				id='accountLogin'
@@ -133,8 +115,8 @@ const Moderator = () => {
 				required
 				onChange={(e) => setAccountLogin(e.target.value)}
 			/>
-			<br />
 			<input
+				class='form-control'
 				type='text'
 				name='moderatorregister'
 				id='emailAccount'
@@ -143,8 +125,8 @@ const Moderator = () => {
 				required
 				onChange={(e) => setEmailAccount(e.target.value)}
 			/>
-			<br />
 			<input
+				class='form-control'
 				type='password'
 				name='moderatorregister'
 				id='passwordAccount'
@@ -153,8 +135,8 @@ const Moderator = () => {
 				required
 				onChange={(e) => setPasswordAccount(e.target.value)}
 			/>
-			<br />
 			<input
+				class='form-control'
 				type='text'
 				name='moderatorregister'
 				id='userNameModerator'
@@ -163,7 +145,6 @@ const Moderator = () => {
 				required
 				onChange={(e) => setUserNameModerator(e.target.value)}
 			/>
-			<br />
 			<input class="loginRegisterButton" type='submit' value='Zarejestruj' />
 		</form>
 	);
@@ -205,6 +186,7 @@ const Client = () => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<input
+				class='form-control'
 				type='text'
 				name='clientregister'
 				id='accountLogin'
@@ -213,8 +195,8 @@ const Client = () => {
 				required
 				onChange={(e) => setAccountLogin(e.target.value)}
 			/>
-			<br />
 			<input
+				class='form-control'
 				type='text'
 				name='clientregister'
 				id='emailAccount'
@@ -223,8 +205,8 @@ const Client = () => {
 				required
 				onChange={(e) => setEmailAccount(e.target.value)}
 			/>
-			<br />
 			<input
+				class='form-control'
 				type='password'
 				name='clientregister'
 				id='passwordAccount'
@@ -233,8 +215,8 @@ const Client = () => {
 				required
 				onChange={(e) => setPasswordAccount(e.target.value)}
 			/>
-			<br />
 			<input
+				class='form-control'
 				type='text'
 				name='clientregister'
 				id='nameUser'
@@ -243,8 +225,8 @@ const Client = () => {
 				required
 				onChange={(e) => setNameUser(e.target.value)}
 			/>
-			<br />
 			<input
+				class='form-control'
 				type='text'
 				name='clientregister'
 				id='surName'
@@ -253,8 +235,8 @@ const Client = () => {
 				required
 				onChange={(e) => setSurName(e.target.value)}
 			/>
-			<br />
 			<input
+				class='form-control'
 				type='date'
 				name='clientregister'
 				id='dateOfBirth'
@@ -263,8 +245,8 @@ const Client = () => {
 				required
 				onChange={(e) => setDateOfBirth(e.target.value)}
 			/>
-			<br />
 			<input
+				class='form-control'
 				type='text'
 				name='clientregister'
 				id='phoneNumber'
@@ -274,7 +256,6 @@ const Client = () => {
 				required
 				onChange={(e) => setPhoneNumber(e.target.value)}
 			/>
-			<br />
 			<input class="loginRegisterButton" type='submit' value='Zarejestruj' />
 		</form>
 	);
@@ -313,6 +294,7 @@ const Agency = () => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<input
+				class='form-control'
 				type='text'
 				name='agencyregister'
 				id='accountLogin'
@@ -321,8 +303,8 @@ const Agency = () => {
 				required
 				onChange={(e) => setAccountLogin(e.target.value)}
 			/>
-			<br />
 			<input
+				class='form-control'
 				type='text'
 				name='agencyregister'
 				id='emailAccount'
@@ -331,8 +313,8 @@ const Agency = () => {
 				required
 				onChange={(e) => setEmailAccount(e.target.value)}
 			/>
-			<br />
 			<input
+				class='form-control'
 				type='password'
 				name='agencyregister'
 				id='passwordAccount'
@@ -341,8 +323,8 @@ const Agency = () => {
 				required
 				onChange={(e) => setPasswordAccount(e.target.value)}
 			/>
-			<br />
 			<input
+				class='form-control'
 				type='text'
 				name='agencyregister'
 				id='nameCompany'
@@ -351,8 +333,8 @@ const Agency = () => {
 				required
 				onChange={(e) => setNameCompany(e.target.value)}
 			/>
-			<br />
 			<input
+				class='form-control'
 				type='text'
 				name='agencyregister'
 				id='NIP'
@@ -362,8 +344,8 @@ const Agency = () => {
 				required
 				onChange={(e) => setNIP(e.target.value)}
 			/>
-			<br />
 			<input
+				class='form-control'
 				type='text'
 				name='agencyregister'
 				id='numberPhone'
@@ -373,7 +355,6 @@ const Agency = () => {
 				required
 				onChange={(e) => setNumberPhone(e.target.value)}
 			/>
-			<br />
 			<input class="loginRegisterButton" type='submit' value='Zarejestruj' />
 		</form>
 	);

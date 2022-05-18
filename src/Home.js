@@ -11,14 +11,17 @@ const Home = ( { loggedIn, userData } ) => {
 			<LinkContainer to="/agency/event/creator">
 				<NavDropdown.Item>Dodawanie wydarzeń</NavDropdown.Item>
 			</LinkContainer>
+			<LinkContainer to="/agency/changedata">
+				<NavDropdown.Item>Zarządzanie kontem</NavDropdown.Item>
+			</LinkContainer>
 	</NavDropdown>);
 
 	const clientElements = (<NavDropdown title='Konto' id='collasible-nav-ddropdown'>
 			<LinkContainer to="/client/orders">
 				<NavDropdown.Item>Moje zamówienia</NavDropdown.Item>
 			</LinkContainer>
-			<LinkContainer to="/client/orders">
-				<NavDropdown.Item>Zarządzaj kontem</NavDropdown.Item>
+			<LinkContainer to="/client/changedata">
+				<NavDropdown.Item>Zarządzanie kontem</NavDropdown.Item>
 			</LinkContainer>
 	</NavDropdown>);
 
@@ -31,6 +34,9 @@ const Home = ( { loggedIn, userData } ) => {
 			</LinkContainer>
 			<LinkContainer to="/agency/event/creator">
 				<NavDropdown.Item>Zarządzanie użytkownikami</NavDropdown.Item>
+			</LinkContainer>
+			<LinkContainer to="/moderator/changedata">
+				<NavDropdown.Item>Zarządzanie kontem</NavDropdown.Item>
 			</LinkContainer>
 	</NavDropdown>);
 
@@ -83,7 +89,9 @@ const Home = ( { loggedIn, userData } ) => {
 							</LinkContainer>
 						</NavDropdown>
 					</Nav>
-
+					
+					{loggedIn === true && userData.role === "ROLE_CLIENT_FACEBOOK" && userData.hasSetBirthday === "false" 
+					&& <Link to="/client/changedata">Aby kupować bilety uzupełnij swoje dane!</Link>}
 					{loggedIn === true && userData.role === "ROLE_AGENCY" && agencyElements}
 					{loggedIn === true && (userData.role === "ROLE_CLIENT" || userData.role === "ROLE_CLIENT_FACEBOOK") && clientElements}
 					{loggedIn === true && userData.role === "ROLE_MODERATOR" && moderatorElements}

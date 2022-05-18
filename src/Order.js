@@ -45,13 +45,13 @@ const Order = ({ userData }) => {
 						)
 						.then((data) => {
 							setTicketExist(data.data);
-							console.log('ticket: ' + data.data);
 						})
 						.catch((err) => console.log(err));
 				}
 			})
 			.catch((err) => alert(err));
 	}
+
 	const date = new Date();
 	const result = date.toISOString().split('T')[0];
 
@@ -164,7 +164,8 @@ const Order = ({ userData }) => {
 						userData.role === 'ROLE_CLIENT_FACEBOOK') &&
 						ticket.capacityEvent !== 0 &&
 						ageCorrect === true &&
-						ticketExist === false && (
+						ticketExist === false &&
+						userData.hasSetBirthday === "true" && (
 							<form
 								id='order-element3'
 								onSubmit={addTicket}
@@ -190,9 +191,16 @@ const Order = ({ userData }) => {
 								</button>
 							</form>
 						)}
+					{(userData.role === 'ROLE_CLIENT_FACEBOOK') &&
+						userData.hasSetBirthday === "false" && (
+							<p class='card-text'>
+								Musisz ustawić datę urodzenia aby kupić ten bilet.
+							</p>
+						)}
 					{(userData.role === 'ROLE_CLIENT' ||
 						userData.role === 'ROLE_CLIENT_FACEBOOK') &&
-						ageCorrect !== true && (
+						ageCorrect !== true &&
+						userData.hasSetBirthday === "true" && (
 							<p class='card-text'>
 								Nie masz wystarczająco lat aby wejść na to wydarzenie.
 							</p>

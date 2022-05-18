@@ -72,7 +72,7 @@ const PaymentManagement = () => {
                     {date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()}
                 </td>
                 <td>
-                    {tickets[i].client.nameUser} (ID: {tickets[i].client.idClient})
+                    {tickets[i].client.nameUser} {tickets[i].client.surName} (ID: {tickets[i].client.idClient})
                 </td>
                 <td>
                     {tickets[i].event.nameEvent} (ID: {tickets[i].event.idEvent})

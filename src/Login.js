@@ -7,6 +7,7 @@ import Facebook from './facebookLogin';
 const Login = () => {
 	const [accountLogin, setAccountLogin] = useState('');
 	const [passwordAccount, setPasswordAccount] = useState('');
+	const [loginErr, setLoginErr] = useState(false);
 	const navigate = useNavigate();
 
 	const handleSubmit = (event) => {
@@ -28,13 +29,17 @@ const Login = () => {
 			})
 			.catch(function (error) {
 				console.log(error);
+				setLoginErr(true);
 			});
 	};
 	return (
 		<div class='login'>
 			<h2>LOGOWANIE</h2>
+			{loginErr === true && <p>Wystąpił błąd podczas logowania! Spróbuj ponownie.</p>} 
+			<br />
 			<form onSubmit={handleSubmit}>
 				<input
+					class='form-control'
 					type='text'
 					name='username'
 					id='accountLogin'
@@ -43,8 +48,8 @@ const Login = () => {
 					required
 					onChange={(e) => setAccountLogin(e.target.value)}
 				/>
-				<br />
 				<input
+					class='form-control'
 					type='password'
 					name='password'
 					id='passwordAccount'
@@ -53,7 +58,6 @@ const Login = () => {
 					required
 					onChange={(e) => setPasswordAccount(e.target.value)}
 				/>
-				<br />
 				<input class="loginRegisterButton" type='submit' value='Zaloguj się!' />
 			</form>
 			<br />

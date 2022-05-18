@@ -12,6 +12,7 @@ import TraditionalPaymentSuccess from './TraditionalPaymentSuccess';
 import PaymentFailed from './PaymentFailed';
 import Order from './Order';
 import MyOrder from './Client/MyOrder';
+import { ChangeClientData, ChangeModeratorData, ChangeAgencyData } from './ChangeData';
 import AboutUs from './aboutus';
 import {
 	BrowserRouter as Router,
@@ -101,6 +102,9 @@ function App() {
 					<Route path='/paymentfailed' element={<PaymentFailed />} exact />
 					<Route path='/moderator/event/management' element={<EventManagement />} exact />
 					<Route path='/moderator/order/management' element={<OrderManagement />} exact />
+					<Route path='/client/changedata' element={<ChangeClientData userData={userData} />} exact />
+					<Route path='/moderator/changedata' element={<ChangeModeratorData userData={userData} />} exact />
+					<Route path='/agency/changedata' element={<ChangeAgencyData userData={userData} />} exact />
 				</Route>
 			</Routes>
 
