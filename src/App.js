@@ -5,21 +5,27 @@ import Logout from './Logout';
 import Register from './Register';
 import Front from './Front';
 import EventCreator from './Agency/EventCreator';
-import EventManagement from './Moderator/EventManagement'
-import OrderManagement from './Moderator/OrderManagement'
+import EventManagement from './Moderator/EventManagement';
+import OrderManagement from './Moderator/OrderManagement';
 import DetalisProducts from './DetalisProduct';
 import TraditionalPaymentSuccess from './TraditionalPaymentSuccess';
 import PaymentFailed from './PaymentFailed';
 import Order from './Order';
 import MyOrder from './Client/MyOrder';
-import { ChangeClientData, ChangeModeratorData, ChangeAgencyData } from './ChangeData';
+import EventList from './Agency/EventList';
+import EventUpdate from './Agency/EventUpdate';
+import {
+	ChangeClientData,
+	ChangeModeratorData,
+	ChangeAgencyData,
+} from './ChangeData';
 import AboutUs from './aboutus';
 import {
 	BrowserRouter as Router,
 	Route,
 	Routes,
 	useLocation,
-	Link
+	Link,
 } from 'react-router-dom';
 import './App.css';
 
@@ -39,7 +45,7 @@ function App() {
 				setUserData(response.data);
 			})
 			.catch(function (error) {
-				if(loggedIn == true) {
+				if (loggedIn == true) {
 					setLoggedIn(false);
 					window.location.reload();
 				}
@@ -49,7 +55,7 @@ function App() {
 	const loginStatus = (status) => {
 		setLoggedIn(status);
 	};
-	
+
 	return (
 		<div>
 			<Routes>
@@ -71,9 +77,15 @@ function App() {
 						element={<EventCreator userData={userData} />}
 						exact
 					/>
+					<Route path='/agency/event/update' element={<EventList />} />
 					<Route
 						path='/client/orders'
 						element={<MyOrder userData={userData} />}
+						exact
+					/>
+					<Route
+						path='/agency/event/creator/update/:idEvent'
+						element={<EventUpdate />}
 						exact
 					/>
 					<Route path='/koncerty/pop' element={<DetalisProducts />} exact />
@@ -98,22 +110,47 @@ function App() {
 					<Route path='/teatr/dramat' element={<DetalisProducts />} exact />
 					<Route path='/teatr/musicale' element={<DetalisProducts />} exact />
 					<Route path='/aboutus' element={<AboutUs />} exact />
-					<Route path='/traditionalpaymentsuccess' element={<TraditionalPaymentSuccess />} exact />
+					<Route
+						path='/traditionalpaymentsuccess'
+						element={<TraditionalPaymentSuccess />}
+						exact
+					/>
 					<Route path='/paymentfailed' element={<PaymentFailed />} exact />
-					<Route path='/moderator/event/management' element={<EventManagement />} exact />
-					<Route path='/moderator/order/management' element={<OrderManagement />} exact />
-					<Route path='/client/changedata' element={<ChangeClientData userData={userData} />} exact />
-					<Route path='/moderator/changedata' element={<ChangeModeratorData userData={userData} />} exact />
-					<Route path='/agency/changedata' element={<ChangeAgencyData userData={userData} />} exact />
+					<Route
+						path='/moderator/event/management'
+						element={<EventManagement />}
+						exact
+					/>
+					<Route
+						path='/moderator/order/management'
+						element={<OrderManagement />}
+						exact
+					/>
+					<Route
+						path='/client/changedata'
+						element={<ChangeClientData userData={userData} />}
+						exact
+					/>
+					<Route
+						path='/moderator/changedata'
+						element={<ChangeModeratorData userData={userData} />}
+						exact
+					/>
+					<Route
+						path='/agency/changedata'
+						element={<ChangeAgencyData userData={userData} />}
+						exact
+					/>
 				</Route>
 			</Routes>
 
 			<footer class='py-5 bg-dark'>
 				<div class='container'>
 					<p class='m-0 text-center text-white'>
-						Copyright &copy; 2022 Daniel Rogowski, Damian Przytuła, Patryk Duda, Karol Zięba; grupa 3ID13A
+						Copyright &copy; 2022 Daniel Rogowski, Damian Przytuła, Patryk Duda,
+						Karol Zięba; grupa 3ID13A
 						<br />
-						<Link to="/aboutus">O projekcie</Link>
+						<Link to='/aboutus'>O projekcie</Link>
 					</p>
 				</div>
 			</footer>

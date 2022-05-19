@@ -55,22 +55,6 @@ const Order = ({ userData }) => {
 	const date = new Date();
 	const result = date.toISOString().split('T')[0];
 
-	function getPayment() {
-		axios.defaults.withCredentials = true;
-
-		axios
-			.post('http://localhost:8080/api/payment/pay', {
-				price: ticket.priceEvent,
-			})
-			.then((response) => {
-				console.log(response.data);
-				window.location.href = response.data;
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
-	}
-
 	function addTicket() {
 		axios.defaults.withCredentials = true;
 
@@ -113,7 +97,15 @@ const Order = ({ userData }) => {
 					navigate('/paymentfailed', { replace: true });
 				});
 		} else if (paymentType === 'paypal') {
-			window.location.href = '';
+			axios
+				.post('http://localhost:8080/api/payment/pay', {
+					price: ticket.priceEvent,
+					description: ticket.idEvent + ',' + userData.idRole,
+					localDateTime: date,
+				})
+				.then((response) => {
+					window.location.href = response.data;
+				});
 		}
 	}
 
@@ -127,7 +119,7 @@ const Order = ({ userData }) => {
 		date.setMonth(date.getMonth() + 1);
 
 		printData = (
-			<div id='order-card'>
+			<div class='order-card'>
 				<img
 					id='order-element1'
 					src={'http://localhost:8080/img/' + ticket.idEvent + '.png'}
@@ -165,7 +157,7 @@ const Order = ({ userData }) => {
 						ticket.capacityEvent !== 0 &&
 						ageCorrect === true &&
 						ticketExist === false &&
-						userData.hasSetBirthday === "true" && (
+						userData.hasSetBirthday === 'true' && (
 							<form
 								id='order-element3'
 								onSubmit={addTicket}
@@ -191,8 +183,8 @@ const Order = ({ userData }) => {
 								</button>
 							</form>
 						)}
-					{(userData.role === 'ROLE_CLIENT_FACEBOOK') &&
-						userData.hasSetBirthday === "false" && (
+					{userData.role === 'ROLE_CLIENT_FACEBOOK' &&
+						userData.hasSetBirthday === 'false' && (
 							<p class='card-text'>
 								Musisz ustawić datę urodzenia aby kupić ten bilet.
 							</p>
@@ -200,7 +192,7 @@ const Order = ({ userData }) => {
 					{(userData.role === 'ROLE_CLIENT' ||
 						userData.role === 'ROLE_CLIENT_FACEBOOK') &&
 						ageCorrect !== true &&
-						userData.hasSetBirthday === "true" && (
+						userData.hasSetBirthday === 'true' && (
 							<p class='card-text'>
 								Nie masz wystarczająco lat aby wejść na to wydarzenie.
 							</p>

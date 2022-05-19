@@ -55,6 +55,7 @@ const EventManagement = () => {
 								}}>
 								Zaakceptuj
 							</button>
+							
 						) : (
 							'Zaakceptowane'
 						)}
