@@ -7,11 +7,11 @@ const EventUpdate = () => {
 	}, []);
 	const [event, setEvent] = useState();
 	const [newLocation, setNewLocation] = useState();
-	const [newDateEvent, setnewDateEvent] = useState();
-	const [newTimeEvent, setTimeEvent] = useState();
-	const [newAllDateEvent, setNewAllDateEvent] = useState();
+	const [newDateEvent, setNewDateEvent] = useState();
+	const [newTimeEvent, setNewTimeEvent] = useState();
+
 	const [newPrice, setNewPriceEvent] = useState();
-	const [newAge, setNewAgeEvent] = useState();
+
 	let { idEvent } = useParams();
 
 	function getEvent() {
@@ -20,15 +20,30 @@ const EventUpdate = () => {
 			setNewLocation(data.data.locationEvent);
 			let tempDate = new Date(data.data.dateTimeEvent);
 
-			setnewDateEvent(tempDate.toISOString().substring(0, 10));
-			setTimeEvent(tempDate.toTimeString().substring(0, 5));
+			setNewDateEvent(tempDate.toISOString().substring(0, 10));
+			setNewTimeEvent(tempDate.toTimeString().substring(0, 5));
 			setNewPriceEvent(data.data.priceEvent);
-			setNewAgeEvent(data.data.minAgeLimit);
 		});
 	}
 
-	function updateEvent() {}
-	
+	function updateEvent() {
+		if (event !== undefined) {
+			axios
+				.patch('http://localhost:8080/api/event/' + event.idEvent, {
+					eventId: event.idEvent,
+					priceEvent: newPrice,
+					locationEvent: newLocation,
+					dateTimeEvent: newDateEvent + 'T' + newTimeEvent,
+				})
+				.then(function (response) {
+					console.log(response);
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+		}
+	}
+
 	let printData;
 	if (event !== undefined) {
 		let date = new Date(event.dateTimeEvent);
@@ -60,11 +75,13 @@ const EventUpdate = () => {
 								type='date'
 								id='dateEvent'
 								defaultValue={date.toISOString().substring(0, 10)}
+								onChange={(e) => setNewDateEvent(e.target.value)}
 							/>
 							<input
 								type='time'
 								id='timeEvent'
 								defaultValue={date.toTimeString().substring(0, 5)}
+								onChange={(e) => setNewTimeEvent(e.target.value)}
 							/>
 						</p>
 						<p class='card-text'>
@@ -73,6 +90,9 @@ const EventUpdate = () => {
 								class='form-control'
 								type='text'
 								placeholder={event.priceEvent + ' zł'}
+								defaultValue={event.priceEvent}
+								value={newPrice}
+								onChange={(e) => setNewPriceEvent(e.target.value)}
 							/>
 						</p>
 						<p class='card-text'>
@@ -80,12 +100,8 @@ const EventUpdate = () => {
 							{event.typeEvent.nameTypeEvent === 'Pilkanozna' && 'Piłka nożna'}
 						</p>
 						<p class='card-text'>
-							Minimalny wiek wstępu:{' '}
-							<input
-								class='form-control'
-								type='text'
-								placeholder={event.typeEvent.minAgeLimit + ' lat'}
-							/>
+							Minimalny wiek wstępu: <br />
+							{event.typeEvent.minAgeLimit}
 						</p>
 						<p class='card-text'>
 							Agencja organizująca: <br />
@@ -96,9 +112,9 @@ const EventUpdate = () => {
 							{event.capacityEvent}
 						</p>
 						<input
-							class='loginRegisterButton'
+							class='loginUpdateButton'
 							type='submit'
-							value='Zarejestruj'
+							value='Zaaktualizuj'
 						/>
 					</form>
 				</div>

@@ -178,7 +178,10 @@ const EventCreator = ({ userData }) => {
 				<br />
 
 				<label>
-					<select data-testid='katWydarzenia' value={category} onChange={handleNameChange}>
+					<select
+						data-testid='katWydarzenia'
+						value={category}
+						onChange={handleNameChange}>
 						<option>Wybierz kategorię wydarzenia</option>
 						{categories}
 					</select>
@@ -188,7 +191,10 @@ const EventCreator = ({ userData }) => {
 				<label Wybierz kategorie wydarzenia />
 
 				{category !== undefined && (
-					<select data-testid='podkatWydarzenia' value={state} onChange={handleStateChange}>
+					<select
+						data-testid='podkatWydarzenia'
+						value={state}
+						onChange={handleStateChange}>
 						<option>Wybierz podkategorię wydarzenia</option>
 						{states}
 					</select>
