@@ -5,8 +5,9 @@ import Logout from './Logout';
 import Register from './Register';
 import Front from './Front';
 import EventCreator from './Agency/EventCreator';
-import EventManagement from './Moderator/EventManagement';
-import OrderManagement from './Moderator/OrderManagement';
+import AccountManagement from './Moderator/AccountManagement'
+import EventManagement from './Moderator/EventManagement'
+import OrderManagement from './Moderator/OrderManagement'
 import DetalisProducts from './DetalisProduct';
 import TraditionalPaymentSuccess from './TraditionalPaymentSuccess';
 import PaymentFailed from './PaymentFailed';
@@ -116,16 +117,12 @@ function App() {
 						exact
 					/>
 					<Route path='/paymentfailed' element={<PaymentFailed />} exact />
-					<Route
-						path='/moderator/event/management'
-						element={<EventManagement />}
-						exact
-					/>
-					<Route
-						path='/moderator/order/management'
-						element={<OrderManagement />}
-						exact
-					/>
+					<Route path='/moderator/account/management' element={<AccountManagement userData={userData} />} exact />
+					<Route path='/moderator/event/management' element={<EventManagement userData={userData} />} exact />
+					<Route path='/moderator/order/management' element={<OrderManagement />} exact />
+					<Route path='/client/changedata' element={<ChangeClientData userData={userData} />} exact />
+					<Route path='/moderator/changedata' element={<ChangeModeratorData userData={userData} />} exact />
+					<Route path='/agency/changedata' element={<ChangeAgencyData userData={userData} />} exact />
 					<Route
 						path='/client/changedata'
 						element={<ChangeClientData userData={userData} />}

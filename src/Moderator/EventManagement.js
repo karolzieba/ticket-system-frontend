@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const EventManagement = () => {
+const EventManagement = ( { userData } ) => {
 	const axios = require('axios').default;
 	axios.defaults.withCredentials = true;
 
@@ -103,7 +103,7 @@ const EventManagement = () => {
 			});
 	};
 
-	return events.length !== 0 ? (
+	return events.length !== 0 && userData.role === "ROLE_MODERATOR"? (
 		<div className='parentMenu'>
 			<br />
 			<br />

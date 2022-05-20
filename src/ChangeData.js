@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 
 export const ChangeClientData = ( { userData } ) => {
@@ -15,6 +15,11 @@ export const ChangeClientData = ( { userData } ) => {
 	const [accountLogin, setAccountLogin] = useState(null);
 	const [passwordAccount, setPasswordAccount] = useState(null);
 	const navigate = useNavigate();
+	const location = useLocation();
+
+	if(location.state !== null) {
+		userData = location.state.data;
+	}
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -40,26 +45,6 @@ export const ChangeClientData = ( { userData } ) => {
 				console.log(error);
 			});
 
-		/*if(userData.role === "ROLE_CLIENT") {
-			sendData('client', {
-				nameUser: nameUser,
-				surName: surName,
-				dateOfBirth: dateOfBirth,
-				phoneNumber: phoneNumber,
-				account: {
-					emailAccount: emailAccount,
-					username: accountLogin,
-					password: passwordAccount,
-				},
-			});
-		}
-		else if(userData.role === "ROLE_CLIENT_FACEBOOK") {
-			sendData('client', {
-				dateOfBirth: dateOfBirth,
-				phoneNumber: phoneNumber
-			});
-		}*/
-
 		setNameUser('');
 		setSurName('');
 		setDateOfBirth('');
@@ -73,7 +58,7 @@ export const ChangeClientData = ( { userData } ) => {
 		<div className='register'>
 			<h2>ZARZĄDZANIE KONTEM</h2>
 			<h3>Rodzaj konta: {userData.role === "ROLE_CLIENT"?"Klient":"Klient - Facebook"}</h3>
-			{userData.role === "ROLE_CLIENT" && <p>Uwaga! Jeżeli zostanie zmieniony login będzie wymagane ponowne zalogowanie się.</p>}
+			{userData.role === "ROLE_CLIENT" && <p>Uwaga! Jeżeli zostanie zmieniony login wymagane będzie ponowne zalogowanie się.</p>}
 			<br />
 			<form onSubmit={handleSubmit}>
 				{userData.role === "ROLE_CLIENT" && <input
@@ -157,6 +142,11 @@ export const ChangeModeratorData = ( { userData }) => {
 	const [accountLogin, setAccountLogin] = useState(null);
 	const [passwordAccount, setPasswordAccount] = useState(null);
 	const navigate = useNavigate();
+	const location = useLocation();
+
+	if(location.state !== null) {
+		userData = location.state.data;
+	}
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -188,7 +178,7 @@ export const ChangeModeratorData = ( { userData }) => {
 		<div className='register'>
 			<h2>ZARZĄDZANIE KONTEM</h2>
 			<h3>Rodzaj konta: Moderator</h3>
-			<p>Uwaga! Jeżeli zostanie zmieniony login będzie wymagane ponowne zalogowanie się.</p>
+			<p>Uwaga! Jeżeli zostanie zmieniony login wymagane będzie ponowne zalogowanie się.</p>
 			<br />	
 			<form onSubmit={handleSubmit}>
 				<input
@@ -240,6 +230,11 @@ export const ChangeAgencyData = ( { userData }) => {
 	const [accountLogin, setAccountLogin] = useState(null);
 	const [passwordAccount, setPasswordAccount] = useState(null);
 	const navigate = useNavigate();
+	const location = useLocation();
+
+	if(location.state !== null) {
+		userData = location.state.data;
+	}
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -275,7 +270,7 @@ export const ChangeAgencyData = ( { userData }) => {
 		<div className='register'>
 			<h2>ZARZĄDZANIE KONTEM</h2>
 			<h3>Rodzaj konta: Agencja</h3>
-			<p>Uwaga! Jeżeli zostanie zmieniony login będzie wymagane ponowne zalogowanie się.</p>
+			<p>Uwaga! Jeżeli zostanie zmieniony login wymagane będzie ponowne zalogowanie się.</p>
 			<br />	
 			<form onSubmit={handleSubmit}>
 				<input
@@ -328,7 +323,7 @@ export const ChangeAgencyData = ( { userData }) => {
 					value={numberPhone}
 					onChange={(e) => setNumberPhone(e.target.value)}
 				/>
-				<input class="loginRegisterButton" type='submit' value='Zarejestruj' />
+				<input class="loginRegisterButton" type='submit' value='Zmień dane' />
 			</form>
 		</div>
 	);
