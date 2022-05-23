@@ -13,7 +13,7 @@ const EventCreator = ({ userData }) => {
 	const [priceEvent, setPriceEvent] = useState('');
 	const [typeEvent, setTypeEvent] = useState(1);
 	const [image, setImage] = useState('');
-
+	const [displayInfo, setDisplayInfo] = useState(false);
 	const optionsData = [
 		{
 			name: 'Koncerty',
@@ -63,62 +63,70 @@ const EventCreator = ({ userData }) => {
 	}
 	/******************************************************************************************************* */
 	const handleSubmit = (event) => {
-		axios.defaults.withCredentials = true;
-		event.preventDefault();
+		let currDate = new Date();
+		let formDate = new Date(dateEvent);
+		if (formDate <= currDate) {
+			setDisplayInfo(true);
+		} else {
+			axios.defaults.withCredentials = true;
+			event.preventDefault();
+			axios
+				.post('http://localhost:8080/api/event', {
+					capacityEvent: capacityEvent,
+					dateTimeEvent: dateEvent + 'T' + timeEvent,
+					locationEvent: locationEvent,
+					priceEvent: priceEvent,
+					nameEvent: nameEvent,
+					waitingToAccept: true,
 
-		axios
-			.post('http://localhost:8080/api/event', {
-				capacityEvent: capacityEvent,
-				dateTimeEvent: dateEvent + 'T' + timeEvent,
-				locationEvent: locationEvent,
-				priceEvent: priceEvent,
-				nameEvent: nameEvent,
-				waitingToAccept: true,
+					typeEvent: {
+						nameTypeEvent: typeEvent,
+					},
 
-				typeEvent: {
-					nameTypeEvent: typeEvent,
-				},
+					agency: {
+						idAgency: userData.idRole,
+					},
+				})
+				.then(function (response) {
+					let idEvent = response.data;
+					let blob = image.slice(0, image.size, 'image/png');
+					let newFile = new File([blob], idEvent + '.png', {
+						type: 'image/png',
+					});
+					let formData = new FormData();
+					formData.append('image', newFile);
 
-				agency: {
-					idAgency: userData.idRole,
-				},
-			})
-			.then(function (response) {
-				let idEvent = response.data;
-				let blob = image.slice(0, image.size, 'image/png');
-				let newFile = new File([blob], idEvent + '.png', { type: 'image/png' });
-				let formData = new FormData();
-				formData.append('image', newFile);
+					axios
+						.post('http://localhost:8080/api/event/image', formData, {
+							headers: {
+								'Content-Type': 'multipart/form-data',
+							},
+						})
+						.then(function (response) {
+							navigate('/', { replace: true });
+						})
+						.catch(function (error) {
+							console.log(error);
+						})
+						.then(function () {});
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
 
-				axios
-					.post('http://localhost:8080/api/event/image', formData, {
-						headers: {
-							'Content-Type': 'multipart/form-data',
-						},
-					})
-					.then(function (response) {
-						navigate('/', { replace: true });
-					})
-					.catch(function (error) {
-						console.log(error);
-					})
-					.then(function () {});
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
-
-		setCapacityEvent('');
-		setDateEvent('');
-		setTimeEvent('');
-		setLocationEvent('');
-		setNameEvent('');
-		setTypeEvent('');
-		setPriceEvent('');
+			setCapacityEvent('');
+			setDateEvent('');
+			setTimeEvent('');
+			setLocationEvent('');
+			setNameEvent('');
+			setTypeEvent('');
+			setPriceEvent('');
+		}
 	};
 
 	return (
 		<div id='creatorFormEvent'>
+			{displayInfo === true && <h2>Podana data już minęła.</h2>}
 			<form onSubmit={handleSubmit}>
 				<input
 					type='text'

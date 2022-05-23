@@ -15,6 +15,10 @@ import Order from './Order';
 import MyOrder from './Client/MyOrder';
 import EventList from './Agency/EventList';
 import EventUpdate from './Agency/EventUpdate';
+import ProtectedRouterAgency from './Agency/ProtectedRouterAgency';
+import ProtectedRouterClient from './Client/ProtectedRouterClient';
+import ProtectedRouterModerarator from './Moderator/ProtectedRouterModerator';
+import ProtectedRouterLogin from './ProtectedRouterLogin';
 import {
 	ChangeClientData,
 	ChangeModeratorData,
@@ -51,12 +55,14 @@ function App() {
 					window.location.reload();
 				}
 			});
-	}, [location]);
+	}, []);
 
 	const loginStatus = (status) => {
 		setLoggedIn(status);
 	};
 
+	const dataToCheck = userData.role;
+	console.log(loggedIn);
 	return (
 		<div>
 			<Routes>
@@ -64,34 +70,78 @@ function App() {
 					path='/'
 					element={<Home loggedIn={loggedIn} userData={userData} />}>
 					<Route index element={<Front />} exact />
-					<Route path='/login' element={<Login />} exact />
+
 					<Route path='/logout' element={<Logout />} exact />
-					<Route path='/register' element={<Register />} exact />
+
 					<Route
 						path='/zamowienie/:id'
 						element={<Order userData={userData} />}
 						exact
 					/>
 
+					<Route element={<ProtectedRouterLogin loggIn={loggedIn} />}>
+						<Route path='/login' element={<Login />} exact />
+						<Route path='/register' element={<Register />} exact />
+					</Route>
+
+					<Route element={<ProtectedRouterAgency varziable={dataToCheck} />}>
+						<Route
+							path='/agency/event/creator'
+							element={<EventCreator userData={userData} />}
+							exact
+						/>
+
+						<Route
+							path='/agency/event/update'
+							element={<EventList userData={userData} />}
+						/>
+						<Route
+							path='/agency/event/creator/update/:idEvent'
+							element={<EventUpdate />}
+							exact
+						/>
+						<Route
+							path='/agency/changedata'
+							element={<ChangeAgencyData userData={userData} />}
+							exact
+						/>
+					</Route>
+					<Route element={<ProtectedRouterClient varziable={dataToCheck} />}>
+						<Route
+							path='/client/orders'
+							element={<MyOrder userData={userData} />}
+							exact
+						/>
+						<Route
+							path='/client/changedata'
+							element={<ChangeClientData userData={userData} />}
+							exact
+						/>
+					</Route>
 					<Route
-						path='/agency/event/creator'
-						element={<EventCreator userData={userData} />}
-						exact
-					/>
-					<Route
-						path='/agency/event/update'
-						element={<EventList userData={userData} />}
-					/>
-					<Route
-						path='/client/orders'
-						element={<MyOrder userData={userData} />}
-						exact
-					/>
-					<Route
-						path='/agency/event/creator/update/:idEvent'
-						element={<EventUpdate />}
-						exact
-					/>
+						element={<ProtectedRouterModerarator varziable={dataToCheck} />}>
+						<Route
+							path='/moderator/account/management'
+							element={<AccountManagement userData={userData} />}
+							exact
+						/>
+						<Route
+							path='/moderator/event/management'
+							element={<EventManagement userData={userData} />}
+							exact
+						/>
+						<Route
+							path='/moderator/order/management'
+							element={<OrderManagement />}
+							exact
+						/>
+
+						<Route
+							path='/moderator/changedata'
+							element={<ChangeModeratorData userData={userData} />}
+							exact
+						/>
+					</Route>
 					<Route path='/koncerty/pop' element={<DetalisProducts />} exact />
 					<Route path='/koncerty/rap' element={<DetalisProducts />} exact />
 					<Route path='/koncerty/rock' element={<DetalisProducts />} exact />
@@ -120,51 +170,6 @@ function App() {
 						exact
 					/>
 					<Route path='/paymentfailed' element={<PaymentFailed />} exact />
-					<Route
-						path='/moderator/account/management'
-						element={<AccountManagement userData={userData} />}
-						exact
-					/>
-					<Route
-						path='/moderator/event/management'
-						element={<EventManagement userData={userData} />}
-						exact
-					/>
-					<Route
-						path='/moderator/order/management'
-						element={<OrderManagement />}
-						exact
-					/>
-					<Route
-						path='/client/changedata'
-						element={<ChangeClientData userData={userData} />}
-						exact
-					/>
-					<Route
-						path='/moderator/changedata'
-						element={<ChangeModeratorData userData={userData} />}
-						exact
-					/>
-					<Route
-						path='/agency/changedata'
-						element={<ChangeAgencyData userData={userData} />}
-						exact
-					/>
-					<Route
-						path='/client/changedata'
-						element={<ChangeClientData userData={userData} />}
-						exact
-					/>
-					<Route
-						path='/moderator/changedata'
-						element={<ChangeModeratorData userData={userData} />}
-						exact
-					/>
-					<Route
-						path='/agency/changedata'
-						element={<ChangeAgencyData userData={userData} />}
-						exact
-					/>
 				</Route>
 			</Routes>
 
