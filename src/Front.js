@@ -114,13 +114,13 @@ const Front = () => {
 			<h1>Najnowsze wydarzenia</h1>
 			<div id='containerFix'>
 				<Carousel fade>
-					<Carousel.Item interval={500000}>
+					<Carousel.Item interval={8000}>
 						<div class='card-deck'>{listMainProduct1}</div>
 					</Carousel.Item>
-					<Carousel.Item interval={500000}>
+					<Carousel.Item interval={8000}>
 						<div class='card-deck'>{listMainProduct2}</div>
 					</Carousel.Item>
-					<Carousel.Item interval={500000}>
+					<Carousel.Item interval={8000}>
 						<div class='card-deck'>{listMainProduct3}</div>
 					</Carousel.Item>
 				</Carousel>
