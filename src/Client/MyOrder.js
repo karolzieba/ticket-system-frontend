@@ -26,13 +26,13 @@ const MyOrder = ({ userData }) => {
 			date.setMonth(date.getMonth() + 1);
 
 			listTicket.push(
-				<div class='card'>
+				<div class='cardboxdetails'>
 					<img
 						src={'http://localhost:8080/img/' + dataTicket[i].event.idEvent + '.png'}
-						class='card-img-top'
+						class='card-picture'
 						alt='...'
 					/>
-					<div class='card-body'>
+					<div class='container'>
 						<h5 class='card-title'>{dataTicket[i].event.nameEvent}</h5>
 						<p class='card-text'>
 							Lokalizacja: {dataTicket[i].event.locationEvent}

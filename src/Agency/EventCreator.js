@@ -127,6 +127,8 @@ const EventCreator = ({ userData }) => {
 	return (
 		<div id='creatorFormEvent'>
 			{displayInfo === true && <h2>Podana data już minęła.</h2>}
+			<h1>DODAWANIE WYDARZENIA</h1>
+			<br/>
 			<form onSubmit={handleSubmit}>
 				<input
 					type='text'

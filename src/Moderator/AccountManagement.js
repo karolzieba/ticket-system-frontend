@@ -48,7 +48,7 @@ const AccountManagement = ( { userData } ) => {
 		if (clients[i] !== undefined) {
 			clientList.push(
 				<tr>
-					<th scope='row'>{clients[i].idClient}</th>
+					<th scope='row' class='first-header'>{clients[i].idClient}</th>
 					<td>{clients[i].nameUser}</td>
 					<td>{clients[i].surName}</td>
 					<td>{clients[i].dateOfBirth === null?"Nie podano":clients[i].dateOfBirth}</td>
@@ -88,7 +88,7 @@ const AccountManagement = ( { userData } ) => {
 			console.log(agencies[i])
 			agencyList.push(
 				<tr>
-					<th scope='row'>{agencies[i].idAgency}</th>
+					<th scope='row' class='first-header'>{agencies[i].idAgency}</th>
 					<td>{agencies[i].nameCompany}</td>
 					<td>{agencies[i].nip}</td>
 					<td>{agencies[i].numberPhone}</td>
@@ -123,7 +123,7 @@ const AccountManagement = ( { userData } ) => {
 		if (moderators[i] !== undefined) {
 			moderatorList.push(
 				<tr>
-					<th scope='row'>{moderators[i].idModerator}</th>
+					<th scope='row' class='first-header'>{moderators[i].idModerator}</th>
 					<td>{moderators[i].userNameModerator}</td>
 					<td>
 						{

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import '../App.css';
 const EventList = ({userData}) => {
 	const axios = require('axios').default;
 	axios.defaults.withCredentials = true;
@@ -27,7 +28,7 @@ const EventList = ({userData}) => {
 
 			eventList.push(
 				<tr>
-					<th scope='row'>{events[i].idEvent}</th>
+					<th scope='row' class='first-header'>{events[i].idEvent}</th>
 					<td>{events[i].nameEvent}</td>
 					<td>
 						{date.getDate() +
@@ -47,7 +48,7 @@ const EventList = ({userData}) => {
 					<td>{events[i].agency.nameCompany}</td>
 					<td>
 						<Link to={'/agency/event/creator/update/' + events[i].idEvent}>
-							<button type='button'>Edytuj</button>
+							<button type='button' class='edit-button'>Edytuj</button>
 						</Link>
 					</td>
 				</tr>

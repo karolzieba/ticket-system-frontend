@@ -27,7 +27,7 @@ const EventManagement = ( { userData } ) => {
 
 			eventList.push(
 				<tr>
-					<th scope='row'>{events[i].idEvent}</th>
+					<th scope='row'  class='first-header'>{events[i].idEvent}</th>
 					<td>{events[i].nameEvent}</td>
 					<td>
 						{date.getDate() +
@@ -129,6 +129,7 @@ const EventManagement = ( { userData } ) => {
 			</table>
 		</div>
 	) : (
+		
 		<div className='parentMenu'>
 			<br />
 			<br />

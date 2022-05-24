@@ -45,7 +45,7 @@ const PaymentManagement = () => {
 
 			paymentList.push(
 				<tr>
-					<th scope='row'>{payments[i].idPayment}</th>
+					<th scope='row' class='first-header'>{payments[i].idPayment}</th>
 					<td>
 						{date.getDate() +
 							'.' +
@@ -103,7 +103,7 @@ const PaymentManagement = () => {
 			}
 			ticketList.push(
 				<tr>
-					<th scope='row'>{tickets[i].idTicket}</th>
+					<th scope='row' class='first-header'>{tickets[i].idTicket}</th>
 					<td>
 						{date.getDate() +
 							'.' +

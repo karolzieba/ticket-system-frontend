@@ -49,13 +49,14 @@ const EventUpdate = () => {
 		let date = new Date(event.dateTimeEvent);
 
 		printData = (
+			
 			<div class='order-card'>
 				<img
-					id='order-element1'
+					id='order-img'
 					src={'http://localhost:8080/img/' + event.idEvent + '.png'}
 					alt='...'
 				/>
-				<div id='order-element2'>
+				<div id='order-element1'>
 					<form onSubmit={updateEvent}>
 						<h5 class='card-title'>{event.nameEvent}</h5>
 						<p class='card-text'>
