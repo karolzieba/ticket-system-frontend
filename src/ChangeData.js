@@ -69,6 +69,7 @@ export const ChangeClientData = ( { userData } ) => {
 					value={accountLogin}
 					onChange={(e) => setAccountLogin(e.target.value)}
 				/>}
+				<br />
 				{userData.role === "ROLE_CLIENT" && <input
 					class='form-control'
 					type='text'
@@ -77,6 +78,7 @@ export const ChangeClientData = ( { userData } ) => {
 					value={emailAccount}
 					onChange={(e) => setEmailAccount(e.target.value)}
 				/>}
+				<br />
 				{userData.role === "ROLE_CLIENT" && <input
 					class='form-control'
 					type='password'
@@ -85,6 +87,7 @@ export const ChangeClientData = ( { userData } ) => {
 					value={passwordAccount}
 					onChange={(e) => setPasswordAccount(e.target.value)}
 				/>}
+				<br />
 				{userData.role === "ROLE_CLIENT" && <input
 					class='form-control'
 					type='text'
@@ -93,6 +96,7 @@ export const ChangeClientData = ( { userData } ) => {
 					value={nameUser}
 					onChange={(e) => setNameUser(e.target.value)}
 				/>}
+				<br />
 				{userData.role === "ROLE_CLIENT" && <input
 					class='form-control'
 					type='text'
@@ -101,6 +105,7 @@ export const ChangeClientData = ( { userData } ) => {
 					value={surName}
 					onChange={(e) => setSurName(e.target.value)}
 				/>}
+				<br />
 				<input
 					class='form-control'
 					type='date'
@@ -109,6 +114,7 @@ export const ChangeClientData = ( { userData } ) => {
 					value={dateOfBirth}
 					onChange={(e) => setDateOfBirth(e.target.value)}
 				/>
+				<br />
 				<input
 					class='form-control'
 					type='text'
@@ -118,6 +124,7 @@ export const ChangeClientData = ( { userData } ) => {
 					value={phoneNumber}
 					onChange={(e) => setPhoneNumber(e.target.value)}
 				/>
+				<br />
 				<input
 					class='form-control'
 					type='text'
@@ -127,6 +134,7 @@ export const ChangeClientData = ( { userData } ) => {
 					value={numberAccountBank}
 					onChange={(e) => setNumberAccountBank(e.target.value)}
 				/>
+				<br />
 				<input class="loginRegisterButton" type='submit' value='Zmień dane' />
 			</form>
 		</div>
@@ -189,6 +197,7 @@ export const ChangeModeratorData = ( { userData }) => {
 					value={accountLogin}
 					onChange={(e) => setAccountLogin(e.target.value)}
 				/>
+				<br />
 				<input
 					class='form-control'
 					type='text'
@@ -197,6 +206,7 @@ export const ChangeModeratorData = ( { userData }) => {
 					value={emailAccount}
 					onChange={(e) => setEmailAccount(e.target.value)}
 				/>
+				<br />
 				<input
 					class='form-control'
 					type='password'
@@ -205,6 +215,7 @@ export const ChangeModeratorData = ( { userData }) => {
 					value={passwordAccount}
 					onChange={(e) => setPasswordAccount(e.target.value)}
 				/>
+				<br />
 				<input
 					class='form-control'
 					type='text'
@@ -213,6 +224,7 @@ export const ChangeModeratorData = ( { userData }) => {
 					value={userNameModerator}
 					onChange={(e) => setUserNameModerator(e.target.value)}
 				/>
+				<br />
 				<input class="loginRegisterButton" type='submit' value='Zmień dane' />
 			</form>
 		</div>
@@ -281,6 +293,7 @@ export const ChangeAgencyData = ( { userData }) => {
 					value={accountLogin}
 					onChange={(e) => setAccountLogin(e.target.value)}
 				/>
+				<br />
 				<input
 					class='form-control'
 					type='text'
@@ -289,6 +302,7 @@ export const ChangeAgencyData = ( { userData }) => {
 					value={emailAccount}
 					onChange={(e) => setEmailAccount(e.target.value)}
 				/>
+				<br />
 				<input
 					class='form-control'
 					type='password'
@@ -297,6 +311,7 @@ export const ChangeAgencyData = ( { userData }) => {
 					value={passwordAccount}
 					onChange={(e) => setPasswordAccount(e.target.value)}
 				/>
+				<br />
 				<input
 					class='form-control'
 					type='text'
@@ -305,6 +320,7 @@ export const ChangeAgencyData = ( { userData }) => {
 					value={nameCompany}
 					onChange={(e) => setNameCompany(e.target.value)}
 				/>
+				<br />
 				<input
 					class='form-control'
 					type='text'
@@ -314,6 +330,7 @@ export const ChangeAgencyData = ( { userData }) => {
 					value={NIP}
 					onChange={(e) => setNIP(e.target.value)}
 				/>
+				<br />
 				<input
 					class='form-control'
 					type='text'
@@ -323,6 +340,7 @@ export const ChangeAgencyData = ( { userData }) => {
 					value={numberPhone}
 					onChange={(e) => setNumberPhone(e.target.value)}
 				/>
+				<br />
 				<input class="loginRegisterButton" type='submit' value='Zmień dane' />
 			</form>
 		</div>

@@ -121,11 +121,11 @@ const Order = ({ userData }) => {
 		printData = (
 			<div class='order-card'>
 				<img
-					id='order-element1'
+					id='order-img'
 					src={'http://localhost:8080/img/' + ticket.idEvent + '.png'}
 					alt='...'
 				/>
-				<div id='order-element2'>
+				<div id='order-element1'>
 					<h5 class='card-title'>{ticket.nameEvent}</h5>
 					<p class='card-text'>Lokalizacja: {ticket.locationEvent}</p>
 					<p class='card-text'>
@@ -159,7 +159,7 @@ const Order = ({ userData }) => {
 						ticketExist === false &&
 						userData.hasSetBirthday === 'true' && (
 							<form
-								id='order-element3'
+								id='order-form'
 								onSubmit={addTicket}
 								value={paymentType}
 								required
@@ -175,7 +175,7 @@ const Order = ({ userData }) => {
 									<option value='traditional'>Przelew tradycyjny</option>
 								</select>
 								<button
-									id='order-element4'
+									id='order-button'
 									type='button'
 									class='btn btn-primary'
 									onClick={addTicket}>

@@ -137,6 +137,7 @@ const EventCreator = ({ userData }) => {
 					onChange={(e) => setNameEvent(e.target.value)}
 				/>
 				<br />
+				<br />
 				<input
 					type='number'
 					id='capacityEvent'
@@ -146,6 +147,7 @@ const EventCreator = ({ userData }) => {
 					onChange={(e) => setCapacityEvent(e.target.value)}
 				/>
 				<br />
+				<br />
 				<input
 					type='date'
 					id='dateEvent'
@@ -154,6 +156,8 @@ const EventCreator = ({ userData }) => {
 					required
 					onChange={(e) => setDateEvent(e.target.value)}
 				/>
+				<br />
+				<br />
 				<input
 					type='time'
 					id='timeEvent'
@@ -163,6 +167,7 @@ const EventCreator = ({ userData }) => {
 					onChange={(e) => setTimeEvent(e.target.value)}
 				/>
 				<br />
+				<br />
 				<input
 					type='text'
 					id='locationEvent'
@@ -171,6 +176,7 @@ const EventCreator = ({ userData }) => {
 					required
 					onChange={(e) => setLocationEvent(e.target.value)}
 				/>
+				<br />
 				<br />
 				<input
 					type='number'
@@ -194,7 +200,7 @@ const EventCreator = ({ userData }) => {
 						{categories}
 					</select>
 				</label>
-
+				<br />
 				<br />
 				<label Wybierz kategorie wydarzenia />
 
