@@ -33,10 +33,10 @@ const Front = () => {
 			date.setMonth(date.getMonth() + 1);
 
 			listMainProduct1.push(
-				<div class='card'>
+				<div class='cardbox'>
 					<Link to={'/zamowienie/' + idEvent}>
 						<img className='d-block w-100' src={"http://localhost:8080/img/" + idEvent + ".png"} alt='First slide' />
-						<div class='card-body'>
+						<div class='container'>
 							<h5 class='card-title'>{tickets[i].nameEvent}</h5>
 							<p class='card-text'>
 								Lokalizacja: {tickets[i].locationEvent}
@@ -60,10 +60,10 @@ const Front = () => {
 			date.setMonth(date.getMonth() + 1);
 
 			listMainProduct2.push(
-				<div class='card'>
+				<div class='cardbox'>
 					<Link to={'/zamowienie/' + idEvent}>
 						<img className='d-block w-100' src={"http://localhost:8080/img/" + idEvent + ".png"} alt='First slide' />
-						<div class='card-body'>
+						<div class='container'>
 							<h5 class='card-title'>{tickets[i].nameEvent}</h5>
 							<p class='card-text'>
 								Lokalizacja: {tickets[i].locationEvent}
@@ -87,10 +87,10 @@ const Front = () => {
 			date.setMonth(date.getMonth() + 1);
 
 			listMainProduct3.push(
-				<div class='card'>
+				<div class='cardbox'>
 					<Link to={'/zamowienie/' + idEvent}>
 						<img className='d-block w-100' src={"http://localhost:8080/img/" + idEvent + ".png"} alt='First slide' />
-						<div class='card-body'>
+						<div class='container'>
 							<h5 class='card-title'>{tickets[i].nameEvent}</h5>
 							<p class='card-text'>
 								Lokalizacja: {tickets[i].locationEvent}
