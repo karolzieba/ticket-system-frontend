@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import './cards.scss';
 import Carousel from 'react-bootstrap/Carousel';
 
 const Front = () => {
@@ -35,7 +36,7 @@ const Front = () => {
 			listMainProduct1.push(
 				<div class='cardbox'>
 					<Link to={'/zamowienie/' + idEvent}>
-						<img className='d-block w-100' src={"http://localhost:8080/img/" + idEvent + ".png"} alt='First slide' />
+						<img className='d-block w-100 card-picture' src={"http://localhost:8080/img/" + idEvent + ".png"} alt='First slide' />
 						<div class='container'>
 							<h5 class='card-title'>{tickets[i].nameEvent}</h5>
 							<p class='card-text'>
@@ -62,7 +63,7 @@ const Front = () => {
 			listMainProduct2.push(
 				<div class='cardbox'>
 					<Link to={'/zamowienie/' + idEvent}>
-						<img className='d-block w-100' src={"http://localhost:8080/img/" + idEvent + ".png"} alt='First slide' />
+						<img className='d-block w-100 card-picture' src={"http://localhost:8080/img/" + idEvent + ".png"} alt='First slide' />
 						<div class='container'>
 							<h5 class='card-title'>{tickets[i].nameEvent}</h5>
 							<p class='card-text'>
@@ -89,7 +90,7 @@ const Front = () => {
 			listMainProduct3.push(
 				<div class='cardbox'>
 					<Link to={'/zamowienie/' + idEvent}>
-						<img className='d-block w-100' src={"http://localhost:8080/img/" + idEvent + ".png"} alt='First slide' />
+						<img className='d-block w-100 card-picture' src={"http://localhost:8080/img/" + idEvent + ".png"} alt='First slide' />
 						<div class='container'>
 							<h5 class='card-title'>{tickets[i].nameEvent}</h5>
 							<p class='card-text'>

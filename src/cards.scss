@@ -1,0 +1,51 @@
+.cardbox {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-left: 3%;
+    margin-top: 3%;
+    width:30%;
+    height:600px;
+    border-radius: 3%;
+    background: linear-gradient(0deg, rgba(5,53,103,1) 0%, rgba(28,112,107,1) 0%, rgba(0,32,96,1) 100%);
+  }
+  .cardbox:hover {
+
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-left: 3%;
+    width:31%;
+    height:700px;
+    border-radius: 3%;
+    background: linear-gradient(0deg, rgba(5,53,103,1) 0%, rgba(28,112,107,1) 0%, rgba(0,32,96,1) 100%);
+  }
+
+
+
+  .card-picture{
+    width:100%;
+    height:60%;
+    border-radius: 3%;
+  }
+  .cardboxdetails {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-right: 20px;
+    margin-left: 20px;
+    width:450px;
+    height:600px;
+    z-index: 20;
+    border-radius: 3%;
+    background: linear-gradient(0deg, rgba(5,53,103,1) 0%, rgba(28,112,107,1) 0%, rgba(0,32,96,1) 100%);
+  }
+  .cardboxdetails:hover {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-right: 50px;
+    margin-left: 50px;
+    width:560px;
+    z-index: 0;
+    height:700px;
+    border-radius: 3%;
+    background: linear-gradient(0deg, rgba(5,53,103,1) 0%, rgba(28,112,107,1) 0%, rgba(0,32,96,1) 100%);
+  }
+
