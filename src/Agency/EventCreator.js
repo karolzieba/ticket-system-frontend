@@ -63,13 +63,14 @@ const EventCreator = ({ userData }) => {
 	}
 	/******************************************************************************************************* */
 	const handleSubmit = (event) => {
+		event.preventDefault();
+
 		let currDate = new Date();
 		let formDate = new Date(dateEvent);
 		if (formDate <= currDate) {
 			setDisplayInfo(true);
 		} else {
 			axios.defaults.withCredentials = true;
-			event.preventDefault();
 			axios
 				.post('http://localhost:8080/api/event', {
 					capacityEvent: capacityEvent,

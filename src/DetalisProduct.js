@@ -1,7 +1,6 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
@@ -34,14 +33,14 @@ const DetalisProducts = () => {
 			listOfProduct.push(
 				<Row>
 					<Col>
-						<div class='card'>
+						<div class='cardboxdetails'>
 							<Link to={'/zamowienie/' + idEvent}>
 								<img
 									src={'http://localhost:8080/img/' + idEvent + '.png'}
-									class='card-img-top'
+									class='card-picture'
 									alt='...'
 								/>
-								<div class='card-body'>
+								<div class='container'>
 									<h5 class='card-title'>{categoryTickets[i].nameEvent}</h5>
 									<p class='card-text'>
 										Lokalizacja: {categoryTickets[i].locationEvent}

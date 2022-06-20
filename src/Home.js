@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, Outlet } from 'react-router-dom';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { ReactComponent as Logo } from './logo.svg';
 
 const Home = ({ loggedIn, userData }) => {
 	const agencyElements = (
@@ -53,12 +52,6 @@ const Home = ({ loggedIn, userData }) => {
 		<div>
 			<Navbar collapseOnSelect expand='lg' id='navigatorHeader'>
 				<Navbar.Brand>
-					<Logo
-						alt=''
-						width='30'
-						height='30'
-						className='d-inline-block align-top'
-					/>
 					<Link id='logo' to='/'>
 						TwójBilecik
 					</Link>
